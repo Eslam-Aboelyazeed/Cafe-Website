@@ -1,45 +1,110 @@
-﻿
-    <link rel="stylesheet" href="/css/all.css">
-    <link rel="stylesheet" href="/css/bootstrap.css">
-    <link href="/css/site.css" rel="stylesheet" >
-
-   
+﻿@{
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
+}
 
 
-    <div class="product-details p-3">
-        <div class="col-md-6">
-            <div class="row w-100">
-                <div class="col">
-                <img class="prodImg img-responsive" src="/images/coffee.jpg" alt="...">
 
-                </div>
+
+
+
+<div class="product-details row p-3 d-flex flex-row ">
+    <div class="col-md-6">
+        <div class="row w-100 d-flex flex-row justify-content-center">
+            <div class="col">
+                <img class="prodImg img-responsive w-100 mb-5" src="/images/coffee.jpg" alt="...">
+
             </div>
         </div>
-        <div class="col-md-6 d-flex flex-column align-items-center align-items-md-start ">
-            <h1 class="name">Denim Jeans</h1>
-            <h4 class="price"
-                style="color: #3c547e;">
-                234.5$
-            </h4>
-            <p class="description text-center text-md-start">Classic denim jeans with a comfortable fit.</p>
-            <p class="brand fw-bolder">Brand: <span class="fw-light">FashionTrend</span></p>
-            @* <p class="color fw-bolder">Color: <i class="fa fa-circle" style="color:rosybrown" aria-hidden="true"></i></p> *@
-            <p class="size fw-bolder">Size: <span class="fw-light">XL</span></p>
-            @* <p class="storage fw-bolder">Storage: <span class="fw-light">128GB</span></p> *@
-            @* <p class="material fw-bolder">Material: <span class="fw-light">White Gold</span></p> *@
+    </div>
+    <div class="col-md-6 d-flex flex-column align-items-center align-items-md-start ">
+        <h1 class="name text-white-50">LATTE</h1>
+        <h4 class="price"
+            style="color: #BE9C79;">
+            234.5$
+        </h4>
+
+        <p class="size fw-bolder" style=" color: #BE9C79;">
+            Size: <span class="fw-light text-white-50">
+                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    @for (var i = 0; i < 3; i++)
+                    {
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio @(i+1)" autocomplete="off" checked>
+                        <label class="btn btn-outline-light" for="btnradio @(i+1)">L</label>
+                    }
+
+                </div>
+            </span>
+        </p>
 
 
-            <p class="desc_website text-center text-md-start">Our website is designed to make your shopping experience as smooth and enjoyable as possible. You can browse by category, color, size, or brand, and filter your search results to find exactly what you’re looking for. We offer free shipping on orders over a certain amount and easy returns if you’re not completely satisfied with your purchase.</p>
 
-            <div class="row">
-                <div class="col-12">
-                    <button class="addToCard p-2 h-100 text-white border-0" style="background-color: #223659;">ADD TO CART</button>
+        <div class="addToCardBtn row">
+            <div class="col-12">
+                <button class="addToCard p-3 h-100 text-white border-0 rounded-2" style="background-color: #BE9C79;">ADD TO CART</button>
+            </div>
+        </div>
+
+        <nav class="tabs mt-5">
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active px-5 fs-3 " style="color:#BE9C79" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Description</button>
+                <button class="nav-link px-5 fs-3" id="nav-profile-tab" style="color:#BE9C79" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Additions</button>
+                <button class="nav-link px-5 fs-3" id="nav-contact-tab" style="color:#BE9C79" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Review</button>
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="Desc tab-pane fade show active text-white-50" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+                <p class="desc_website text-center text-md-start text-white-50">Our website is designed to make your shopping experience as smooth and enjoyable as possible. You can browse by category, color, size, or brand, and filter your search results to find exactly what you’re looking for. We offer free shipping on orders over a certain amount and easy returns if you’re not completely satisfied with your purchase.</p>
+
+            </div>
+            <div class="Adds tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+            </div>
+            <div class="Review tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+                <div id="respond" class="comment-respond">
+                    <span id="reply-title" class="comment-reply-title">Add a review <small><a rel="nofollow" id="cancel-comment-reply-link" href="/product/french-press/#respond" style="display:none;">Cancel reply</a></small></span>
+                    <form action="https://corretto.qodeinteractive.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+                        <div class="rate">
+                            <input type="radio" id="star1" name="rate" value="1" />
+                            <label for="star1" title="text">1 star</label>
+                            <input type="radio" id="star2" name="rate" value="2" />
+                            <label for="star2" title="text">2 stars</label>
+                            <input type="radio" id="star3" name="rate" value="3" />
+                            <label for="star3" title="text">3 stars</label>
+                            <input type="radio" id="star4" name="rate" value="4" />
+                            <label for="star4" title="text">4 stars</label>
+                            <input type="radio" id="star5" name="rate" value="5" />
+                            <label for="star5" title="text">5 stars</label>
+
+
+
+
+                        </div>
+                        <p class="comment-form-comment">
+                            <label for="comment">Your review&nbsp;<span class="required">*</span></label><textarea id="comment" name="comment" cols="45" rows="8" required=""></textarea>
+                        </p><p class="comment-form-author"><label for="author">Name&nbsp;<span class="required">*</span></label><input id="author" name="author" type="text" value="" size="30" required=""></p>
+                        <p class="comment-form-email"><label for="email">Email&nbsp;<span class="required">*</span></label><input id="email" name="email" type="email" value="" size="30" required=""></p>
+                        <p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes"> <label for="wp-comment-cookies-consent">Save my name, email, and website in this browser for the next time I comment.</label></p>
+                        <p class="form-submit">
+                            <input name="submit" type="submit" id="submit" class="submit" value="Submit"> <input type="hidden" name="comment_post_ID" value="387" id="comment_post_ID">
+                            <input type="hidden" name="comment_parent" id="comment_parent" value="0">
+                        </p><div class="wantispam-required-fields wantispam-form-processed">
+                            <input type="hidden" name="wantispam_t" class="wantispam-control wantispam-control-t" value="1711394953"><div class="wantispam-group wantispam-group-q" style="clear: both; display: none;">
+                                <label>Current ye@r <span class="required">*</span></label>
+                                <input type="hidden" name="wantispam_a" class="wantispam-control wantispam-control-a" value="2024">
+                                <input type="text" name="wantispam_q" class="wantispam-control wantispam-control-q" value="7.3.4" autocomplete="off">
+                            </div>
+                            <div class="wantispam-group wantispam-group-e" style="display: none;">
+                                <label>Leave this field empty</label>
+                                <input type="text" name="wantispam_e_email_url_website" class="wantispam-control wantispam-control-e" value="" autocomplete="off">
+                            </div>
+                            <input type="hidden" name="wantispam_d" class="wantispam-control wantispam-control-d" value="2024">
+                        </div>
+                    </form>
                 </div>
             </div>
 
-        </div> 
+        </div>
+
     </div>
-    <script src="/js/bootstrap.bundle.js"></script>
-    <script src="/js/all.js"></script>
-    @* <script src="/js/site.js"></script> *@
+</div>
+
 
