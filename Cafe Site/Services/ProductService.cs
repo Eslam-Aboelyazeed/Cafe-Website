@@ -69,7 +69,7 @@ namespace Cafe_Site.Services
                 Product_Quantity = productInfo.Product_Quantity,
                 Product_Image = ProductImage,
                 Product_Description = productInfo.Product_Description,
-                userId = "1"
+                userId = "651616ac-8281-433c-a684-5a614ffb1d89"
             });
 
             repository.SaveChanges();
@@ -78,7 +78,7 @@ namespace Cafe_Site.Services
                 p => p.Product_Name == productInfo.Product_Name &&
                 p.Product_Quantity == productInfo.Product_Quantity &&
                 p.Product_Type == productInfo.Product_Type &&
-                p.Product_Description == productInfo.Product_Description && p.userId =="1", null).Product_Id;
+                p.Product_Description == productInfo.Product_Description && p.userId == "651616ac-8281-433c-a684-5a614ffb1d89", null).Product_Id;
 
             int value;
             bool flag = int.TryParse(productInfo.SPrice, out value); 

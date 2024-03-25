@@ -1,0 +1,246 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4240DE6C-29C5-4CBB-9537-E3A6C99A37EF}|Cafe Site\\Cafe Site.csproj|d:\\mvc final project\\mvc final project\\cafe-site\\cafe site\\views\\menu\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4240DE6C-29C5-4CBB-9537-E3A6C99A37EF}|Cafe Site\\Cafe Site.csproj|solutionrelative:cafe site\\views\\menu\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4240DE6C-29C5-4CBB-9537-E3A6C99A37EF}|Cafe Site\\Cafe Site.csproj|d:\\mvc final project\\mvc final project\\cafe-site\\cafe site\\views\\admindashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4240DE6C-29C5-4CBB-9537-E3A6C99A37EF}|Cafe Site\\Cafe Site.csproj|solutionrelative:cafe site\\views\\admindashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4240DE6C-29C5-4CBB-9537-E3A6C99A37EF}|Cafe Site\\Cafe Site.csproj|d:\\mvc final project\\mvc final project\\cafe-site\\cafe site\\views\\admindashboard\\add.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4240DE6C-29C5-4CBB-9537-E3A6C99A37EF}|Cafe Site\\Cafe Site.csproj|solutionrelative:cafe site\\views\\admindashboard\\add.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4240DE6C-29C5-4CBB-9537-E3A6C99A37EF}|Cafe Site\\Cafe Site.csproj|d:\\mvc final project\\mvc final project\\cafe-site\\cafe site\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4240DE6C-29C5-4CBB-9537-E3A6C99A37EF}|Cafe Site\\Cafe Site.csproj|solutionrelative:cafe site\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4240DE6C-29C5-4CBB-9537-E3A6C99A37EF}|Cafe Site\\Cafe Site.csproj|d:\\mvc final project\\mvc final project\\cafe-site\\cafe site\\services\\iproductservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4240DE6C-29C5-4CBB-9537-E3A6C99A37EF}|Cafe Site\\Cafe Site.csproj|solutionrelative:cafe site\\services\\iproductservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4240DE6C-29C5-4CBB-9537-E3A6C99A37EF}|Cafe Site\\Cafe Site.csproj|d:\\mvc final project\\mvc final project\\cafe-site\\cafe site\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4240DE6C-29C5-4CBB-9537-E3A6C99A37EF}|Cafe Site\\Cafe Site.csproj|solutionrelative:cafe site\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4240DE6C-29C5-4CBB-9537-E3A6C99A37EF}|Cafe Site\\Cafe Site.csproj|d:\\mvc final project\\mvc final project\\cafe-site\\cafe site\\viewmodels\\productinfoviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4240DE6C-29C5-4CBB-9537-E3A6C99A37EF}|Cafe Site\\Cafe Site.csproj|solutionrelative:cafe site\\viewmodels\\productinfoviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4240DE6C-29C5-4CBB-9537-E3A6C99A37EF}|Cafe Site\\Cafe Site.csproj|d:\\mvc final project\\mvc final project\\cafe-site\\cafe site\\viewmodel\\contactviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4240DE6C-29C5-4CBB-9537-E3A6C99A37EF}|Cafe Site\\Cafe Site.csproj|solutionrelative:cafe site\\viewmodel\\contactviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4240DE6C-29C5-4CBB-9537-E3A6C99A37EF}|Cafe Site\\Cafe Site.csproj|d:\\mvc final project\\mvc final project\\cafe-site\\cafe site\\models\\product_size_price.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4240DE6C-29C5-4CBB-9537-E3A6C99A37EF}|Cafe Site\\Cafe Site.csproj|solutionrelative:cafe site\\models\\product_size_price.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4240DE6C-29C5-4CBB-9537-E3A6C99A37EF}|Cafe Site\\Cafe Site.csproj|d:\\mvc final project\\mvc final project\\cafe-site\\cafe site\\models\\product_reviews.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4240DE6C-29C5-4CBB-9537-E3A6C99A37EF}|Cafe Site\\Cafe Site.csproj|solutionrelative:cafe site\\models\\product_reviews.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4240DE6C-29C5-4CBB-9537-E3A6C99A37EF}|Cafe Site\\Cafe Site.csproj|d:\\mvc final project\\mvc final project\\cafe-site\\cafe site\\models\\order_products.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4240DE6C-29C5-4CBB-9537-E3A6C99A37EF}|Cafe Site\\Cafe Site.csproj|solutionrelative:cafe site\\models\\order_products.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4240DE6C-29C5-4CBB-9537-E3A6C99A37EF}|Cafe Site\\Cafe Site.csproj|d:\\mvc final project\\mvc final project\\cafe-site\\cafe site\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4240DE6C-29C5-4CBB-9537-E3A6C99A37EF}|Cafe Site\\Cafe Site.csproj|solutionrelative:cafe site\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 9,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\Views\\AdminDashboard\\Index.cshtml",
+              "RelativeDocumentMoniker": "Cafe Site\\Views\\AdminDashboard\\Index.cshtml",
+              "ToolTip": "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\Views\\AdminDashboard\\Index.cshtml",
+              "RelativeToolTip": "Cafe Site\\Views\\AdminDashboard\\Index.cshtml",
+              "ViewState": "AQIAADMAAAAAAAAAAAAAAEQAAABEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-03-25T23:04:14.245Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Add.cshtml",
+              "DocumentMoniker": "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\Views\\AdminDashboard\\Add.cshtml",
+              "RelativeDocumentMoniker": "Cafe Site\\Views\\AdminDashboard\\Add.cshtml",
+              "ToolTip": "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\Views\\AdminDashboard\\Add.cshtml",
+              "RelativeToolTip": "Cafe Site\\Views\\AdminDashboard\\Add.cshtml",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-03-25T23:04:03.879Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ProductInfoViewModel.cs",
+              "DocumentMoniker": "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\ViewModels\\ProductInfoViewModel.cs",
+              "RelativeDocumentMoniker": "Cafe Site\\ViewModels\\ProductInfoViewModel.cs",
+              "ToolTip": "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\ViewModels\\ProductInfoViewModel.cs",
+              "RelativeToolTip": "Cafe Site\\ViewModels\\ProductInfoViewModel.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAA4wBQAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-25T22:58:08.738Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Product_Size_Price.cs",
+              "DocumentMoniker": "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\Models\\Product_Size_Price.cs",
+              "RelativeDocumentMoniker": "Cafe Site\\Models\\Product_Size_Price.cs",
+              "ToolTip": "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\Models\\Product_Size_Price.cs",
+              "RelativeToolTip": "Cafe Site\\Models\\Product_Size_Price.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAsAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-25T22:55:59.286Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Product_Reviews.cs",
+              "DocumentMoniker": "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\Models\\Product_Reviews.cs",
+              "RelativeDocumentMoniker": "Cafe Site\\Models\\Product_Reviews.cs",
+              "ToolTip": "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\Models\\Product_Reviews.cs",
+              "RelativeToolTip": "Cafe Site\\Models\\Product_Reviews.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-25T22:55:57.052Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Product.cs",
+              "DocumentMoniker": "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "Cafe Site\\Models\\Product.cs",
+              "ToolTip": "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\Models\\Product.cs",
+              "RelativeToolTip": "Cafe Site\\Models\\Product.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-25T22:55:50.587Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Order_Products.cs",
+              "DocumentMoniker": "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\Models\\Order_Products.cs",
+              "RelativeDocumentMoniker": "Cafe Site\\Models\\Order_Products.cs",
+              "ToolTip": "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\Models\\Order_Products.cs",
+              "RelativeToolTip": "Cafe Site\\Models\\Order_Products.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-25T22:55:46.071Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ContactViewModel.cs",
+              "DocumentMoniker": "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\ViewModel\\ContactViewModel.cs",
+              "RelativeDocumentMoniker": "Cafe Site\\ViewModel\\ContactViewModel.cs",
+              "ToolTip": "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\ViewModel\\ContactViewModel.cs",
+              "RelativeToolTip": "Cafe Site\\ViewModel\\ContactViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-25T22:55:34.441Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\Views\\Menu\\Index.cshtml",
+              "RelativeDocumentMoniker": "Cafe Site\\Views\\Menu\\Index.cshtml",
+              "ToolTip": "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\Views\\Menu\\Index.cshtml",
+              "RelativeToolTip": "Cafe Site\\Views\\Menu\\Index.cshtml",
+              "ViewState": "AQIAAFoAAAAAAAAAAAAAAGgAAAAHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-03-25T22:41:24.105Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IProductService.cs",
+              "DocumentMoniker": "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\Services\\IProductService.cs",
+              "RelativeDocumentMoniker": "Cafe Site\\Services\\IProductService.cs",
+              "ToolTip": "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\Services\\IProductService.cs",
+              "RelativeToolTip": "Cafe Site\\Services\\IProductService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-25T22:59:06.646Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ProductService.cs",
+              "DocumentMoniker": "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\Services\\ProductService.cs",
+              "RelativeDocumentMoniker": "Cafe Site\\Services\\ProductService.cs",
+              "ToolTip": "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\Services\\ProductService.cs",
+              "RelativeToolTip": "Cafe Site\\Services\\ProductService.cs",
+              "ViewState": "AQIAAI8AAAAAAAAAAAAIwFAAAAB9AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-25T22:49:39.775Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Cafe Site\\Views\\Home\\Index.cshtml",
+              "ToolTip": "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Cafe Site\\Views\\Home\\Index.cshtml",
+              "ViewState": "AQIAACkBAAAAAAAAAAAAADwBAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-03-25T22:40:02.297Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 288,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

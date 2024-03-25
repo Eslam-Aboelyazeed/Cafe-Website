@@ -100,8 +100,9 @@
             <div class="fh5co-item">
                 @try
                 {
-                    <img src="@Model[i].Product_Image" class="img-responsive" alt="@Model[i].Product_Name">
+					<img src="data:image/png;base64,@Model[i].Product_Image" class="img-responsive" alt="@Model[i].Product_Name">
                     <h3>@Model[i].Product_Name</h3>
+					<p>@Model[i].Product_Type</p>
 
                     
                         // Format MPrice
@@ -122,7 +123,8 @@
                     <span class="fh5co-price">S: @formattedSPrice<sup>.@centsS</sup></span>
                     <span class="fh5co-price">M: @formattedMPrice<sup>.@centsM</sup></span>
                     <span class="fh5co-price">L: @formattedLPrice<sup>.@centsL</sup></span>
-                    <p>@Model[i].Product_Type</p>
+                    <p>@Model[i].Product_Description</p>
+					
                 }
                 catch (Exception ex)
                 {
@@ -135,8 +137,9 @@
                 <div class="fh5co-item">
                     @try
                     {
-                        <img src="@Model[i + 1].Product_Image" class="img-responsive" alt="@Model[i + 1].Product_Name">
+						<img src="data:image/png;base64,@Model[i + 1].Product_Image" class="img-responsive" alt="@Model[i + 1].Product_Name">
                         <h3>@Model[i + 1].Product_Name</h3>
+						<p>@Model[i + 1].Product_Type</p>
 
                         
                             // Format MPrice
@@ -157,7 +160,7 @@
                         <span class="fh5co-price">S: @formattedSPrice2<sup>.@centsS2</sup></span>
                         <span class="fh5co-price">M: @formattedMPrice2<sup>.@centsM2</sup></span>
                         <span class="fh5co-price">L: @formattedLPrice2<sup>.@centsL2</sup></span>
-                        <p>@Model[i + 1].Product_Type</p>
+                        <p>@Model[i + 1].Product_Description</p>
                     }
                     catch (Exception ex)
                     {

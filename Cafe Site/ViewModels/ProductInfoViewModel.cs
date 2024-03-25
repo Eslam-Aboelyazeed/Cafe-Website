@@ -21,6 +21,6 @@ namespace Cafe_Site.ViewModels
         public string? MPrice { get; set; }
         [DataType(DataType.Currency)]
         public string? LPrice { get; set; }
-        public string userId { get; set; }
+        public string? userId { get; set; }
     }
 }

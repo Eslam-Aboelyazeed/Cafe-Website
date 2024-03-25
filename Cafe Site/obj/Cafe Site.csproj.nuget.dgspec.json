@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ITI-Proffesional Web 44\\26- MVC\\MVC Final Project\\Cafe-Site\\Cafe Site\\Cafe Site.csproj": {}
+    "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\Cafe Site.csproj": {}
   },
   "projects": {
-    "D:\\ITI-Proffesional Web 44\\26- MVC\\MVC Final Project\\Cafe-Site\\Cafe Site\\Cafe Site.csproj": {
+    "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\Cafe Site.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ITI-Proffesional Web 44\\26- MVC\\MVC Final Project\\Cafe-Site\\Cafe Site\\Cafe Site.csproj",
+        "projectUniqueName": "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\Cafe Site.csproj",
         "projectName": "Cafe Site",
-        "projectPath": "D:\\ITI-Proffesional Web 44\\26- MVC\\MVC Final Project\\Cafe-Site\\Cafe Site\\Cafe Site.csproj",
-        "packagesPath": "C:\\Users\\SaadH\\.nuget\\packages\\",
-        "outputPath": "D:\\ITI-Proffesional Web 44\\26- MVC\\MVC Final Project\\Cafe-Site\\Cafe Site\\obj\\",
+        "projectPath": "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\Cafe Site.csproj",
+        "packagesPath": "C:\\Users\\YN\\.nuget\\packages\\",
+        "outputPath": "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\SaadH\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\YN\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -91,7 +91,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
