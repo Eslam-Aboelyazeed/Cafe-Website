@@ -1,0 +1,45 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "F:\\ITI material\\Cafe-Site\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4240DE6C-29C5-4CBB-9537-E3A6C99A37EF}|Cafe Site\\Cafe Site.csproj|f:\\iti material\\cafe-site\\cafe site\\views\\productdetails\\productdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4240DE6C-29C5-4CBB-9537-E3A6C99A37EF}|Cafe Site\\Cafe Site.csproj|solutionrelative:cafe site\\views\\productdetails\\productdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ProductDetails.cshtml",
+              "DocumentMoniker": "F:\\ITI material\\Cafe-Site\\Cafe Site\\Views\\ProductDetails\\ProductDetails.cshtml",
+              "RelativeDocumentMoniker": "Cafe Site\\Views\\ProductDetails\\ProductDetails.cshtml",
+              "ToolTip": "F:\\ITI material\\Cafe-Site\\Cafe Site\\Views\\ProductDetails\\ProductDetails.cshtml",
+              "RelativeToolTip": "Cafe Site\\Views\\ProductDetails\\ProductDetails.cshtml",
+              "ViewState": "AQIAACMAAACAMzMzMzMbwG4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-03-25T22:38:43.328Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
