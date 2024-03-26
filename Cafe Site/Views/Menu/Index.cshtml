@@ -1,285 +1,324 @@
-﻿@model List<Cafe_Site.ViewModels.ProductInfoViewModel>
+﻿@model Cafe_Site.ViewModels.MenuViewModel
 
 
-<!DOCTYPE HTML>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Tasty</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <!DOCTYPE HTML>
+  <html>
 
-	<link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,300i,400,400i,500,600i,700" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Tasty</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<!-- Animate.css -->
-	<link rel="stylesheet" href="css/animate.css">
-	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="css/icomoon.css">
-	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="css/bootstrap.css">
-	<!-- Flexslider  -->
-	<link rel="stylesheet" href="css/flexslider.css">
+    <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,300i,400,400i,500,600i,700"
+      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet">
 
-	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="css/animate.css">
+    <!-- Icomoon Icon Fonts-->
+    <link rel="stylesheet" href="css/icomoon.css">
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <!-- Flexslider  -->
+    <link rel="stylesheet" href="css/flexslider.css">
 
-	<!-- Modernizr JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
+    <!-- Theme style  -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Modernizr JS -->
+    <script src="js/modernizr-2.6.2.min.js"></script>
+    <!-- FOR IE9 below -->
+    <!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
 
-</head>
-<body>
+    <style>
+        .pagination-container {
+            margin-top: 20px;
+            text-align: center; /* Center the pagination */
+        }
 
-	<div class="fh5co-loader"></div>
+            .pagination-container ul.pagination li a,
+            .pagination-container ul.pagination li span {
+                color: #ffffff; /* Text color */
+                background-color: #f0ad4e; /* Yellow background color */
+                border: 1px solid #eea236; /* Darker yellow border */
+                padding: 5px 10px; /* Padding */
+                margin: 0 5px; /* Margin between items */
+                border-radius: 4px; /* Rounded corners */
+            }
 
-	<div id="page">
-		<nav class="fh5co-nav" role="navigation">
-			<div class="container">
-				<div class="row">
-					<div class="col-xs-12 text-center logo-wrap">
-						<div id="fh5co-logo"><a href="index.html">Tasty<span>.</span></a></div>
-					</div>
-					<div class="col-xs-12 text-center menu-1 menu-wrap">
-						<ul>
-							<li><a href="home">Home</a></li>
-							<li class="active"><a href="menu">Menu</a></li>
-							<li class="has-dropdown">
-								<a href="gallery.html">Gallery</a>
-								<ul class="dropdown">
-									<li><a href="#">Events</a></li>
-									<li><a href="#">Food</a></li>
-									<li><a href="#">Coffees</a></li>
-								</ul>
-							</li>
-							<li><a href="reservation.html">Reservation</a></li>
-							<li><a href="about.html">About</a></li>
-							<li><a href="contact.html">Contact</a></li>
-						</ul>
-					</div>
-				</div>
+            .pagination-container ul.pagination li.active span {
+                background-color: gray; /* Gray background for active page */
+                border-color: #555555; /* Darker border for active page */
+            }
 
-			</div>
-			<!-- </div> -->
-		</nav>
+            .pagination-container ul.pagination li.disabled span,
+            .pagination-container ul.pagination li.disabled a {
+                color: #aaaaaa; /* Disabled text color */
+                background-color: #ffffff; /* Disabled background color */
+                border-color: #dddddd; /* Disabled border color */
+            }
 
-		<header id="fh5co-header" class="fh5co-cover js-fullheight" role="banner" style="background-image: url(images/hero_1.jpeg);" data-stellar-background-ratio="0.5">
-			<div class="overlay"></div>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12 text-center">
-						<div class="display-t js-fullheight">
-							<div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
-								<h1>See <em>Our</em> Menu</h1>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</header>
+            .pagination-container ul.pagination li a:hover {
+                background-color: #e0a21d; /* Darker yellow on hover */
+            }
+    </style>
 
-		<div id="fh5co-featured-menu" class="fh5co-section">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12 fh5co-heading animate-box">
-						<h2>Our Delicous Menu</h2>
-						<div class="row">
-							<div class="col-md-6">
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ab debitis sit itaque totam, a maiores nihil, nulla magnam porro minima officiis! Doloribus aliquam voluptates corporis et tempora consequuntur ipsam, itaque, nesciunt similique commodi omnis. Ad magni perspiciatis, voluptatum repellat.</p>
-							</div>
-						</div>
-					</div>
 
-@for (int i = 0; i < Model.Count; i += 2)
-{
-    <div class="col-md-3 col-sm-6 col-xs-6 col-xxs-12 fh5co-item-wrap">
-        <div class="fh5co-item-group animate-box">
-            <div class="fh5co-item">
-                @try
+
+  </head>
+
+  <body>
+
+    <div class="fh5co-loader"></div>
+
+    <div id="page">
+      <nav class="fh5co-nav" role="navigation">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12 text-center logo-wrap">
+              <div id="fh5co-logo"><a href="index.html">Tasty<span>.</span></a></div>
+            </div>
+            <div class="col-xs-12 text-center menu-1 menu-wrap">
+              <ul>
+                <li><a href="home">Home</a></li>
+                <li class="active"><a href="menu">Menu</a></li>
+                <li class="has-dropdown">
+                  <a href="gallery.html">Gallery</a>
+                  <ul class="dropdown">
+                    <li><a href="#">Events</a></li>
+                    <li><a href="#">Food</a></li>
+                    <li><a href="#">Coffees</a></li>
+                  </ul>
+                </li>
+                <li><a href="reservation.html">Reservation</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+        <!-- </div> -->
+      </nav>
+
+      <header id="fh5co-header" class="fh5co-cover js-fullheight" role="banner"
+        style="background-image: url(images/hero_1.jpeg);" data-stellar-background-ratio="0.5">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <div class="display-t js-fullheight">
+                <div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
+                  <h1>See <em>Our</em> Menu</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div id="fh5co-featured-menu" class="fh5co-section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 fh5co-heading animate-box">
+              <h2>Our Delicous Menu</h2>
+              <div class="row">
+                <div class="col-md-6">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ab debitis sit itaque totam, a
+                    maiores nihil, nulla magnam porro minima officiis! Doloribus aliquam voluptates corporis et tempora
+                    consequuntur ipsam, itaque, nesciunt similique commodi omnis. Ad magni perspiciatis, voluptatum
+                    repellat.</p>
+                </div>
+              </div>
+            </div>
+
+            @foreach (var product in Model.Products){
+            <div class="col-md-3 col-sm-6 col-xs-6 col-xxs-12 fh5co-item-wrap">
+              <div class="fh5co-item-group animate-box">
+                <div class="fh5co-item">
+                  @try
+                  {
+                  // Format MPrice
+                  var mPriceDecimal = Convert.ToDecimal(product.MPrice);
+                  var formattedMPrice = (int)Math.Round(mPriceDecimal);
+                  var centsM = mPriceDecimal.ToString().Split('.')[1]?.Substring(0, 2) ?? "00";
+
+                  // Format SPrice
+                  var sPriceDecimal = Convert.ToDecimal(product.SPrice);
+                  var formattedSPrice = (int)Math.Round(sPriceDecimal);
+                  var centsS = sPriceDecimal.ToString().Split('.')[1]?.Substring(0, 2) ?? "00";
+
+                  // Format LPrice
+                  var lPriceDecimal = Convert.ToDecimal(product.LPrice);
+                  var formattedLPrice = (int)Math.Round(lPriceDecimal);
+                  var centsL = lPriceDecimal.ToString().Split('.')[1]?.Substring(0, 2) ?? "00";
+
+                  <a href="@Url.RouteUrl("ProductDetails", new { id=product.Product_Id })">
+                    <img src="data:image/png;base64,@product.Product_Image" class="img-responsive"
+                      alt="@product.Product_Name">
+                    <h3>@product.Product_Name</h3>
+                    <p>@product.Product_Type</p>
+                    <span class="fh5co-price">Small: $@formattedSPrice<sup>.@centsS</sup></span>
+                    <span class="fh5co-price">Medium: $@formattedMPrice<sup>.@centsM</sup></span>
+                    <span class="fh5co-price">Large: $@formattedLPrice<sup>.@centsL</sup></span>
+                    <p>@product.Product_Description</p>
+                  </a>
+                  }
+                  catch (Exception ex)
+                  {
+                  <p>Error: @ex.Message</p>
+                  }
+                </div>
+              </div>
+            </div>
+            }
+          </div>
+        </div>
+            <!-- Pagination -->
+            <div class="pagination-container text-center">
+                @if (Model.TotalPages > 1)
                 {
-					<img src="data:image/png;base64,@Model[i].Product_Image" class="img-responsive" alt="@Model[i].Product_Name">
-                    <h3>@Model[i].Product_Name</h3>
-					<p>@Model[i].Product_Type</p>
+                    <ul class="pagination">
+                        @if (Model.CurrentPage > 1)
+                        {
+                            <li><a href="@Url.Action("Index", new { page = Model.CurrentPage - 1 })">Previous</a></li>
+                        }
 
-                    
-                        // Format MPrice
-                        var mPriceDecimal = Convert.ToDecimal(Model[i].MPrice);
-                        var formattedMPrice = (int)Math.Round(mPriceDecimal);
-                        var centsM = mPriceDecimal.ToString().Split('.')[1]?.Substring(0, 2) ?? "00";
+                        @for (int i = 1; i <= Model.TotalPages; i++)
+                        {
+                            if (i == Model.CurrentPage)
+                            {
+                                <li class="active"><span>@i</span></li>
+                            }
+                            else
+                            {
+                                <li><a href="@Url.Action("Index", new { page = i })">@i</a></li>
+                            }
+                        }
 
-                        // Format SPrice
-                        var sPriceDecimal = Convert.ToDecimal(Model[i].SPrice);
-                        var formattedSPrice = (int)Math.Round(sPriceDecimal);
-                        var centsS = sPriceDecimal.ToString().Split('.')[1]?.Substring(0, 2) ?? "00";
-
-                        // Format LPrice
-                        var lPriceDecimal = Convert.ToDecimal(Model[i].LPrice);
-                        var formattedLPrice = (int)Math.Round(lPriceDecimal);
-                        var centsL = lPriceDecimal.ToString().Split('.')[1]?.Substring(0, 2) ?? "00";
-                    
-                    <span class="fh5co-price">S: @formattedSPrice<sup>.@centsS</sup></span>
-                    <span class="fh5co-price">M: @formattedMPrice<sup>.@centsM</sup></span>
-                    <span class="fh5co-price">L: @formattedLPrice<sup>.@centsL</sup></span>
-                    <p>@Model[i].Product_Description</p>
-					
-                }
-                catch (Exception ex)
-                {
-                    <p>Error: @ex.Message</p>
+                        @if (Model.CurrentPage < Model.TotalPages)
+                        {
+                            <li><a href="@Url.Action("Index", new { page = Model.CurrentPage + 1 })">Next</a></li>
+                        }
+                    </ul>
                 }
             </div>
 
-            @if (i + 1 < Model.Count)
-            {
-                <div class="fh5co-item">
-                    @try
-                    {
-						<img src="data:image/png;base64,@Model[i + 1].Product_Image" class="img-responsive" alt="@Model[i + 1].Product_Name">
-                        <h3>@Model[i + 1].Product_Name</h3>
-						<p>@Model[i + 1].Product_Type</p>
+      </div>
 
-                        
-                            // Format MPrice
-                            var mPriceDecimal2 = Convert.ToDecimal(Model[i + 1].MPrice);
-                            var formattedMPrice2 = (int)Math.Round(mPriceDecimal2);
-                            var centsM2 = mPriceDecimal2.ToString().Split('.')[1]?.Substring(0, 2) ?? "00";
-
-                            // Format SPrice
-                            var sPriceDecimal2 = Convert.ToDecimal(Model[i + 1].SPrice);
-                            var formattedSPrice2 = (int)Math.Round(sPriceDecimal2);
-                            var centsS2 = sPriceDecimal2.ToString().Split('.')[1]?.Substring(0, 2) ?? "00";
-
-                            // Format LPrice
-                            var lPriceDecimal2 = Convert.ToDecimal(Model[i + 1].LPrice);
-                            var formattedLPrice2 = (int)Math.Round(lPriceDecimal2);
-                            var centsL2 = lPriceDecimal2.ToString().Split('.')[1]?.Substring(0, 2) ?? "00";
-                        
-                        <span class="fh5co-price">S: @formattedSPrice2<sup>.@centsS2</sup></span>
-                        <span class="fh5co-price">M: @formattedMPrice2<sup>.@centsM2</sup></span>
-                        <span class="fh5co-price">L: @formattedLPrice2<sup>.@centsL2</sup></span>
-                        <p>@Model[i + 1].Product_Description</p>
-                    }
-                    catch (Exception ex)
-                    {
-                        <p>Error: @ex.Message</p>
-                    }
+      <div id="fh5co-featured-testimony" class="fh5co-section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 fh5co-heading animate-box">
+              <h2>Testimony</h2>
+              <div class="row">
+                <div class="col-md-6">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ab debitis sit itaque totam, a
+                    maiores nihil, nulla magnam porro minima officiis! Doloribus aliquam voluptates corporis et tempora
+                    consequuntur ipsam, itaque, nesciunt similique commodi omnis.</p>
                 </div>
-            }
+              </div>
+            </div>
+
+            <div class="col-md-5 animate-box img-to-responsive">
+              <img src="images/person_1.jpg" alt="">
+            </div>
+            <div class="col-md-7 animate-box">
+              <blockquote>
+                <p> &ldquo; Quantum ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ab debitis sit itaque
+                  totam, a maiores nihil, nulla magnam porro minima officiis! Doloribus aliquam voluptates corporis et
+                  tempora consequuntur ipsam. &rdquo;</p>
+                <p class="author"><cite>&mdash; Jane Smith</cite></p>
+              </blockquote>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <footer id="fh5co-footer" role="contentinfo" class="fh5co-section">
+        <div class="container">
+          <div class="row row-pb-md">
+            <div class="col-md-4 fh5co-widget">
+              <h4>Tasty</h4>
+              <p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos cumque dicta adipisci
+                architecto culpa amet.</p>
+            </div>
+            <div class="col-md-2 col-md-push-1 fh5co-widget">
+              <h4>Links</h4>
+              <ul class="fh5co-footer-links">
+                <li><a href="home">Home</a></li>
+                <li><a href="#">Portfolio</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">About</a></li>
+              </ul>
+            </div>
+
+            <div class="col-md-2 col-md-push-1 fh5co-widget">
+              <h4>Categories</h4>
+              <ul class="fh5co-footer-links">
+                <li><a href="#">Landing Page</a></li>
+                <li><a href="#">Real Estate</a></li>
+                <li><a href="#">Personal</a></li>
+                <li><a href="#">Business</a></li>
+                <li><a href="#">e-Commerce</a></li>
+              </ul>
+            </div>
+
+            <div class="col-md-4 col-md-push-1 fh5co-widget">
+              <h4>Contact Information</h4>
+              <ul class="fh5co-footer-links">
+                <li>198 West 21th Street, <br> Suite 721 New York NY 10016</li>
+                <li><a href="tel://1234567920">+ 1235 2355 98</a></li>
+                <li><a href="mailto:info@yoursite.com">info@yoursite.com</a></li>
+              </ul>
+            </div>
+
+          </div>
+
+          <div class="row copyright">
+            <div class="col-md-12 text-center">
+              <p>
+                <small class="block">&copy; 2024 All Rights Reserved.</small>
+                <small class="block">Designed by <a href="http://freehtml5.co/" target="_blank">FreeHTML5.co</a> Demo
+                  Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a></small>
+              </p>
+              <p>
+              <ul class="fh5co-social-icons">
+                <li><a href="#"><i class="icon-twitter2"></i></a></li>
+                <li><a href="#"><i class="icon-facebook2"></i></a></li>
+                <li><a href="#"><i class="icon-linkedin2"></i></a></li>
+                <li><a href="#"><i class="icon-dribbble2"></i></a></li>
+              </ul>
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </footer>
     </div>
-}
-				</div>
-			</div>
-		</div>
 
-		<div id="fh5co-featured-testimony" class="fh5co-section">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12 fh5co-heading animate-box">
-						<h2>Testimony</h2>
-						<div class="row">
-							<div class="col-md-6">
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ab debitis sit itaque totam, a maiores nihil, nulla magnam porro minima officiis! Doloribus aliquam voluptates corporis et tempora consequuntur ipsam, itaque, nesciunt similique commodi omnis.</p>
-							</div>
-						</div>
-					</div>
+    <div class="gototop js-top">
+      <a href="#" class="js-gotop"><i class="icon-arrow-up22"></i></a>
+    </div>
 
-					<div class="col-md-5 animate-box img-to-responsive">
-						<img src="images/person_1.jpg" alt="">
-					</div>
-					<div class="col-md-7 animate-box">
-						<blockquote>
-							<p> &ldquo; Quantum ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ab debitis sit itaque totam, a maiores nihil, nulla magnam porro minima officiis! Doloribus aliquam voluptates corporis et tempora consequuntur ipsam. &rdquo;</p>
-							<p class="author"><cite>&mdash; Jane Smith</cite></p>
-						</blockquote>
-					</div>
-				</div>
-			</div>
-		</div>
+    <!-- jQuery -->
+    <script src="js/jquery.min.js"></script>
+    <!-- jQuery Easing -->
+    <script src="js/jquery.easing.1.3.js"></script>
+    <!-- Bootstrap -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Waypoints -->
+    <script src="js/jquery.waypoints.min.js"></script>
+    <!-- Waypoints -->
+    <script src="js/jquery.stellar.min.js"></script>
+    <!-- Flexslider -->
+    <script src="js/jquery.flexslider-min.js"></script>
+    <!-- Main -->
+    <script src="js/main.js"></script>
 
-		<footer id="fh5co-footer" role="contentinfo" class="fh5co-section">
-			<div class="container">
-				<div class="row row-pb-md">
-					<div class="col-md-4 fh5co-widget">
-						<h4>Tasty</h4>
-						<p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos cumque dicta adipisci architecto culpa amet.</p>
-					</div>
-					<div class="col-md-2 col-md-push-1 fh5co-widget">
-						<h4>Links</h4>
-						<ul class="fh5co-footer-links">
-							<li><a href="home">Home</a></li>
-							<li><a href="#">Portfolio</a></li>
-							<li><a href="#">Blog</a></li>
-							<li><a href="#">About</a></li>
-						</ul>
-					</div>
+  </body>
 
-					<div class="col-md-2 col-md-push-1 fh5co-widget">
-						<h4>Categories</h4>
-						<ul class="fh5co-footer-links">
-							<li><a href="#">Landing Page</a></li>
-							<li><a href="#">Real Estate</a></li>
-							<li><a href="#">Personal</a></li>
-							<li><a href="#">Business</a></li>
-							<li><a href="#">e-Commerce</a></li>
-						</ul>
-					</div>
-
-					<div class="col-md-4 col-md-push-1 fh5co-widget">
-						<h4>Contact Information</h4>
-						<ul class="fh5co-footer-links">
-							<li>198 West 21th Street, <br> Suite 721 New York NY 10016</li>
-							<li><a href="tel://1234567920">+ 1235 2355 98</a></li>
-							<li><a href="mailto:info@yoursite.com">info@yoursite.com</a></li>
-						</ul>
-					</div>
-
-				</div>
-
-				<div class="row copyright">
-					<div class="col-md-12 text-center">
-						<p>
-							<small class="block">&copy; 2024 All Rights Reserved.</small>
-							<small class="block">Designed by <a href="http://freehtml5.co/" target="_blank">FreeHTML5.co</a> Demo Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a></small>
-						</p>
-						<p>
-							<ul class="fh5co-social-icons">
-								<li><a href="#"><i class="icon-twitter2"></i></a></li>
-								<li><a href="#"><i class="icon-facebook2"></i></a></li>
-								<li><a href="#"><i class="icon-linkedin2"></i></a></li>
-								<li><a href="#"><i class="icon-dribbble2"></i></a></li>
-							</ul>
-						</p>
-					</div>
-				</div>
-
-			</div>
-		</footer>
-	</div>
-
-	<div class="gototop js-top">
-		<a href="#" class="js-gotop"><i class="icon-arrow-up22"></i></a>
-	</div>
-
-	<!-- jQuery -->
-	<script src="js/jquery.min.js"></script>
-	<!-- jQuery Easing -->
-	<script src="js/jquery.easing.1.3.js"></script>
-	<!-- Bootstrap -->
-	<script src="js/bootstrap.min.js"></script>
-	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
-	<!-- Waypoints -->
-	<script src="js/jquery.stellar.min.js"></script>
-	<!-- Flexslider -->
-	<script src="js/jquery.flexslider-min.js"></script>
-	<!-- Main -->
-	<script src="js/main.js"></script>
-
-</body>
-</html>
-
-
+  </html>
