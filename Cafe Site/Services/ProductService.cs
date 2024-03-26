@@ -69,7 +69,7 @@ namespace Cafe_Site.Services
                 Product_Quantity = productInfo.Product_Quantity,
                 Product_Image = ProductImage,
                 Product_Description = productInfo.Product_Description,
-                userId = "651616ac-8281-433c-a684-5a614ffb1d89"
+                userId = "ef5d3cdc-2c85-4657-8520-dc55be23168c"
             });
 
             repository.SaveChanges();
@@ -78,10 +78,10 @@ namespace Cafe_Site.Services
                 p => p.Product_Name == productInfo.Product_Name &&
                 p.Product_Quantity == productInfo.Product_Quantity &&
                 p.Product_Type == productInfo.Product_Type &&
-                p.Product_Description == productInfo.Product_Description && p.userId == "651616ac-8281-433c-a684-5a614ffb1d89", null).Product_Id;
+                p.Product_Description == productInfo.Product_Description && p.userId == "ef5d3cdc-2c85-4657-8520-dc55be23168c", null).Product_Id;
 
-            int value;
-            bool flag = int.TryParse(productInfo.SPrice, out value); 
+            decimal value;
+            bool flag = decimal.TryParse(productInfo.SPrice, out value); 
 
             if(flag && value > 0)
             {
@@ -93,7 +93,7 @@ namespace Cafe_Site.Services
                 });
             }
 
-            flag = int.TryParse(productInfo.MPrice, out value);
+            flag = decimal.TryParse(productInfo.MPrice, out value);
 
             if(flag && value > 0)
             {
@@ -105,7 +105,7 @@ namespace Cafe_Site.Services
                 });
             }
 
-            flag = int.TryParse(productInfo.LPrice, out value);
+            flag = decimal.TryParse(productInfo.LPrice, out value);
 
             if(flag && value > 0)
             {
@@ -150,7 +150,10 @@ namespace Cafe_Site.Services
             product.Product_Name = productInfo.Product_Name;
             product.Product_Quantity = productInfo.Product_Quantity;
             product.Product_Type = productInfo.Product_Type;
-            product.Product_Image = ProductImage;
+            if(ProductImage.Length != 0)
+            {
+                product.Product_Image = ProductImage;
+            }
             product.Product_Description = productInfo.Product_Description;
             product.userId = productInfo.userId;
 

@@ -14,11 +14,13 @@ namespace Cafe_Site.ViewModels
         //[Required(ErrorMessage = "The Product Quantity is Required")]
         [Range(1, 100, ErrorMessage = "The Product Quantity Must be Higher Than 0 and Lower Than 100")]
         public int Product_Quantity { get; set; }
+        [Required(ErrorMessage = "The Product Description is Required")]
         public string Product_Description { get; set; }
         [DataType(DataType.Currency)]
         public string? SPrice { get; set; }
         [DataType(DataType.Currency)]
-        public string? MPrice { get; set; }
+        [Required(ErrorMessage = "The Product Medium Size Price is Required")]
+        public string MPrice { get; set; }
         [DataType(DataType.Currency)]
         public string? LPrice { get; set; }
         public string? userId { get; set; }

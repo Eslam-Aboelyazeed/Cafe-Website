@@ -2,6 +2,29 @@ a{
     text-decoration: none;
 }
 
+#pt option {
+    /*    background-image: url(/images/broken_noise.png);
+    background-repeat:repeat;*/
+    /*background-color: black;*/
+    background-color: #242424;
+    color: white;
+    font-size: larger;
+    font-family: "Satisfy", cursive;
+    font-weight: normal;
+}
+
+/*#o1{
+    opacity:0.5;
+}*/
+
+/*option {
+    background-color: transparent;
+    color: white;
+    font-size: larger;
+    font-family: " Satisfy", cursive;
+}
+*/
+
 /*button{
     background-color: wheat;
     color: black;
