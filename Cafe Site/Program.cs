@@ -44,11 +44,24 @@ namespace Cafe_Site
 
             app.UseAuthorization();
 
-            app.MapControllerRoute(
-                name: "default",
-               // pattern: "{controller=AdminDashboard}/{action=Index}/{id?}");
-            pattern: "{controller=Home}/{action=Index}/{id?}");
-            app.MapRazorPages();
+            //app.MapControllerRoute(
+            //    name: "default",
+            //   // pattern: "{controller=AdminDashboard}/{action=Index}/{id?}");
+            //pattern: "{controller=Home}/{action=Index}/{id?}");
+            //app.MapRazorPages();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "ProductDetails",
+                    pattern: "ProductDetails/{id?}",
+                    defaults: new { controller = "Home", action = "ProductDetails" });
+
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapRazorPages();
+            });
             app.Run();
         }
     }
