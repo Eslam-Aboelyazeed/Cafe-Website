@@ -323,6 +323,9 @@ FodyWeavers.xsd
 !.vscode/launch.json
 !.vscode/extensions.json
 
+# Visual Studio
+.vs/
+
 # Stylelint config if it's json format
 .stylelintrc.json
 
