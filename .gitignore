@@ -1,0 +1,16 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+*.vsidx
+/.vs/Cafe Site/v17/.suo
+*.v2
+/.vs/ProjectEvaluation/cafe site.projects.v7.bin
+/Cafe Site/bin/Debug/net8.0/Cafe Site.dll
+/Cafe Site/obj/Debug/net8.0/Cafe Site.AssemblyInfo.cs
+/.vs/ProjectEvaluation/cafe site.metadata.v7.bin
+/Cafe Site/obj/Debug/net8.0/Cafe Site.AssemblyInfoInputs.cache
+/.vs/Cafe Site/v17/DocumentLayout.json
+/Cafe Site/obj/Debug/net8.0/Cafe Site.dll
+/Cafe Site/bin/Debug/net8.0/Cafe Site.exe
+/.vs/Cafe Site/FileContentIndex/8de4b677-a279-4a59-978c-854640704fac.vsidx
