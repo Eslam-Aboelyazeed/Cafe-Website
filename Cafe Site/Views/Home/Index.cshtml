@@ -123,50 +123,36 @@
 								<div class="fh5co-item">
 									@try
 									{
-										// Format MPrice
-										var mPriceDecimal = Convert.ToDecimal(product.MPrice);
-										var formattedMPrice = (int)Math.Round(mPriceDecimal);
-										var centsM = mPriceDecimal.ToString().Split('.')[1]?.Substring(0, 2) ?? "00";
-
-										// Format SPrice
-										var sPriceDecimal = Convert.ToDecimal(product.SPrice);
-										var formattedSPrice = (int)Math.Round(sPriceDecimal);
-										var centsS = sPriceDecimal.ToString().Split('.')[1]?.Substring(0, 2) ?? "00";
-
-										// Format LPrice
-										var lPriceDecimal = Convert.ToDecimal(product.LPrice);
-										var formattedLPrice = (int)Math.Round(lPriceDecimal);
-										var centsL = lPriceDecimal.ToString().Split('.')[1]?.Substring(0, 2) ?? "00";
-
 										<a href="@Url.RouteUrl("ProductDetails", new { id=product.Product_Id })">
 											<img src="data:image/png;base64,@product.Product_Image" class="img-responsive" alt="@product.Product_Name">
 											<h3>@product.Product_Name</h3>
 											<p>@product.Product_Type</p>
-											@if (formattedSPrice == 0)
+
+											@if (product.SPrice == "-")
 											{
-												<span class="fh5co-price" style="color: gray; text-decoration: line-through;">Small: $@formattedSPrice<sup>.@centsS</sup></span>
+												<span class="fh5co-price" style="color: gray; text-decoration: line-through;">Small: $@product.SPrice</span>
 											}
-											else
+											else if (Convert.ToDecimal(product.SPrice) > 0)
 											{
-												<span class="fh5co-price">Small: $@formattedSPrice<sup>.@centsS</sup></span>
+												<span class="fh5co-price">Small: $@(Convert.ToDecimal(product.SPrice).ToString("N2"))</span>
 											}
 
-											@if (formattedMPrice == 0)
+											@if (product.MPrice == "-")
 											{
-												<span class="fh5co-price" style="color: gray; text-decoration: line-through;">Medium: $@formattedMPrice<sup>.@centsM</sup></span>
+												<span class="fh5co-price" style="color: gray; text-decoration: line-through;">Medium: $@product.MPrice</span>
 											}
-											else
+											else if (Convert.ToDecimal(product.MPrice) > 0)
 											{
-												<span class="fh5co-price">Medium: $@formattedMPrice<sup>.@centsM</sup></span>
+												<span class="fh5co-price">Medium: $@(Convert.ToDecimal(product.MPrice).ToString("N2"))</span>
 											}
 
-											@if (formattedLPrice == 0)
+											@if (product.LPrice == "-")
 											{
-												<span class="fh5co-price" style="color: gray; text-decoration: line-through;">Large: $@formattedLPrice<sup>.@centsL</sup></span>
+												<span class="fh5co-price" style="color: gray; text-decoration: line-through;">Large: $@product.LPrice</span>
 											}
-											else
+											else if (Convert.ToDecimal(product.LPrice) > 0)
 											{
-												<span class="fh5co-price">Large: $@formattedLPrice<sup>.@centsL</sup></span>
+												<span class="fh5co-price">Large: $@(Convert.ToDecimal(product.LPrice).ToString("N2"))</span>
 											}
 
 											<p>@product.Product_Description</p>
@@ -180,6 +166,9 @@
 							</div>
 						</div>
 					}
+
+
+
 				</div>
 			</div>
 		</div>
