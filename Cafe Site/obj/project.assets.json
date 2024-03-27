@@ -8566,19 +8566,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\abeer\\.nuget\\packages\\": {}
+    "C:\\Users\\Softlaptop\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\ITI material\\Cafe-Site\\Cafe Site\\Cafe Site.csproj",
+      "projectUniqueName": "C:\\ITI\\MVC Project\\Final V3\\Cafe-Site\\Cafe Site\\Cafe Site.csproj",
       "projectName": "Cafe Site",
-      "projectPath": "F:\\ITI material\\Cafe-Site\\Cafe Site\\Cafe Site.csproj",
-      "packagesPath": "C:\\Users\\abeer\\.nuget\\packages\\",
-      "outputPath": "F:\\ITI material\\Cafe-Site\\Cafe Site\\obj\\",
+      "projectPath": "C:\\ITI\\MVC Project\\Final V3\\Cafe-Site\\Cafe Site\\Cafe Site.csproj",
+      "packagesPath": "C:\\Users\\Softlaptop\\.nuget\\packages\\",
+      "outputPath": "C:\\ITI\\MVC Project\\Final V3\\Cafe-Site\\Cafe Site\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\abeer\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Softlaptop\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

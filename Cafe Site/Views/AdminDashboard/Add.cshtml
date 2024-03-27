@@ -10,6 +10,21 @@
 @* <h4>ProductInfoViewModel</h4> *@
 @* <hr /> *@
 
+<header id="fh5co-header" class="fh5co-cover js-fullheight" role="banner" style="background-image: url(/images/hero_1.jpeg);" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="display-t js-fullheight">
+                    <div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
+                        <h1>Admin Dashboard</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
@@ -31,7 +46,18 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Product_Type" class="control-label"></label>&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-asterisk text-danger"></i>
-                    <input asp-for="Product_Type" class="form-control" placeholder="Please Enter The Product Type" />
+                    <input asp-for="Product_Type" class="form-control" placeholder="Please Enter The Product Type" hidden/>
+                    <select id="pt" onchange="AssignType()" class="form-select" style="background-image: url(/images/broken_noise.png); background-repeat:repeat; color: white; font-size: larger; font-family: 'Satisfy', cursive;">
+                        <option id="o1" value="none">--Select Product Type--</option>
+                        <option id="o2" value="Hot Drinks">Hot Drinks</option>
+                        <option id="o3" value="Cold Drinks">Cold Drinks</option>
+                        <option id="o4" value="Deserts">Deserts</option>
+                        <option id="o5" value="Pastery">Pastery</option>
+                        <option id="o6" value="Add-Hot Drinks">Hot Drinks Additions</option>
+                        <option id="o7" value="Add-Cold Drinks">Cold Drinks Additions</option>
+                        <option id="o8" value="Add-Deserts">Deserts Additions</option>
+                        <option id="o9" value="Add-Pastery">Pastery Additions</option>
+                    </select>
                     <span asp-validation-for="Product_Type" class="text-danger"></span>
                 </div>
                 <div class="form-group">
@@ -45,7 +71,7 @@
                     <span asp-validation-for="Product_Quantity" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Product_Description" class="control-label"></label>
+                    <label asp-for="Product_Description" class="control-label"></label>&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-asterisk text-danger"></i>
                     <input asp-for="Product_Description" class="form-control" placeholder="Please Enter The Product Description" />
                     <span asp-validation-for="Product_Description" class="text-danger"></span>
                 </div>
@@ -55,7 +81,7 @@
                     <span asp-validation-for="SPrice" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="MPrice" class="control-label"></label>
+                    <label asp-for="MPrice" class="control-label"></label>&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-asterisk text-danger"></i>
                     <input asp-for="MPrice" type="number" class="form-control" placeholder="Please Enter The Price For the Medium Size of The Product" />
                     <span asp-validation-for="MPrice" class="text-danger"></span>
                 </div>
@@ -80,4 +106,31 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        function loaded(){
+            let pt = document.getElementById("pt");
+
+            pt.style.opacity = 0.5;
+        }
+
+        loaded();
+
+        function AssignType() {
+            let pt = document.getElementById("pt");
+
+            let productType = document.getElementById("Product_Type");
+
+            if (pt.value != "none") {
+                productType.value = pt.value;
+
+                pt.style.opacity = 1;
+
+            } else {
+                productType.value = null;
+
+                pt.style.opacity = 0.5;
+
+            }
+        }
+    </script>
 }
