@@ -29,11 +29,6 @@ namespace Cafe_Site.Controllers
                 TotalPages = (int)Math.Ceiling(count / (double)pageSize)
             };
 
-            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
-            {
-                return PartialView("_ProductListPartial", viewModel);
-            }
-
             return View(viewModel);
         }
 
