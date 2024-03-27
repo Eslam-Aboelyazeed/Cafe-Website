@@ -8566,19 +8566,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\alaa\\.nuget\\packages\\": {}
+    "C:\\Users\\abeer\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "I:\\MVC V2\\Cafe-Site\\Cafe Site\\Cafe Site.csproj",
+      "projectUniqueName": "F:\\ITI material\\Cafe-Site\\Cafe Site\\Cafe Site.csproj",
       "projectName": "Cafe Site",
-      "projectPath": "I:\\MVC V2\\Cafe-Site\\Cafe Site\\Cafe Site.csproj",
-      "packagesPath": "C:\\Users\\alaa\\.nuget\\packages\\",
-      "outputPath": "I:\\MVC V2\\Cafe-Site\\Cafe Site\\obj\\",
+      "projectPath": "F:\\ITI material\\Cafe-Site\\Cafe Site\\Cafe Site.csproj",
+      "packagesPath": "C:\\Users\\abeer\\.nuget\\packages\\",
+      "outputPath": "F:\\ITI material\\Cafe-Site\\Cafe Site\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\alaa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\abeer\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8598,6 +8598,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -8650,7 +8655,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
