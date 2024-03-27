@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\Cafe Site.csproj": {}
+    "F:\\ITI material\\Cafe-Site\\Cafe Site\\Cafe Site.csproj": {}
   },
   "projects": {
-    "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\Cafe Site.csproj": {
+    "F:\\ITI material\\Cafe-Site\\Cafe Site\\Cafe Site.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\Cafe Site.csproj",
+        "projectUniqueName": "F:\\ITI material\\Cafe-Site\\Cafe Site\\Cafe Site.csproj",
         "projectName": "Cafe Site",
-        "projectPath": "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\Cafe Site.csproj",
-        "packagesPath": "C:\\Users\\YN\\.nuget\\packages\\",
-        "outputPath": "D:\\MVC Final Project\\MVC Final Project\\Cafe-Site\\Cafe Site\\obj\\",
+        "projectPath": "F:\\ITI material\\Cafe-Site\\Cafe Site\\Cafe Site.csproj",
+        "packagesPath": "C:\\Users\\abeer\\.nuget\\packages\\",
+        "outputPath": "F:\\ITI material\\Cafe-Site\\Cafe Site\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\YN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\abeer\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

@@ -2,11 +2,13 @@
 using Cafe_Site.Repository;
 using Cafe_Site.Services;
 using Cafe_Site.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cafe_Site.Controllers
 {
-	public class AdminDashboardController : Controller
+    [Authorize(Roles = "Admin")]
+    public class AdminDashboardController : Controller
 	{
         private readonly IProductService productService;
 
