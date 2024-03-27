@@ -161,9 +161,33 @@
                       alt="@product.Product_Name">
                     <h3>@product.Product_Name</h3>
                     <p>@product.Product_Type</p>
-                    <span class="fh5co-price">Small: $@formattedSPrice<sup>.@centsS</sup></span>
-                    <span class="fh5co-price">Medium: $@formattedMPrice<sup>.@centsM</sup></span>
-                    <span class="fh5co-price">Large: $@formattedLPrice<sup>.@centsL</sup></span>
+                                            @if (formattedSPrice == 0)
+                                            {
+                                                <span class="fh5co-price" style="color: gray; text-decoration: line-through;">Small: $@formattedSPrice<sup>.@centsS</sup></span>
+                                            }
+                                            else
+                                            {
+                                                <span class="fh5co-price">Small: $@formattedSPrice<sup>.@centsS</sup></span>
+                                            }
+
+                                            @if (formattedMPrice == 0)
+                                            {
+                                                <span class="fh5co-price" style="color: gray; text-decoration: line-through;">Medium: $@formattedMPrice<sup>.@centsM</sup></span>
+                                            }
+                                            else
+                                            {
+                                                <span class="fh5co-price">Medium: $@formattedMPrice<sup>.@centsM</sup></span>
+                                            }
+
+                                            @if (formattedLPrice == 0)
+                                            {
+                                                <span class="fh5co-price" style="color: gray; text-decoration: line-through;">Large: $@formattedLPrice<sup>.@centsL</sup></span>
+                                            }
+                                            else
+                                            {
+                                                <span class="fh5co-price">Large: $@formattedLPrice<sup>.@centsL</sup></span>
+                                            }
+
                     <p>@product.Product_Description</p>
                   </a>
                   }
