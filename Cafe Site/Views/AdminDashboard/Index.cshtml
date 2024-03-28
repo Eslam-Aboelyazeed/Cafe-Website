@@ -70,13 +70,13 @@
             <td class="align-middle">
                 @Html.DisplayFor(modelItem => item.Product_Description)
             </td>
-            <td class="align-middle">
+            <td class="align-middle" id="s@(item.Product_Id)">
                 @Html.DisplayFor(modelItem => item.SPrice)
             </td>
             <td class="align-middle">
                 @Html.DisplayFor(modelItem => item.MPrice)
             </td>
-            <td class="align-middle">
+            <td class="align-middle" id="l@(item.Product_Id)">
                 @Html.DisplayFor(modelItem => item.LPrice)
             </td>
             <td class="align-middle">
@@ -85,7 +85,8 @@
             </td>
             <td class="align-middle">
                 @Html.ActionLink("Update", "Update", new { id = item.Product_Id }) |
-                <button type="button" class="bg-transparent text-danger border-0" onclick="ShowModal(@item.Product_Id)">Delete</button>
+                <button type="button" class="bg-transparent text-danger border-0" onclick="ShowModal(@item.Product_Id)">Delete</button> |
+                <button type="button" class="bg-transparent text-danger border-0" onclick="ShowModalSize(@item.Product_Id)">Delete Size</button>
                     @* <a href="" onclick="ShowModal(@item.Product_Id)">Delete</a> *@
                 @* @Html.ActionLink("Delete", "Delete", "AdminDashboard", new { id = item.Product_Id }, new { onclick = $"ShowModal({item.Product_Id})" }) *@
             </td>
@@ -101,9 +102,7 @@
                 <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body text-dark">
-                Are You Sure You Want To Delete This Product?
-            </div>
+            <div class="modal-body text-dark" id="ModalText"></div>
             <div class="modal-footer" id="mf">
                 @*                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                 <button type="button" class="btn btn-primary">Yes</button> *@
@@ -114,11 +113,20 @@
 
 @section scripts{
     <script>
-        function ShowModal(id) {
-            var modal = new bootstrap.Modal(document.getElementById('m1'));
 
-            var b1 = document.createElement("a");
-            var b2 = document.createElement("a");
+        function loaded(){
+            let adminnbl = document.getElementById('adminlink');
+
+            adminnbl.className = "active";
+        }
+
+        loaded();
+
+        function ShowModal(id) {
+            let modal = new bootstrap.Modal(document.getElementById('m1'));
+
+            let b1 = document.createElement("a");
+            let b2 = document.createElement("a");
 
             b1.classList = "btn btn-secondary";
 
@@ -130,11 +138,82 @@
             b1.setAttribute("data-bs-dismiss", "modal");
             b2.setAttribute("href", `/AdminDashboard/Delete/${id}`);
 
-            var mf = document.getElementById('mf');
+            let mf = document.getElementById('mf');
+
+            let mt = document.getElementById('ModalText');
 
             mf.innerHTML = "";
+            mt.innerText = "Are You Sure You Want To Delete This Product?";
 
             mf.append(b1, b2);
+
+            modal.show();
+        }
+
+        function ShowModalSize(id) {
+            let modal = new bootstrap.Modal(document.getElementById('m1'));
+
+            let mf = document.getElementById('mf');
+
+            let mt = document.getElementById('ModalText');
+
+            let sp = document.getElementById(`s${id}`);
+            let lp = document.getElementById(`l${id}`);
+             
+            mf.innerHTML = "";
+
+            let b1 = document.createElement("a");
+            b1.classList = "btn btn-secondary";
+            b1.innerText = "Cancel";
+            b1.setAttribute("data-bs-dismiss", "modal");
+
+            mt.innerText = "Choose The Size You Want to Delete";
+
+            if (sp.innerText != '-' && lp.innerText != '-') {
+                let b2 = document.createElement("a");
+                b2.classList = "btn btn-primary";
+                b2.innerText = "Delete Size Small";
+                b2.setAttribute("href", `/AdminDashboard/DeleteSize/${id}?size=S`);
+
+                let b3 = document.createElement("a");
+                b3.classList = "btn btn-primary";
+                b3.innerText = "Delete Size Large";
+                b3.setAttribute("href", `/AdminDashboard/DeleteSize/${id}?size=L`);
+
+                // mt.innerText = "Choose The Size You Want to Delete";
+
+                mf.append(b1, b2, b3);
+            }
+            else if (sp.innerText != '-') {
+                let b2 = document.createElement("a");
+                b2.classList = "btn btn-primary";
+                b2.innerText = "Delete Size Small";
+                b2.setAttribute("href", `/AdminDashboard/DeleteSize/${id}?size=S`);
+
+                // mt.innerText = "Choose The Size You Want to Delete";
+
+                mf.append(b1, b2);
+            }
+            else if (lp.innerText != '-') {
+                let b3 = document.createElement("a");
+                b3.classList = "btn btn-primary";
+                b3.innerText = "Delete Size Large";
+                b3.setAttribute("href", `/AdminDashboard/DeleteSize/${id}?size=L`);
+
+                // mt.innerText = "Choose The Size You Want to Delete";
+
+                mf.append(b1, b3);
+            }
+            else {
+                b1.innerText = "Ok";
+
+                mt.innerText = "There are no available sizes to be deleted";
+                
+                mf.append(b1);
+            }
+            // mt.innerText = "Choose The Size You Want to Delete";
+
+            // mf.append(b1, b2, b3);
 
             modal.show();
         }

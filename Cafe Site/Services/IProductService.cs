@@ -1,6 +1,7 @@
 ﻿using Cafe_Site.Models;
 using Cafe_Site.Repository;
 using Cafe_Site.ViewModels;
+using System.Security.Claims;
 
 namespace Cafe_Site.Services
 {
@@ -11,5 +12,7 @@ namespace Cafe_Site.Services
         public void InsertProduct(ProductInfoViewModel productInfo);
         public void UpdateProduct(ProductInfoViewModel productInfo);
         public void DeleteProduct(int id);
+        public void DeleteSize(int id, char size);
+        //public ApplicationUser GetUser(string userId);
     }
 }

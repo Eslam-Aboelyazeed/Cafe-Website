@@ -2,7 +2,10 @@
 using Cafe_Site.Repository;
 using Cafe_Site.ViewModels;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using System.Drawing;
+using System.Security.Claims;
 
 namespace Cafe_Site.Services
 {
@@ -10,11 +13,15 @@ namespace Cafe_Site.Services
     {
         private readonly IDefaultRepository<Product> repository;
         private readonly IDefaultRepository<Product_Size_Price> psrepository;
+        //private readonly UserManager<ApplicationUser> urepo;
+
+        //private readonly IDefaultRepository<aspnet> urepo;
 
         public ProductService(IDefaultRepository<Product> repository, IDefaultRepository<Product_Size_Price> psrepository)
         {
             this.repository = repository;
             this.psrepository = psrepository;
+            //this.urepo = urepo;
         }
 
         public List<ProductInfoViewModel> GetAllProducts()
@@ -282,5 +289,22 @@ namespace Cafe_Site.Services
 
             repository.SaveChanges();
         }
+
+        public void DeleteSize(int id, char size)
+        {
+            var SizedProduct = psrepository.GetElement(ps => ps.Product_Id == id && ps.Size == size, null);
+
+            if (SizedProduct != null)
+            {
+                psrepository.Delete(SizedProduct);
+
+                repository.SaveChanges();
+            }
+        }
+
+        //public ApplicationUser GetUser(string userId)
+        //{
+        //    return urepo.Users.FirstOrDefault(u => u.Id == userId);
+        //}
     }
 }
