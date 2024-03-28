@@ -10,6 +10,7 @@ namespace Cafe_Site.Controllers
     public class MenuController : Controller
     {
         private readonly IProductService _productService;
+
         public MenuController(IProductService productService)
         {
             _productService = productService;
@@ -29,10 +30,14 @@ namespace Cafe_Site.Controllers
                 TotalPages = (int)Math.Ceiling(count / (double)pageSize)
             };
 
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+                return PartialView("_ProductsPartial", viewModel);
+            }
+
             return View(viewModel);
         }
 
-
-
     }
+
 }
