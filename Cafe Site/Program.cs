@@ -18,14 +18,12 @@ namespace Cafe_Site
             (builder.Configuration.GetConnectionString("cs")));
 
             builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false).AddRoles<IdentityRole>().AddEntityFrameworkStores<CafeSiteContext>();
-            //builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<CafeSiteContext>();
+            //builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<CafeSiteContext>();
 
 
             builder.Services.AddScoped< IDefaultRepository<Product>, DefaultRepository<Product> >();
 
             builder.Services.AddScoped< IDefaultRepository<Product_Size_Price>, DefaultRepository<Product_Size_Price> >();
-
-            //builder.Services.AddScoped< IDefaultRepository<ApplicationUser>, DefaultRepository<ApplicationUser> >();
 
             builder.Services.AddScoped< IProductService, ProductService >();
 
@@ -44,16 +42,13 @@ namespace Cafe_Site
 
             app.UseRouting();
 
-            app.UseAuthentication();
-
             app.UseAuthorization();
 
             //app.MapControllerRoute(
             //    name: "default",
-            //// pattern: "{controller=AdminDashboard}/{action=Index}/{id?}");
+            //   // pattern: "{controller=AdminDashboard}/{action=Index}/{id?}");
             //pattern: "{controller=Home}/{action=Index}/{id?}");
             //app.MapRazorPages();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
