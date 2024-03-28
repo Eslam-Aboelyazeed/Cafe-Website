@@ -4,25 +4,32 @@
 @{
     ViewData["Title"] = "Log in";
 }
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 <style>
 .input-wrapper {
   position: relative;
+  margin-top:20px;
 }
 
 .inputself {
-  border: 1px solid gray;
-  border-radius: 6px;
+        border: 3px solid #751F53;
+  border-radius: 15px;
   position: relative;
-  width: 200px;
+  width: 400px;
   margin: 10px;
   line-height: 6ex;
+  transition: border-color 1s;
+  font-size:18px;
 }
 input:hover{
-    border-color:green;
-    border-radius:5px;
+        border-color: #751F53;
 }
 
 .labelself {
+  color: #00224D;
+  font-size:17px;
   position: absolute;
   top: 0.2ex;
   z-index: 1;
@@ -30,47 +37,150 @@ input:hover{
   background-color: white;
   padding: 0 5px;
 }
+
+.butn{
+        margin-left: 130px;
+        margin-top: 23px;
+        margin-bottom: 22px;
+        width:100px;
+        height:50px;
+    }
+p{
+    margin-top:20px;
+}
+.passinput{
+        flex-direction: column;
+        display:flex;
+        width: fit-content;
+}
+.passinput div{
+   display: flex;
+   align-items: center;
+   position: relative;
+}
+.linksContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+    .btn {
+        background: #b53187;
+        background-image: -webkit-linear-gradient(top, #b53187, #d4359f);
+        background-image: -moz-linear-gradient(top, #b53187, #d4359f);
+        background-image: -ms-linear-gradient(top, #b53187, #d4359f);
+        background-image: -o-linear-gradient(top, #b53187, #d4359f);
+        background-image: linear-gradient(to bottom, #b53187, #d4359f);
+        -webkit-border-radius: 12;
+        -moz-border-radius: 12;
+        border-radius: 12px;
+        font-family: Arial;
+        color: #ffffff;
+        font-size: 20px;
+        text-decoration: none;
+
+        cursor: pointer;
+        margin: auto;
+        display: block;
+        padding: 7px;
+        width: 56%;
+    }
+
+        .btn:hover {
+            background: #c963a7;
+            background-image: -webkit-linear-gradient(top, #c963a7, #d66db3);
+            background-image: -moz-linear-gradient(top, #c963a7, #d66db3);
+            background-image: -ms-linear-gradient(top, #c963a7, #d66db3);
+            background-image: -o-linear-gradient(top, #c963a7, #d66db3);
+            background-image: linear-gradient(to bottom, #c963a7, #d66db3);
+            text-decoration: none;
+        }
+
+        i{
+            cursor:pointer;
+        }
+
+    .pTag {
+        text-align: center;
+        width: 100%;
+    }
+
+    .loginHeader{
+        text-align: center;
+        font-size: 50px;
+        font-weight: revert;
+    }
+
+    .invisible {
+        display: none;
+    }
+
 </style>
 
-<h2>@ViewData["Title"]</h2>
 <div class="row">
     <div class="col-md-6">
-        <section>
+        <section style="margin-left:4vw;margin-top:30px;">
             <form id="account" method="post">
-                <div asp-validation-summary="All" class="text-danger"></div>
+@*                 <div asp-validation-summary="All" class="text-danger"></div>
+ *@                
                 <div class="input-wrapper">
-                    <label asp-for="Input.Email" class="labelself"></label>
-                    <input asp-for="Input.Email" class="inputself" />
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                </div>
-                <div class="input-wrapper">
-                    <label asp-for="Input.Password" class="labelself"></label>
-                    <input asp-for="Input.Password" class="inputself" />
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label asp-for="Input.RememberMe">
-                            <input asp-for="Input.RememberMe" />
-                            @Html.DisplayNameFor(m => m.Input.RememberMe)
-                        </label>
+                    <div class="passinput">
+                        <h2 class="loginHeader">Login</h2>
+
+                        <div class="input-wrapper">
+                            <label asp-for="Input.Email" class="labelself"></label>
+                            <input asp-for="Input.Email" class="inputself" />
+                        </div>
+                        <span asp-validation-for="Input.Email" class="text-danger d-flex"></span>
+
+                        <div>
+                            <label asp-for="Input.Password" class="labelself"></label>
+                            <input asp-for="Input.Password" class="inputself" id="password" />
+                            <a onclick="showHide()" style="left: 88%;position: absolute;">
+                                <i id="eyeIcon" class="fa-solid fa-eye-slash invisible" style="font-size: large;color: #878787;"></i>
+                            </a>
+                        </div>
+                        <span asp-validation-for="Input.Password" class="text-danger d-flex"></span>
+
+                        <div class="linksContainer">
+                            <div class="form-group">
+                                <div class="checkbox mt-3 mx-2">
+                                    <label asp-for="Input.RememberMe">
+                                        <input asp-for="Input.RememberMe" />
+                                        @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                    </label>
+                                </div>
+                            </div>
+                            <p>
+                                <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                            </p>
+                        </div>           
+                        <button type="submit" class="btn">Log in</button>
+                        <div class="form-group">
+                            @* <p>
+                            <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                            </p> *@
+                            <p class="pTag">
+                                Don`t Have Account?
+                                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl"> Sign Up</a>
+                            </p>
+                            @* <p>
+                            <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                            </p> *@
+                        </div>
                     </div>
+                    
+                    <input type="checkbox" id="checkbox" hidden/>
+
+                    @* <div class="showpassword mx-2">
+                        <input type="checkbox" id="checkbox" />
+                       <label>Show Password</label>
+                    </div> *@
+
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-warning">Log in</button>
-                </div>
-                <div class="form-group">
-                    <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                    </p>
-                    <p>
-                      Don`t Have Account?
-                      <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl"> Sign Up</a>
-                    </p>
-                    @* <p>
-                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
-                    </p> *@
-                </div>
+                
+                
             </form>
         </section>
     </div>
@@ -81,7 +191,39 @@ input:hover{
        
     </div>
 </div>
+<script>
+    let password=document.getElementById("password");
+    let checkbox = document.getElementById("checkbox");
+    var eye = document.getElementById("eyeIcon");
 
+    checkbox.onclick = function () {
+        //console.log("checked");
+        if (checkbox.checked) {
+            password.type = "text"; 
+            eye.className = "fa-solid fa-eye";
+        }
+        else { 
+            password.type = "password";
+            eye.className = "fa-solid fa-eye-slash";
+        }
+    }
+    password.oninput=function(){
+        console.log("value  "+password.value);
+        console.log("text  "+password.text);
+        if (password.value=="") {
+            eye.classList.add('invisible');
+            console.log("if")
+        }
+        else{
+            eye.classList.remove('invisible');
+            console.log("else")
+
+        }
+    }
+    function showHide() {
+        checkbox.click();
+    }
+</script>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
