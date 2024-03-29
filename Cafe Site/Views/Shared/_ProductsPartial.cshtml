@@ -1,0 +1,56 @@
+﻿@model Cafe_Site.ViewModels.MenuViewModel
+
+
+<div id="products-section" data-current-page="@Model.CurrentPage" data-total-pages="@Model.TotalPages">
+
+    @foreach (var product in Model.Products)
+    {
+        <div class="col-md-3 col-sm-6 col-xs-6 col-xxs-12 fh5co-item-wrap">
+            <div class="fh5co-item-group animate-box">
+                <div class="fh5co-item">
+                    @try
+                    {
+                        <a href="@Url.RouteUrl("ProductDetails", new { id=product.Product_Id })">
+                            <img src="data:image/png;base64,@product.Product_Image" class="img-responsive" alt="@product.Product_Name">
+                            <h3>@product.Product_Name</h3>
+                            <p>@product.Product_Type</p>
+
+                            @if (product.SPrice == "-")
+                            {
+                                <span class="fh5co-price" style="color: gray; text-decoration: line-through;">Small: $@product.SPrice</span>
+                            }
+                            else if (Convert.ToDecimal(product.SPrice) > 0)
+                            {
+                                <span class="fh5co-price">Small: $@(Convert.ToDecimal(product.SPrice).ToString("N2"))</span>
+                            }
+
+                            @if (product.MPrice == "-")
+                            {
+                                <span class="fh5co-price" style="color: gray; text-decoration: line-through;">Medium: $@product.MPrice</span>
+                            }
+                            else if (Convert.ToDecimal(product.MPrice) > 0)
+                            {
+                                <span class="fh5co-price">Medium: $@(Convert.ToDecimal(product.MPrice).ToString("N2"))</span>
+                            }
+
+                            @if (product.LPrice == "-")
+                            {
+                                <span class="fh5co-price" style="color: gray; text-decoration: line-through;">Large: $@product.LPrice</span>
+                            }
+                            else if (Convert.ToDecimal(product.LPrice) > 0)
+                            {
+                                <span class="fh5co-price">Large: $@(Convert.ToDecimal(product.LPrice).ToString("N2"))</span>
+                            }
+
+                            <p>@product.Product_Description</p>
+                        </a>
+                    }
+                    catch (Exception ex)
+                    {
+                        <p>Error: @ex.Message</p>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>

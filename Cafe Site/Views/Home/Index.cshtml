@@ -1,8 +1,8 @@
 ﻿@model Cafe_Site.ViewModels.MenuViewModel
-
-@* @{
+@{
     ViewData["Title"] = "Home Page";
-} *@
+} 
+
 
 <!DOCTYPE HTML>
 <html>
@@ -62,9 +62,9 @@
 							<li><a href="reservation.html">Reservation</a></li>
 							<li><a href="about.html">About</a></li>
 							<li><a href="contact.html">Contact</a></li>
+							<partial name="_LoginPartial">
 						</ul>
 					</div>
-					<partial name="_LoginPartial">
 				</div>
 				
 			</div>
@@ -78,7 +78,7 @@
 				<div class="col-md-12 text-center">
 					<div class="display-t js-fullheight">
 						<div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
-							<h1>The Best Coffee <em>&amp;</em> Restaurant <em>in</em> Brooklyn</h1>
+							<h1>The Best Coffee <em>&amp;</em> Restaurant <em>in</em> Egypt</h1>
 						</div>
 					</div>
 				</div>
@@ -97,61 +97,81 @@
 						<h2>The Restaurant</h2>
 						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae neque quisquam at deserunt ab praesentium architecto tempore saepe animi voluptatem molestias, eveniet aut laudantium alias, laboriosam excepturi, et numquam? Atque tempore iure tenetur perspiciatis, aliquam, asperiores aut odio accusamus, unde libero dignissimos quod aliquid neque et illo vero nesciunt. Sunt!</p>
 						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam iure reprehenderit nihil nobis laboriosam beatae assumenda tempore, magni ducimus abentey.</p>
-						<p><a href="#" class="btn btn-primary btn-outline">Our History</a></p>
+						<p><a href="about" class="btn btn-primary btn-outline">Our History</a></p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div id="fh5co-featured-menu" class="fh5co-section">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12 fh5co-heading animate-box">
-					<h2>Today's Menu</h2>
-					<div class="row">
-						<div class="col-md-6">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ab debitis sit itaque totam, a maiores nihil, nulla magnam porro minima officiis! Doloribus aliquam voluptates corporis et tempora consequuntur ipsam, itaque, nesciunt similique commodi omnis. Ad magni perspiciatis, voluptatum repellat.</p>
+		<div id="fh5co-featured-menu" class="fh5co-section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 fh5co-heading animate-box">
+						<h2>Today's Menu</h2>
+						<div class="row">
+							<div class="col-md-6">
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ab debitis sit itaque totam, a maiores nihil, nulla magnam porro minima officiis! Doloribus aliquam voluptates corporis et tempora consequuntur ipsam, itaque, nesciunt similique commodi omnis. Ad magni perspiciatis, voluptatum repellat.</p>
+							</div>
 						</div>
 					</div>
-				</div>
-				
-				<div class="col-md-3 col-sm-6 col-xs-6 col-xxs-12 fh5co-item-wrap animate-box">
-					<div class="fh5co-item">
-						<img src="images/gallery_9.jpeg" class="img-responsive" alt="Free Restaurant Bootstrap Website Template by FreeHTML5.co">
-						<h3>Bake Potato Pizza</h3>
-						<span class="fh5co-price">$20<sup>.50</sup></span>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos nihil cupiditate ut vero alias quaerat inventore molestias vel suscipit explicabo.</p>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-6 col-xs-6 col-xxs-12 fh5co-item-wrap animate-box">
-					<div class="fh5co-item margin_top">
-						<img src="images/gallery_8.jpeg" class="img-responsive" alt="Free Restaurant Bootstrap Website Template by FreeHTML5.co">
-						<h3>Salted Fried Chicken</h3>
-						<span class="fh5co-price">$19<sup>.00</sup></span>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos nihil cupiditate ut vero alias quaerat inventore molestias vel suscipit explicabo.</p>
-					</div>
-				</div>
-				<div class="clearfix visible-sm-block visible-xs-block"></div>
-				<div class="col-md-3 col-sm-6 col-xs-6 col-xxs-12 fh5co-item-wrap animate-box">
-					<div class="fh5co-item">
-						<img src="images/gallery_7.jpeg" class="img-responsive" alt="Free Restaurant Bootstrap Website Template by FreeHTML5.co">
-						<h3>Italian Sauce Mushroom</h3>
-						<span class="fh5co-price">$17<sup>.99</sup></span>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos nihil cupiditate ut vero alias quaerat inventore molestias vel suscipit explicabo.</p>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-6 col-xs-6 col-xxs-12 fh5co-item-wrap animate-box">
-					<div class="fh5co-item margin_top">
-						<img src="images/gallery_6.jpeg" class="img-responsive" alt="Free Restaurant Bootstrap Website Template by FreeHTML5.co">
-						<h3>Fried Potato w/ Garlic</h3>
-						<span class="fh5co-price">$22<sup>.50</sup></span>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos nihil cupiditate ut vero alias quaerat inventore molestias vel suscipit explicabo.</p>
-					</div>
+
+					@foreach (var product in Model.Products)
+					{
+						<div class="col-md-3 col-sm-6 col-xs-6 col-xxs-12 fh5co-item-wrap">
+							<div class="fh5co-item-group animate-box">
+								<div class="fh5co-item">
+									@try
+									{
+										<a href="@Url.RouteUrl("ProductDetails", new { id=product.Product_Id })">
+											<img src="data:image/png;base64,@product.Product_Image" class="img-responsive" alt="@product.Product_Name">
+											<h3>@product.Product_Name</h3>
+											<p>@product.Product_Type</p>
+
+											@if (product.SPrice == "-")
+											{
+												<span class="fh5co-price" style="color: gray; text-decoration: line-through;">Small: $@product.SPrice</span>
+											}
+											else if (Convert.ToDecimal(product.SPrice) > 0)
+											{
+												<span class="fh5co-price">Small: $@(Convert.ToDecimal(product.SPrice).ToString("N2"))</span>
+											}
+
+											@if (product.MPrice == "-")
+											{
+												<span class="fh5co-price" style="color: gray; text-decoration: line-through;">Medium: $@product.MPrice</span>
+											}
+											else if (Convert.ToDecimal(product.MPrice) > 0)
+											{
+												<span class="fh5co-price">Medium: $@(Convert.ToDecimal(product.MPrice).ToString("N2"))</span>
+											}
+
+											@if (product.LPrice == "-")
+											{
+												<span class="fh5co-price" style="color: gray; text-decoration: line-through;">Large: $@product.LPrice</span>
+											}
+											else if (Convert.ToDecimal(product.LPrice) > 0)
+											{
+												<span class="fh5co-price">Large: $@(Convert.ToDecimal(product.LPrice).ToString("N2"))</span>
+											}
+
+											<p>@product.Product_Description</p>
+										</a>
+									}
+									catch (Exception ex)
+									{
+										<p>Error: @ex.Message</p>
+									}
+								</div>
+							</div>
+						</div>
+					}
 				</div>
 			</div>
 		</div>
-	</div>
+
+
+
 
 	<div id="fh5co-featured-testimony" class="fh5co-section">
 		<div class="container">
@@ -200,7 +220,7 @@
 						   					<div class="desc">
 													<h2>Crab <em>with</em> Curry Sources</h2>
 													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt eveniet quae, numquam magnam doloribus eligendi ratione rem, consequatur quos natus voluptates est totam magni! Nobis a temporibus, ipsum repudiandae dolorum.</p>
-													<p><a href="#" class="btn btn-primary btn-outline">Learn More</a></p>
+													<p><a href="menu" class="btn btn-primary btn-outline">Learn More</a></p>
 						   					</div>
 						   				</div>
 						   			</div>
@@ -216,7 +236,7 @@
 						   					<div class="desc">
 													<h2>Tuna <em>&amp;</em> Roast Beef</h2>
 													<p>Ink is a free html5 bootstrap and a multi-purpose template perfect for any type of websites. A combination of a minimal and modern design template. The features are big slider on homepage, smooth animation, product listing and many more</p>
-													<p><a href="#" class="btn btn-primary btn-outline">Learn More</a></p>
+													<p><a href="menu" class="btn btn-primary btn-outline">Learn More</a></p>
 						   					</div>
 						   				</div>
 						   			</div>
@@ -232,7 +252,7 @@
 						   					<div class="desc">
 													<h2>Egg <em>with</em> Mushroom</h2>
 													<p>Ink is a free html5 bootstrap and a multi-purpose template perfect for any type of websites. A combination of a minimal and modern design template. The features are big slider on homepage, smooth animation, product listing and many more</p>
-													<p><a href="#" class="btn btn-primary btn-outline">Learn More</a></p>
+													<p><a href="menu" class="btn btn-primary btn-outline">Learn More</a></p>
 						   					</div>
 						   				</div>
 						   			</div>
@@ -258,45 +278,45 @@
 			<div class="row">
 				<div class="col-md-4">
 					<div class="fh5co-blog animate-box">
-						<a href="#" class="blog-bg" style="background-image: url(images/gallery_1.jpeg);"></a>
+						<a href="menu" class="blog-bg" style="background-image: url(images/gallery_1.jpeg);"></a>
 						<div class="blog-text">
 							<span class="posted_on">Feb. 15th 2016</span>
-							<h3><a href="#">Photoshoot On The Street</a></h3>
+							<h3><a href="menu">Photoshoot On The Street</a></h3>
 							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
 							<ul class="stuff">
 								<li><i class="icon-heart2"></i>1.2K</li>
 								<li><i class="icon-eye2"></i>2K</li>
-								<li><a href="#">Read More<i class="icon-arrow-right22"></i></a></li>
+								<li><a href="menu">Read More<i class="icon-arrow-right22"></i></a></li>
 							</ul>
 						</div> 
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="fh5co-blog animate-box">
-						<a href="#" class="blog-bg" style="background-image: url(images/gallery_2.jpeg);"></a>
+						<a href="menu" class="blog-bg" style="background-image: url(images/gallery_2.jpeg);"></a>
 						<div class="blog-text">
 							<span class="posted_on">Feb. 15th 2016</span>
-							<h3><a href="#">Surfing at Philippines</a></h3>
+							<h3><a href="menu">Surfing at Philippines</a></h3>
 							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
 							<ul class="stuff">
 								<li><i class="icon-heart2"></i>1.2K</li>
 								<li><i class="icon-eye2"></i>2K</li>
-								<li><a href="#">Read More<i class="icon-arrow-right22"></i></a></li>
+								<li><a href="menu">Read More<i class="icon-arrow-right22"></i></a></li>
 							</ul>
 						</div> 
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="fh5co-blog animate-box">
-						<a href="#" class="blog-bg" style="background-image: url(images/gallery_3.jpeg);"></a>
+						<a href="menu" class="blog-bg" style="background-image: url(images/gallery_3.jpeg);"></a>
 						<div class="blog-text">
 							<span class="posted_on">Feb. 15th 2016</span>
-							<h3><a href="#">Focus On Uderwater</a></h3>
+							<h3><a href="menu">Focus On Uderwater</a></h3>
 							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
 							<ul class="stuff">
 								<li><i class="icon-heart2"></i>1.2K</li>
 								<li><i class="icon-eye2"></i>2K</li>
-								<li><a href="#">Read More<i class="icon-arrow-right22"></i></a></li>
+								<li><a href="menu">Read More<i class="icon-arrow-right22"></i></a></li>
 							</ul>
 						</div> 
 					</div>
@@ -318,47 +338,6 @@
 		</div>
 	</div> *@
 
-@* 		@foreach (var product in Model.Products)
-		{
-			<div class="col-md-3 col-sm-6 col-xs-6 col-xxs-12 fh5co-item-wrap">
-				<div class="fh5co-item-group animate-box">
-					<div class="fh5co-item">
-						@try
-						{
-							// Format MPrice
-							var mPriceDecimal = Convert.ToDecimal(product.MPrice);
-							var formattedMPrice = (int)Math.Round(mPriceDecimal);
-							var centsM = mPriceDecimal.ToString().Split('.')[1]?.Substring(0, 2) ?? "00";
-
-							// Format SPrice
-							var sPriceDecimal = Convert.ToDecimal(product.SPrice);
-							var formattedSPrice = (int)Math.Round(sPriceDecimal);
-							var centsS = sPriceDecimal.ToString().Split('.')[1]?.Substring(0, 2) ?? "00";
-
-							// Format LPrice
-							var lPriceDecimal = Convert.ToDecimal(product.LPrice);
-							var formattedLPrice = (int)Math.Round(lPriceDecimal);
-							var centsL = lPriceDecimal.ToString().Split('.')[1]?.Substring(0, 2) ?? "00";
-
-							<a href="@Url.RouteUrl("ProductDetails", new { id=product.Product_Id })">
-								<img src="data:image/png;base64,@product.Product_Image" class="img-responsive"
-									 alt="@product.Product_Name">
-								<h3>@product.Product_Name</h3>
-								<p>@product.Product_Type</p>
-								<span class="fh5co-price">Small: $@formattedSPrice<sup>.@centsS</sup></span>
-								<span class="fh5co-price">Medium: $@formattedMPrice<sup>.@centsM</sup></span>
-								<span class="fh5co-price">Large: $@formattedLPrice<sup>.@centsL</sup></span>
-								<p>@product.Product_Description</p>
-							</a>
-						}
-						catch (Exception ex)
-						{
-							<p>Error: @ex.Message</p>
-						}
-					</div>
-				</div>
-			</div>
-		} *@
 
 	<footer id="fh5co-footer" role="contentinfo" class="fh5co-section">
 		<div class="container">
@@ -370,9 +349,9 @@
 				<div class="col-md-2 col-md-push-1 fh5co-widget">
 					<h4>Links</h4>
 					<ul class="fh5co-footer-links">
-						<li><a href="#">Home</a></li>
-						<li><a href="#">About</a></li>
-						<li><a href="#">Menu</a></li>
+						<li><a href="home">Home</a></li>
+						<li><a href="about">About</a></li>
+						<li><a href="menu">Menu</a></li>
 						<li><a href="#">Gallery</a></li>
 					</ul>
 				</div>
@@ -403,7 +382,7 @@
 				<div class="col-md-12 text-center">
 					<p>
 						<small class="block">&copy; 2024 All Rights Reserved.</small> 
-						<small class="block">Designed by <a href="http://freehtml5.co/" target="_blank">FreeHTML5.co</a> Demo Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a></small>
+@* 						<small class="block">Designed by <a href="http://freehtml5.co/" target="_blank">FreeHTML5.co</a> Demo Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a></small> *@
 					</p>
 					<p>
 						<ul class="fh5co-social-icons">

@@ -94,7 +94,7 @@
                   </ul>
                 </li>
                 <li><a href="reservation.html">Reservation</a></li>
-                <li><a href="about.html">About</a></li>
+                <li><a href="about">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
               </ul>
             </div>
@@ -120,92 +120,57 @@
         </div>
       </header>
 
-      <div id="fh5co-featured-menu" class="fh5co-section">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12 fh5co-heading animate-box">
-              <h2>Our Delicous Menu</h2>
-              <div class="row">
-                <div class="col-md-6">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ab debitis sit itaque totam, a
-                    maiores nihil, nulla magnam porro minima officiis! Doloribus aliquam voluptates corporis et tempora
-                    consequuntur ipsam, itaque, nesciunt similique commodi omnis. Ad magni perspiciatis, voluptatum
-                    repellat.</p>
-                </div>
+        <div id="fh5co-featured-menu" class="fh5co-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 fh5co-heading animate-box">
+                        <h2>Our Delicous Menu</h2>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ab debitis sit itaque totam, a
+                                    maiores nihil, nulla magnam porro minima officiis! Doloribus aliquam voluptates corporis et tempora
+                                    consequuntur ipsam, itaque, nesciunt similique commodi omnis. Ad magni perspiciatis, voluptatum
+                                    repellat.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <partial name="_ProductsPartial" />
               </div>
             </div>
-
-            @foreach (var product in Model.Products){
-            <div class="col-md-3 col-sm-6 col-xs-6 col-xxs-12 fh5co-item-wrap">
-              <div class="fh5co-item-group animate-box">
-                <div class="fh5co-item">
-                  @try
-                  {
-                  // Format MPrice
-                  var mPriceDecimal = Convert.ToDecimal(product.MPrice);
-                  var formattedMPrice = (int)Math.Round(mPriceDecimal);
-                  var centsM = mPriceDecimal.ToString().Split('.')[1]?.Substring(0, 2) ?? "00";
-
-                  // Format SPrice
-                  var sPriceDecimal = Convert.ToDecimal(product.SPrice);
-                  var formattedSPrice = (int)Math.Round(sPriceDecimal);
-                  var centsS = sPriceDecimal.ToString().Split('.')[1]?.Substring(0, 2) ?? "00";
-
-                  // Format LPrice
-                  var lPriceDecimal = Convert.ToDecimal(product.LPrice);
-                  var formattedLPrice = (int)Math.Round(lPriceDecimal);
-                  var centsL = lPriceDecimal.ToString().Split('.')[1]?.Substring(0, 2) ?? "00";
-
-                  <a href="@Url.RouteUrl("ProductDetails", new { id=product.Product_Id })">
-                    <img src="data:image/png;base64,@product.Product_Image" class="img-responsive"
-                      alt="@product.Product_Name">
-                    <h3>@product.Product_Name</h3>
-                    <p>@product.Product_Type</p>
-                    <span class="fh5co-price">Small: $@formattedSPrice<sup>.@centsS</sup></span>
-                    <span class="fh5co-price">Medium: $@formattedMPrice<sup>.@centsM</sup></span>
-                    <span class="fh5co-price">Large: $@formattedLPrice<sup>.@centsL</sup></span>
-                    <p>@product.Product_Description</p>
-                  </a>
-                  }
-                  catch (Exception ex)
-                  {
-                  <p>Error: @ex.Message</p>
-                  }
-                </div>
-              </div>
-            </div>
-            }
           </div>
         </div>
-            <!-- Pagination -->
-            <div class="pagination-container text-center">
-                @if (Model.TotalPages > 1)
+    <div class="pagination-container text-center">
+        @if (Model.TotalPages > 1)
+        {
+            <ul class="pagination">
+                @if (Model.CurrentPage > 1)
                 {
-                    <ul class="pagination">
-                        @if (Model.CurrentPage > 1)
-                        {
-                            <li><a href="@Url.Action("Index", new { page = Model.CurrentPage - 1 })">Previous</a></li>
-                        }
-
-                        @for (int i = 1; i <= Model.TotalPages; i++)
-                        {
-                            if (i == Model.CurrentPage)
-                            {
-                                <li class="active"><span>@i</span></li>
-                            }
-                            else
-                            {
-                                <li><a href="@Url.Action("Index", new { page = i })">@i</a></li>
-                            }
-                        }
-
-                        @if (Model.CurrentPage < Model.TotalPages)
-                        {
-                            <li><a href="@Url.Action("Index", new { page = Model.CurrentPage + 1 })">Next</a></li>
-                        }
-                    </ul>
+                    <li><a href="#" class="pagination-link" data-page="@(Model.CurrentPage - 1)">Previous</a></li>
                 }
-            </div>
+
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    if (i == Model.CurrentPage)
+                    {
+                        <li class="active"><span>@i</span></li>
+                    }
+                    else
+                    {
+                        <li><a href="#" class="pagination-link" data-page="@i">@i</a></li>
+                    }
+                }
+
+                @if (Model.CurrentPage < Model.TotalPages)
+                {
+                    <li><a href="#" class="pagination-link" data-page="@(Model.CurrentPage + 1)">Next</a></li>
+                }
+            </ul>
+        }
+    </div>
+
 
       </div>
 
@@ -252,7 +217,7 @@
                 <li><a href="home">Home</a></li>
                 <li><a href="#">Portfolio</a></li>
                 <li><a href="#">Blog</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="about">About</a></li>
               </ul>
             </div>
 
@@ -282,8 +247,8 @@
             <div class="col-md-12 text-center">
               <p>
                 <small class="block">&copy; 2024 All Rights Reserved.</small>
-                <small class="block">Designed by <a href="http://freehtml5.co/" target="_blank">FreeHTML5.co</a> Demo
-                  Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a></small>
+@*                 <small class="block">Designed by <a href="http://freehtml5.co/" target="_blank">FreeHTML5.co</a> Demo
+                  Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a></small> *@
               </p>
               <p>
               <ul class="fh5co-social-icons">
@@ -318,6 +283,101 @@
     <script src="js/jquery.flexslider-min.js"></script>
     <!-- Main -->
     <script src="js/main.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".pagination-link").click(function (e) {
+                e.preventDefault(); // Prevent default navigation behavior
+                var page = $(this).data("page");
+                var url = '@Url.Action("Index", "Menu")';
+
+
+                console.log("Fetching page:", page);
+                console.log("URL:", url);
+                console.log("Data:", { page: page });
+
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    data: { page: page },
+                    beforeSend: function () {
+                        // Show loading spinner or message
+                    },
+                    success: function (result) {
+                        console.log("AJAX Response:", result);
+
+                        var newContent = result;
+                        var newPage = $(result).find('#products-section').data('current-page');
+                        var totalPages = $(result).find('#products-section').data('total-pages');
+
+                        // Check if newContent is defined
+                        if (newContent) {
+                            // Update image URLs to force reload
+                            var timestamp = new Date().getTime();
+                            newContent = newContent.replace(/src="data:image\/png;base64,/g, 'src="data:image/png;base64,' + timestamp);
+
+                            $("#products-section").html(newContent);
+
+                            // Update pagination links
+                            updatePaginationLinks(newPage, totalPages);
+
+                            console.log("Success:", result);
+                        } else {
+                            console.log("Error: New content is undefined");
+                        }
+                    },
+
+
+                    error: function (error) {
+                        console.log("Error:", error);
+                        console.log("Error Response:", error.responseText);
+                    }
+                });
+            });
+        });
+
+        function updatePaginationLinks(currentPage, totalPages) {
+            // Clear existing pagination links
+            $(".pagination-container").empty();
+
+            // Create new pagination links
+            var paginationContainer = $(".pagination-container");
+            var paginationList = $("<ul>").addClass("pagination");
+
+            // Previous button
+            if (currentPage > 1) {
+                var prevLink = $("<li>").append($("<a>").addClass("pagination-link").attr("href", "#").attr("data-page", currentPage - 1).text("Previous"));
+                paginationList.append(prevLink);
+            }
+
+            // Numbered pages
+            for (var i = 1; i <= totalPages; i++) {
+                var pageLink = $("<li>").append($("<a>").addClass("pagination-link").attr("href", "#").attr("data-page", i).text(i));
+                if (i === currentPage) {
+                    pageLink.addClass("active");
+                }
+                paginationList.append(pageLink);
+            }
+
+            // Next button
+            if (currentPage < totalPages) {
+                var nextLink = $("<li>").append($("<a>").addClass("pagination-link").attr("href", "#").attr("data-page", currentPage + 1).text("Next"));
+                paginationList.append(nextLink);
+            }
+
+            // Append pagination links to container
+            paginationContainer.append(paginationList);
+
+            // Attach click event to pagination links
+            $(".pagination-link").on("click", function (e) {
+                e.preventDefault();
+                var page = $(this).data("page");
+                fetchProducts(page);
+            });
+        }
+
+
+
+    </script>
 
   </body>
 

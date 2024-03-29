@@ -17,7 +17,7 @@ namespace Cafe_Site
             builder.Services.AddDbContext<CafeSiteContext>(options => options.UseSqlServer
             (builder.Configuration.GetConnectionString("cs")));
 
-            builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<CafeSiteContext>();
+            builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false).AddRoles<IdentityRole>().AddEntityFrameworkStores<CafeSiteContext>();
             //builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<CafeSiteContext>();
 
 
