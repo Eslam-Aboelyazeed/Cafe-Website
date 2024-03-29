@@ -209,6 +209,10 @@
       "PackagePath": "staticwebassets\\images\\person_1.jpg"
     },
     {
+      "Id": "F:\\ITI material\\Cafe-Site\\Cafe Site\\wwwroot\\images\\whipped-cream-1.jpg",
+      "PackagePath": "staticwebassets\\images\\whipped-cream-1.jpg"
+    },
+    {
       "Id": "F:\\ITI material\\Cafe-Site\\Cafe Site\\wwwroot\\js\\all.js",
       "PackagePath": "staticwebassets\\js\\all.js"
     },

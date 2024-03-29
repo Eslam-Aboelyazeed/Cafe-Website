@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Cafe_Site.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class AdminDashboardController : Controller
 	{
         private readonly IProductService productService;

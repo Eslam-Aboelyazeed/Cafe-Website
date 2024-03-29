@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "HlyIx1YMxcMj5ZCYDXiKWhg1gTvCliYx/hhz5oIuq8c=",
+  "Hash": "mnTVW2jANnNQOh+MLYK7oIhnHS4z+euT0jhdfdeQUJ4=",
   "Source": "Cafe Site",
   "BasePath": "_content/Cafe Site",
   "Mode": "Default",
@@ -2162,6 +2162,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\Register.gif"
+    },
+    {
+      "Identity": "F:\\ITI material\\Cafe-Site\\Cafe Site\\wwwroot\\images\\whipped-cream-1.jpg",
+      "SourceId": "Cafe Site",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\ITI material\\Cafe-Site\\Cafe Site\\wwwroot\\",
+      "BasePath": "_content/Cafe Site",
+      "RelativePath": "images/whipped-cream-1.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\whipped-cream-1.jpg"
     },
     {
       "Identity": "F:\\ITI material\\Cafe-Site\\Cafe Site\\wwwroot\\js\\all.js",

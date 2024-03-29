@@ -18,6 +18,7 @@ namespace Cafe_Site.Services
         }
 
         public List<ProductInfoViewModel> GetAllProducts()
+
         {
             byte[] defaultByteArray = new byte[0];
 
@@ -69,7 +70,8 @@ namespace Cafe_Site.Services
                 Product_Quantity = productInfo.Product_Quantity,
                 Product_Image = ProductImage,
                 Product_Description = productInfo.Product_Description,
-                userId = "ef5d3cdc-2c85-4657-8520-dc55be23168c"
+
+                userId = "76c682ad-e525-41e5-8e90-c3f226999314"
             });
 
             repository.SaveChanges();
@@ -78,7 +80,7 @@ namespace Cafe_Site.Services
                 p => p.Product_Name == productInfo.Product_Name &&
                 p.Product_Quantity == productInfo.Product_Quantity &&
                 p.Product_Type == productInfo.Product_Type &&
-                p.Product_Description == productInfo.Product_Description && p.userId == "ef5d3cdc-2c85-4657-8520-dc55be23168c", null).Product_Id;
+                p.Product_Description == productInfo.Product_Description && p.userId == "76c682ad-e525-41e5-8e90-c3f226999314 ", null).Product_Id;
 
             decimal value;
             bool flag = decimal.TryParse(productInfo.SPrice, out value); 

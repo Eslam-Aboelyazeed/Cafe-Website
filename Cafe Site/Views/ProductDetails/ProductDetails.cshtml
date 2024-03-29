@@ -1,10 +1,12 @@
 ﻿@{
     Layout = "~/Views/Shared/_CustomLayout.cshtml";
 }
+@model ProductDetailsModel
 
 
 
 <link href="~/css/all.css" rel="stylesheet" />
+<!--header start-->
 <header id="fh5co-header" class="fh5co-cover js-fullheight" role="banner" style="background-image: url('/images/hero_1.jpeg'); height: 702px; background-position: 0px 0px;" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
     <div class="container">
@@ -19,9 +21,12 @@
         </div>
     </div>
 </header>
+<!--header end-->
+
 
 <div class="product-details row p-3 d-flex flex-row ">
-    <div class="col-md-6">
+    <!--product img start-->
+    <div class="prodimg col-md-6">
         <div class="row w-100 d-flex flex-row justify-content-center">
             <div class="col">
                 <img class="prodImg img-responsive w-100 mb-5" src="/images/coffee.jpg" alt="...">
@@ -29,96 +34,160 @@
             </div>
         </div>
     </div>
+    <!--product img end-->
     <div class="col-md-6 d-flex flex-column align-items-center align-items-md-start ">
         <h1 class="name text-white-50">LATTE</h1>
-        <h4 class="price"
+
+        <h4 class="price font-monospace"
             style="color: #BE9C79;">
             234.5$
         </h4>
-
+        <!--size start-->
         <p class="size fw-bolder" style=" color: #BE9C79;">
             Size: <span class="fw-light text-white-50">
                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                    @for (var i = 0; i < 3; i++)
+                    @for (var i = 0; i < Model.productSizePrices.Count; i++)
                     {
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio @(i+1)" autocomplete="off" checked>
-                        <label class="btn btn-outline-light" for="btnradio @(i+1)">L</label>
+                        <label class="btn btn-outline-light" for="btnradio @(i+1)">@Model.productSizePrices[i].Size</label>
                     }
 
                 </div>
             </span>
         </p>
+        <!--size end-->
 
-
-
+        <!--addToCard start-->
         <div class="addToCardBtn row">
             <div class="col-12">
                 <button class="addToCard p-3 h-100 text-white border-0 rounded-2" style="background-color: #BE9C79;">ADD TO CART</button>
             </div>
         </div>
+        <!--addToCard end-->
 
+        <!--Tabs start-->
         <nav class="tabs mt-5">
-            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <div class="nav nav-tabs " id="nav-tab" role="tablist">
                 <button class="nav-link active px-5 fs-3 " style="color:#BE9C79" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Description</button>
                 <button class="nav-link px-5 fs-3" id="nav-profile-tab" style="color:#BE9C79" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Additions</button>
                 <button class="nav-link px-5 fs-3" id="nav-contact-tab" style="color:#BE9C79" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Review</button>
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
+            <!--description start-->
             <div class="Desc tab-pane fade show active text-white-50" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-                <p class="desc_website text-center text-md-start text-white-50">Our website is designed to make your shopping experience as smooth and enjoyable as possible. You can browse by category, color, size, or brand, and filter your search results to find exactly what you’re looking for. We offer free shipping on orders over a certain amount and easy returns if you’re not completely satisfied with your purchase.</p>
+                <p class="desc_website text-center text-md-start text-white-50 mt-4">Our website is designed to make your shopping experience as smooth and enjoyable as possible. You can browse by category, color, size, or brand, and filter your search results to find exactly what you’re looking for. We offer free shipping on orders over a certain amount and easy returns if you’re not completely satisfied with your purchase.</p>
 
             </div>
-            <div class="Adds tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+            <!--description end-->
+
+            <!--Additions start-->
+            <div class="Adds tab-pane fade p-2" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+               <div class="row w-100">
+                    <label class="fs-4 mt-3 ">new Addition</label>
+                    <select class="form-control w-50 ">
+                        @for (int i = 0; i < Model.AddProducts.Count; i++)
+                        {
+                            <option value="@Model.AddProducts[i].Product_Id">@Model.AddProducts[i].Product_Name</option>
+                        }
+                    </select>
+               </div>
+                <div class="row d-flex flex-row justify-content-around ">
+                    <div class="cartproducts col">
+                        <div class="addedprod row">
+                            <div class="col-1 d-flex flex-row justify-content-between align-items-center">
+                                <button class="delProduct border-0 text-white bg-transparent"><i class="fa fa-close" aria-hidden="true"></i></button>
+                            </div>
+                            <div class="col-3 d-flex flex-row justify-content-between align-items-center ">
+                                <img class="prodImg w-100 h-75 rounded-circle " src="/images/whipped-cream-1.jpg" alt="...">
+                            </div>
+                            <div class="col-4 d-flex flex-row justify-content-between align-items-center">
+                                <h6 class="prodName text-white">Whipped Cream</h6>
+                            </div>
+                            <div class="col-2 d-flex flex-row justify-content-between align-items-center">
+                                <h6 class="prodPrice fs-4 font-monospace " style="color:#BE9C79">234$</h6>
+                            </div>
+                            <div class="col-2 d-flex flex-row justify-content-between align-items-center align-self-center ms-5 ms-sm-0 mb-3 mb-sm-0">
+                                <button class="minus fs-6 fw-bold me-3 rounded-circle border-primary-subtle"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                                <span class="quantity">1</span>
+                                <button class="plus fw-bold ms-3  me-5 rounded-circle border-primary-subtle"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
             </div>
+
+            
+
+        </div>
+            <!--Additions end-->
+            <!--review start-->
             <div class="Review tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
-                <div id="respond" class="comment-respond">
-                    <span id="reply-title" class="comment-reply-title">Add a review <small><a rel="nofollow" id="cancel-comment-reply-link" href="/product/french-press/#respond" style="display:none;">Cancel reply</a></small></span>
-                    <form action="https://corretto.qodeinteractive.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+                <div class="row">
+                    @for(int i=0; i<Model.productReviews.Count; i++)
+                    {
+                        <section class="border-2 border-light">
+                            <h3 class="username text-white mb-0 mt-4">@Model.productReviews[i].User_Name</h3>
+                            <label class="ratenum" style="color:#BE9C79">@Model.productReviews[i].Product_Rate out of 5</label>
+                            <p class="fs-4 "> @Model.productReviews[i].Product_Review</p>
+                            <hr class="text-white wider" />
+                        </section>
+                    }
+                </div>
+                <div id="respond" class="comment-respond mt-5">
+                    <span id="reply-title" class="comment-reply-title fs-4">Add a review <small><a rel="nofollow" id="cancel-comment-reply-link" href="/product/french-press/#respond" style="display:none;">Cancel reply</a></small></span>
+                    <form asp-controller="ProductDetails" asp-action="review" method="post" id="commentform" class="comment-form">
                         <div class="rate">
-                            <input type="radio" id="star1" name="rate" value="1" />
-                            <label for="star1" title="text"><i class="fa-star-half"></i></label>
-                            <input type="radio" id="star2" name="rate" value="2" />
-                            <label for="star2" title="text">2 stars</label>
-                            <input type="radio" id="star3" name="rate" value="3" />
-                            <label for="star3" title="text">3 stars</label>
-                            <input type="radio" id="star4" name="rate" value="4" />
-                            <label for="star4" title="text">4 stars</label>
-                            <input type="radio" id="star5" name="rate" value="5" />
-                            <label for="star5" title="text">5 stars</label>
-
-
-
+                            <input class="invisible" type="radio" id="star1" name="rate" value="1" />
+                            <label id="1" for="star1" title="text" style="display: inline-block; font-size: 40px; color: #878787;">★</label>
+                            <input class="d-none" type="radio" id="star2" name="rate" value="2" />
+                            <label id="2" for="star2" title="text" style="display: inline-block; font-size: 40px; color: #878787;">★</label>
+                            <input class="d-none" type="radio" id="star3" name="rate" value="3" />
+                            <label id="3" for="star3" title="text" style="display: inline-block; font-size: 40px; color: #878787;">★</label>
+                            <input class="d-none" type="radio" id="star4" name="rate" value="4" />
+                            <label id="4" for="star4" title="text" style="display: inline-block; font-size: 40px; color: #878787;">★</label>
+                            <input class="d-none" type="radio" id="star5" name="rate" value="5" />
+                            <label id="5" for="star5" title="text" style="display: inline-block; font-size: 40px; color: #878787;">★</label>
 
                         </div>
-                        <p class="comment-form-comment">
-                            <label for="comment">Your review&nbsp;<span class="required">*</span></label><textarea id="comment" name="comment" cols="45" rows="8" required=""></textarea>
-                        </p><p class="comment-form-author"><label for="author">Name&nbsp;<span class="required">*</span></label><input id="author" name="author" type="text" value="" size="30" required=""></p>
-                        <p class="comment-form-email"><label for="email">Email&nbsp;<span class="required">*</span></label><input id="email" name="email" type="email" value="" size="30" required=""></p>
-                        <p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes"> <label for="wp-comment-cookies-consent">Save my name, email, and website in this browser for the next time I comment.</label></p>
-                        <p class="form-submit">
-                            <input name="submit" type="submit" id="submit" class="submit" value="Submit"> <input type="hidden" name="comment_post_ID" value="387" id="comment_post_ID">
-                            <input type="hidden" name="comment_parent" id="comment_parent" value="0">
-                        </p><div class="wantispam-required-fields wantispam-form-processed">
-                            <input type="hidden" name="wantispam_t" class="wantispam-control wantispam-control-t" value="1711394953"><div class="wantispam-group wantispam-group-q" style="clear: both; display: none;">
-                                <label>Current ye@r <span class="required">*</span></label>
-                                <input type="hidden" name="wantispam_a" class="wantispam-control wantispam-control-a" value="2024">
-                                <input type="text" name="wantispam_q" class="wantispam-control wantispam-control-q" value="7.3.4" autocomplete="off">
-                            </div>
-                            <div class="wantispam-group wantispam-group-e" style="display: none;">
-                                <label>Leave this field empty</label>
-                                <input type="text" name="wantispam_e_email_url_website" class="wantispam-control wantispam-control-e" value="" autocomplete="off">
-                            </div>
-                            <input type="hidden" name="wantispam_d" class="wantispam-control wantispam-control-d" value="2024">
-                        </div>
+                        <label class="d-block fs-4" for="message">Your review*</label>
+                        <textarea class="border-whitform-control-feedback" id="message" name="review" rows="4" cols="50"></textarea>
+                        <input class="btn btn-light d-block text-white p-3 mt-3 fs-5 rounded-1 form-control w-50 " style="background-color: #BE9C79;" type="submit" name="name" value="Send Review" />
                     </form>
                 </div>
             </div>
-
+            <!--review end-->
         </div>
-
-    </div>
+        <!--Tabs end-->
 </div>
 
+@section scripts{
+    <script>
+        let stars = document.getElementsByClassName("rate")[0].getElementsByTagName("label");
+        let rate=0;
+        console.log(stars);
+        $(stars).hover(function () {
+            let hovered = $(this).attr("id");
+            for (var i = 0; i < hovered; i++) {
+                $(stars[i]).attr("style", "font-size: 40px; color: #f9f21a")
+            }
+        }, function(){
+            for (var i = rate; i < 5; i++) {
+                $(stars[i]).attr("style", "font-size: 40px; color: #878787")
+            }
+        })
+        $(stars).on("click", function () {
+            for (var i = 0; i < 5; i++) {
+                $(stars[i]).attr("style", "font-size: 40px; color: #878787")
+            }
+            rate = $(this).attr("id");
+            for (var i = 0; i < rate; i++) {
+                $(stars[i]).attr("style", "font-size: 40px; color: #f9f21a")
+            }
+        })
 
-<script src="~/js/all.js"></script>
+    </script>
+}
