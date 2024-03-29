@@ -13,14 +13,17 @@ namespace Cafe_Site.Services
     {
         private readonly IDefaultRepository<Product> repository;
         private readonly IDefaultRepository<Product_Size_Price> psrepository;
+        private readonly IDefaultService defaultService;
+
         //private readonly UserManager<ApplicationUser> urepo;
 
         //private readonly IDefaultRepository<aspnet> urepo;
 
-        public ProductService(IDefaultRepository<Product> repository, IDefaultRepository<Product_Size_Price> psrepository)
+        public ProductService(IDefaultRepository<Product> repository, IDefaultRepository<Product_Size_Price> psrepository, IDefaultService defaultService)
         {
             this.repository = repository;
             this.psrepository = psrepository;
+            this.defaultService = defaultService;
             //this.urepo = urepo;
         }
 
@@ -47,28 +50,28 @@ namespace Cafe_Site.Services
             return products;
         }
 
-        public byte[] ImageToByteArray(string path)
-        {
-            try
-            {
-                Image imageIn = Image.FromFile(path);
+        //public byte[] ImageToByteArray(string path)
+        //{
+        //    try
+        //    {
+        //        Image imageIn = Image.FromFile(path);
 
-                using (var ms = new MemoryStream())
-                {
-                    imageIn.Save(ms, imageIn.RawFormat);
-                    return ms.ToArray();
-                }
-            }
-            catch (Exception)
-            {
-                return new byte[0];
-            }
+        //        using (var ms = new MemoryStream())
+        //        {
+        //            imageIn.Save(ms, imageIn.RawFormat);
+        //            return ms.ToArray();
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return new byte[0];
+        //    }
 
-        }
+        //}
 
         public void InsertProduct(ProductInfoViewModel productInfo)
         {
-            var ProductImage = ImageToByteArray(productInfo.Product_Image);
+            var ProductImage = defaultService.ImageToByteArray(productInfo.Product_Image);
 
             repository.Insert(new Product()
             {
@@ -154,7 +157,7 @@ namespace Cafe_Site.Services
         {
             var product = repository.GetElement(p => p.Product_Id == productInfo.Product_Id, null);
 
-            var ProductImage = ImageToByteArray(productInfo.Product_Image);
+            var ProductImage = defaultService.ImageToByteArray(productInfo.Product_Image);
 
             product.Product_Name = productInfo.Product_Name;
             product.Product_Quantity = productInfo.Product_Quantity;

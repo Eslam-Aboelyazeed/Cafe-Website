@@ -20,6 +20,7 @@ namespace Cafe_Site.ViewModels
         public string? SPrice { get; set; }
         [DataType(DataType.Currency)]
         [Required(ErrorMessage = "The Product Medium Size Price is Required")]
+        [Range(1, int.MaxValue, ErrorMessage = "The Product Medium Size Price Must be Higher Than 0")]
         public string MPrice { get; set; }
         [DataType(DataType.Currency)]
         public string? LPrice { get; set; }
