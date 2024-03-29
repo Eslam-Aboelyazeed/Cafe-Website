@@ -30,12 +30,31 @@ namespace Cafe_Site.Controllers
                 TotalPages = (int)Math.Ceiling(count / (double)pageSize)
             };
 
-            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
-            {
-                return PartialView("_ProductsPartial", viewModel);
-            }
+            //if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            //{
+            //    return PartialView("_ProductsPartial", viewModel);
+            //}
 
             return View(viewModel);
+        }
+
+        public IActionResult GetProducts(int page = 1, int pageSize = 4)
+        {
+            List<ProductInfoViewModel> menuItems = _productService.GetAllProducts();
+
+            var count = menuItems.Count;
+            var items = menuItems.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            var viewModel = new MenuViewModel
+            {
+                Products = items,
+                CurrentPage = page,
+                TotalPages = (int)Math.Ceiling(count / (double)pageSize)
+            };
+
+
+            return PartialView("_ProductsPartial", viewModel);
+            
         }
 
     }

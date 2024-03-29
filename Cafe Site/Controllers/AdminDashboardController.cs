@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Cafe_Site.Controllers
 {
-    //[Authorize(Roles = "Admin")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
+    //[Authorize]
     public class AdminDashboardController : Controller
 	{
         private readonly IProductService productService;

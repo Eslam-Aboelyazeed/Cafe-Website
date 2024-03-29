@@ -19,6 +19,7 @@
     <!-- Icomoon Icon Fonts-->
     <link rel="stylesheet" href="css/icomoon.css">
     <!-- Bootstrap  -->
+    @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> *@
     <link rel="stylesheet" href="css/bootstrap.css">
     <!-- Flexslider  -->
     <link rel="stylesheet" href="css/flexslider.css">
@@ -137,12 +138,16 @@
                         </div>
                     </div>
 
-                    <partial name="_ProductsPartial" />
+                    @* <partial name="_ProductsPartial" id="parView" /> *@
+
+                    <div id="parView">
+                        <partial name="_ProductsPartial" />
+                    </div>
               </div>
             </div>
           </div>
         </div>
-    <div class="pagination-container text-center">
+    <div class="pagination-container text-center" id="container">
         @if (Model.TotalPages > 1)
         {
             <ul class="pagination">
@@ -275,6 +280,7 @@
     <script src="js/jquery.easing.1.3.js"></script>
     <!-- Bootstrap -->
     <script src="js/bootstrap.min.js"></script>
+    @* <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script> *@
     <!-- Waypoints -->
     <script src="js/jquery.waypoints.min.js"></script>
     <!-- Waypoints -->
@@ -285,11 +291,12 @@
     <script src="js/main.js"></script>
     <script>
         $(document).ready(function () {
-            $(".pagination-link").click(function (e) {
+            $("#container").on('click', '.pagination-link', function (e) {
                 e.preventDefault(); // Prevent default navigation behavior
                 var page = $(this).data("page");
-                var url = '@Url.Action("Index", "Menu")';
-
+                // var url = 'Url.Action("GetProducts", "Menu")';
+                var url = '/menu/getproducts';
+                // var currentPage = Model.CurrentPage;
 
                 console.log("Fetching page:", page);
                 console.log("URL:", url);
@@ -306,21 +313,73 @@
                         console.log("AJAX Response:", result);
 
                         var newContent = result;
-                        var newPage = $(result).find('#products-section').data('current-page');
-                        var totalPages = $(result).find('#products-section').data('total-pages');
+                        // var newPage = $(result).find('#products-section').data('current-page');
+                        // var totalPages = $(result).find('#products-section').data('total-pages');
+
+                        // var newPage = result.getElementById("products-section").getAttribute("data-current-page");
+                        // var totalPages = result.getElementById("products-section").getAttribute("data-total-pages");
 
                         // Check if newContent is defined
                         if (newContent) {
                             // Update image URLs to force reload
                             var timestamp = new Date().getTime();
-                            newContent = newContent.replace(/src="data:image\/png;base64,/g, 'src="data:image/png;base64,' + timestamp);
+                            // newContent = newContent.replace(/src="data:image\/png;base64,/g, 'src="data:image/png;base64,' + timestamp);
 
-                            $("#products-section").html(newContent);
+                            $("#parView").html(newContent);
+                            // contentWayPoint();
+                            // $("#products-section").html(newContent);
+
+                            // document.getElementById("problem").classList.remove('animate-box');
+                            // void document.getElementById("problem").offsetWidth;
+                            // document.getElementById("problem").classList.add('animate-box');
+
+                            // document.getElementById("problem").style.opacity = 1;
+                            var i = 0;
+
+                            $(".problem").waypoint(function (direction) {
+
+                                if (direction === 'down' && !$(this.element).hasClass('animated-fast')) {
+
+                                    i++;
+
+                                    $(this.element).addClass('item-animate');
+                                    setTimeout(function () {
+
+                                        $('body .animate-box.item-animate').each(function (k) {
+                                            var el = $(this);
+                                            setTimeout(function () {
+                                                var effect = el.data('animate-effect');
+                                                if (effect === 'fadeIn') {
+                                                    el.addClass('fadeIn animated-fast');
+                                                } else if (effect === 'fadeInLeft') {
+                                                    el.addClass('fadeInLeft animated-fast');
+                                                } else if (effect === 'fadeInRight') {
+                                                    el.addClass('fadeInRight animated-fast');
+                                                } else {
+                                                    el.addClass('fadeInUp animated-fast');
+                                                }
+
+                                                el.removeClass('item-animate');
+                                            }, k * 200, 'easeInOutExpo');
+                                        });
+
+                                    }, 100);
+
+                                }
+
+                            }, { offset: '85%' });
+
+                            var newPage = document.getElementById("products-section").getAttribute("data-current-page");
+                            var totalPages = document.getElementById("products-section").getAttribute("data-total-pages");
 
                             // Update pagination links
+                            console.log("currentPage " + newPage);
+                            console.log("totalPages " + totalPages);
                             updatePaginationLinks(newPage, totalPages);
 
                             console.log("Success:", result);
+
+                            console.log("Inner HTML", document.getElementById("parView").innerHTML);
                         } else {
                             console.log("Error: New content is undefined");
                         }
@@ -343,24 +402,28 @@
             var paginationContainer = $(".pagination-container");
             var paginationList = $("<ul>").addClass("pagination");
 
+            console.log("currentPage " + currentPage);
+            console.log("totalPages " + totalPages);
+
             // Previous button
-            if (currentPage > 1) {
-                var prevLink = $("<li>").append($("<a>").addClass("pagination-link").attr("href", "#").attr("data-page", currentPage - 1).text("Previous"));
+            if (Number(currentPage) > 1) {
+                var prevLink = $("<li>").append($("<a>").addClass("pagination-link").attr("href", "#").attr("data-page", Number(currentPage) - 1).text("Previous"));
                 paginationList.append(prevLink);
             }
 
             // Numbered pages
-            for (var i = 1; i <= totalPages; i++) {
+            for (var i = 1; i <= Number(totalPages); i++) {
                 var pageLink = $("<li>").append($("<a>").addClass("pagination-link").attr("href", "#").attr("data-page", i).text(i));
-                if (i === currentPage) {
-                    pageLink.addClass("active");
+                if (i === Number(currentPage)) {
+                    // pageLink.addClass("active");
+                    pageLink = $("<li>").addClass("active").append($("<span>").text(i));
                 }
                 paginationList.append(pageLink);
             }
 
             // Next button
-            if (currentPage < totalPages) {
-                var nextLink = $("<li>").append($("<a>").addClass("pagination-link").attr("href", "#").attr("data-page", currentPage + 1).text("Next"));
+            if (Number(currentPage) < Number(totalPages)) {
+                var nextLink = $("<li>").append($("<a>").addClass("pagination-link").attr("href", "#").attr("data-page", Number(currentPage) + 1).text("Next"));
                 paginationList.append(nextLink);
             }
 
@@ -368,11 +431,11 @@
             paginationContainer.append(paginationList);
 
             // Attach click event to pagination links
-            $(".pagination-link").on("click", function (e) {
-                e.preventDefault();
-                var page = $(this).data("page");
-                fetchProducts(page);
-            });
+            // $(".pagination-link").on("click", function (e) {
+            //     e.preventDefault();
+            //     var page = $(this).data("page");
+            //     fetchProducts(page);
+            // });
         }
 
 
