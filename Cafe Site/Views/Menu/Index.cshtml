@@ -66,8 +66,6 @@
             }
     </style>
 
-
-
   </head>
 
   <body>
@@ -85,23 +83,15 @@
               <ul>
                 <li><a href="home">Home</a></li>
                 <li class="active"><a href="menu">Menu</a></li>
-                <li class="has-dropdown">
-                  <a href="gallery.html">Gallery</a>
-                  <ul class="dropdown">
-                    <li><a href="#">Events</a></li>
-                    <li><a href="#">Food</a></li>
-                    <li><a href="#">Coffees</a></li>
-                  </ul>
-                </li>
+                <li><a href="gallery">Gallery</a></li>
                 <li><a href="reservation.html">Reservation</a></li>
                 <li><a href="about">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="contact">Contact</a></li>
               </ul>
             </div>
           </div>
 
         </div>
-        <!-- </div> -->
       </nav>
 
       <header id="fh5co-header" class="fh5co-cover js-fullheight" role="banner"
@@ -120,7 +110,7 @@
         </div>
       </header>
 
-        <div id="fh5co-featured-menu" class="fh5co-section">
+        <div id="fh5co-featured-menu" class="fh5co-section" style="padding-bottom: 0;">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 fh5co-heading animate-box">
@@ -137,12 +127,14 @@
                         </div>
                     </div>
 
-                    <partial name="_ProductsPartial" />
+                    <div id="parView">
+                        <partial name="_ProductsPartial" />
+                    </div>
               </div>
             </div>
           </div>
         </div>
-    <div class="pagination-container text-center">
+    <div class="pagination-container text-center" id="container">
         @if (Model.TotalPages > 1)
         {
             <ul class="pagination">
@@ -170,10 +162,7 @@
             </ul>
         }
     </div>
-
-
       </div>
-
       <div id="fh5co-featured-testimony" class="fh5co-section">
         <div class="container">
           <div class="row">
@@ -247,8 +236,6 @@
             <div class="col-md-12 text-center">
               <p>
                 <small class="block">&copy; 2024 All Rights Reserved.</small>
-@*                 <small class="block">Designed by <a href="http://freehtml5.co/" target="_blank">FreeHTML5.co</a> Demo
-                  Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a></small> *@
               </p>
               <p>
               <ul class="fh5co-social-icons">
@@ -285,11 +272,10 @@
     <script src="js/main.js"></script>
     <script>
         $(document).ready(function () {
-            $(".pagination-link").click(function (e) {
+            $("#container").on('click', '.pagination-link', function (e) {
                 e.preventDefault(); // Prevent default navigation behavior
                 var page = $(this).data("page");
-                var url = '@Url.Action("Index", "Menu")';
-
+                var url = '/menu/getproducts';
 
                 console.log("Fetching page:", page);
                 console.log("URL:", url);
@@ -306,21 +292,53 @@
                         console.log("AJAX Response:", result);
 
                         var newContent = result;
-                        var newPage = $(result).find('#products-section').data('current-page');
-                        var totalPages = $(result).find('#products-section').data('total-pages');
 
                         // Check if newContent is defined
                         if (newContent) {
                             // Update image URLs to force reload
                             var timestamp = new Date().getTime();
-                            newContent = newContent.replace(/src="data:image\/png;base64,/g, 'src="data:image/png;base64,' + timestamp);
 
-                            $("#products-section").html(newContent);
+                            $("#parView").html(newContent);
+                            var i = 0;
+
+                            $(".problem").waypoint(function (direction) {
+
+                                if (direction === 'down' && !$(this.element).hasClass('animated-fast')) {
+
+                                    i++;
+
+                                    $(this.element).addClass('item-animate');
+                                    setTimeout(function () {
+
+                                        $('body .animate-box.item-animate').each(function (k) {
+                                            var el = $(this);
+                                            setTimeout(function () {
+                                                var effect = el.data('animate-effect');
+                                                if (effect === 'fadeIn') {
+                                                    el.addClass('fadeIn animated-fast');
+                                                } else if (effect === 'fadeInLeft') {
+                                                    el.addClass('fadeInLeft animated-fast');
+                                                } else if (effect === 'fadeInRight') {
+                                                    el.addClass('fadeInRight animated-fast');
+                                                } else {
+                                                    el.addClass('fadeInUp animated-fast');
+                                                }
+
+                                                el.removeClass('item-animate');
+                                            }, k * 200, 'easeInOutExpo');
+                                        });
+
+                                    }, 100);
+
+                                }
+
+                            }, { offset: '85%' });
+
+                            var newPage = document.getElementById("products-section").getAttribute("data-current-page");
+                            var totalPages = document.getElementById("products-section").getAttribute("data-total-pages");
 
                             // Update pagination links
                             updatePaginationLinks(newPage, totalPages);
-
-                            console.log("Success:", result);
                         } else {
                             console.log("Error: New content is undefined");
                         }
@@ -343,40 +361,33 @@
             var paginationContainer = $(".pagination-container");
             var paginationList = $("<ul>").addClass("pagination");
 
+            console.log("currentPage " + currentPage);
+            console.log("totalPages " + totalPages);
+
             // Previous button
-            if (currentPage > 1) {
-                var prevLink = $("<li>").append($("<a>").addClass("pagination-link").attr("href", "#").attr("data-page", currentPage - 1).text("Previous"));
+            if (Number(currentPage) > 1) {
+                var prevLink = $("<li>").append($("<a>").addClass("pagination-link").attr("href", "#").attr("data-page", Number(currentPage) - 1).text("Previous"));
                 paginationList.append(prevLink);
             }
 
             // Numbered pages
-            for (var i = 1; i <= totalPages; i++) {
+            for (var i = 1; i <= Number(totalPages); i++) {
                 var pageLink = $("<li>").append($("<a>").addClass("pagination-link").attr("href", "#").attr("data-page", i).text(i));
-                if (i === currentPage) {
-                    pageLink.addClass("active");
+                if (i === Number(currentPage)) {
+                    pageLink = $("<li>").addClass("active").append($("<span>").text(i));
                 }
                 paginationList.append(pageLink);
             }
 
             // Next button
-            if (currentPage < totalPages) {
-                var nextLink = $("<li>").append($("<a>").addClass("pagination-link").attr("href", "#").attr("data-page", currentPage + 1).text("Next"));
+            if (Number(currentPage) < Number(totalPages)) {
+                var nextLink = $("<li>").append($("<a>").addClass("pagination-link").attr("href", "#").attr("data-page", Number(currentPage) + 1).text("Next"));
                 paginationList.append(nextLink);
             }
 
             // Append pagination links to container
             paginationContainer.append(paginationList);
-
-            // Attach click event to pagination links
-            $(".pagination-link").on("click", function (e) {
-                e.preventDefault();
-                var page = $(this).data("page");
-                fetchProducts(page);
-            });
         }
-
-
-
     </script>
 
   </body>

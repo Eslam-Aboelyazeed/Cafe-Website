@@ -11,8 +11,12 @@ namespace Cafe_Site.Models
         public DbSet<Product_Size_Price> Product_Sizes { set; get; }
         public DbSet<Order_Products> Order_Products { set; get; }
         public DbSet<Product_Reviews> Product_Reviews { get; set; }
+		public DbSet<Contact> Contact { get; set; }
 
-        public CafeSiteContext(DbContextOptions<CafeSiteContext> options):base(options){}
+		public CafeSiteContext() : base() { }
+		
+
+		public CafeSiteContext(DbContextOptions<CafeSiteContext> options):base(options){}
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{

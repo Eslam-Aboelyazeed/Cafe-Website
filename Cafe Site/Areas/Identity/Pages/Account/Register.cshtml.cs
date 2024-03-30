@@ -25,6 +25,8 @@ namespace Cafe_Site.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
+        private static bool flag = false;
+
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
@@ -86,14 +88,24 @@ namespace Cafe_Site.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+                //var userCheck = _userManager.Users.FirstOrDefault();
                 var user = new ApplicationUser {  User_Fname=Input.FName,User_Lname=Input.LName,User_Address=Input.Address,UserName = Input.Email, Email = Input.Email};
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
                    
-                    await _userManager.AddToRoleAsync(user, "User");
-                    
+                    if(!flag)
+                    {
+                        await _userManager.AddToRoleAsync(user, "Admin");
+
+                        flag = true;
+                    }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, "User");
+                    }
+
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
