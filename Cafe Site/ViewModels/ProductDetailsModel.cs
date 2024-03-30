@@ -9,5 +9,7 @@ namespace Cafe_Site.ViewModels
         public List<Product_Reviews> productReviews { get; set; }
 
         public List<Product_Size_Price> productSizePrices { get; set; }
+
+        public List<Product> selectedAddProducts { get; set; }
     }
 }

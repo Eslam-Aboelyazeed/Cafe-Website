@@ -14,7 +14,7 @@ namespace Cafe_Site.Controllers
         }
         public IActionResult Index()
         {
-            
+
             int id = 12;
             Product product = productDetailsServ.Getproduct(id);
             string type=product.Product_Type;
@@ -27,14 +27,16 @@ namespace Cafe_Site.Controllers
                 productReviews=productReview,
                 productSizePrices=productSizes,
                 Product=product
-                
-                
             };
             return View("ProductDetails", viewModel);
         }
         public IActionResult review(int rate, string review)
         {
-            return View();
+
+            return RedirectToAction("Index");
         }
+
+        public void addProductToCart()
+        { }
     }
 }
