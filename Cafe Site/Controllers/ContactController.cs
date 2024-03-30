@@ -1,4 +1,5 @@
-﻿using Cafe_Site.ViewModel;
+﻿using Cafe_Site.Models;
+using Cafe_Site.ViewModels;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -7,49 +8,52 @@ using System.Net.Mail;
 
 namespace Cafe_Site.Controllers
 {
-    public class ContactController : Controller
-    {
+	public class ContactController : Controller
+	{
 
-        [HttpGet]
-        public IActionResult Contact()
-        {
-            return View();
-        }
+		private readonly CafeSiteContext cafeSiteContext;
 
-        [HttpPost]
-        public IActionResult Contact(ContactViewModel contact)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(contact);
-            }
+		public ContactController(CafeSiteContext cafeSiteContext)
+		{
+			this.cafeSiteContext = cafeSiteContext;
+		}
+		public ActionResult Contact()
+		{
+			return View();
+		}
 
-            try
-            {
-                MailMessage mail = new MailMessage();
-                mail.From = new MailAddress("itiexaminationsystem@gmail.com");
-                mail.To.Add("itiexaminationsystem@gmail.com");
-                mail.Subject = "Message from " + contact.Email;
-                mail.Body = contact.Message;
+		[HttpPost]
+		public ActionResult Contact(ContactViewModels model)
+		{
+			CafeSiteContext db = new CafeSiteContext();
 
-                SmtpClient smtp = new SmtpClient("smtp.gmail.com");
-                smtp.Port = 587;
-                smtp.Credentials = new NetworkCredential("itiexaminationsystem@gmail.com", "9:48*5/3/2024");
-                smtp.EnableSsl = true;
-                smtp.Send(mail);
+			if (ModelState.IsValid)
+			{
 
-                ViewBag.Message = "Email sent successfully!";
+				try
+				{
+					var contact = new Contact
+					{
+						Name = model.Name,
+						Email = model.Email,
+						Message = model.Message,
+						CreatedAt = DateTime.Now
+					};
 
-                ModelState.Clear();
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Message = "Error sending email: " + ex.Message;
-                //ViewBag.Message = ex.Message.ToString();
+					// Add contact to database
+					db.Contact.Add(contact);
+					db.SaveChanges();
 
-            }
+					ViewBag.Message = "Message sent successfully!";
+				}
+				catch (Exception ex)
+				{
+					ViewBag.Message = "Error occurred while sending message.";
+					return View(model);
+				}
 
-            return View();
-        }
-    }
+			}
+			return View(model);
+		}
+	}
 }
