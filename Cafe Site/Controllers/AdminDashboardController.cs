@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace Cafe_Site.Controllers
 {
@@ -28,13 +29,18 @@ namespace Cafe_Site.Controllers
 		{
             //var user = await userManager.GetUserAsync(User);
 
+            //var test = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            //var test2 = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+            //var test3 = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+            //var test4 = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+
             //try
             //{
             //    var flag = await userManager.GetRolesAsync(user);
 
             //    if (flag[0] == "Admin")
             //    {
-                    var products = productService.GetAllProducts();
+            var products = productService.GetAllProducts();
 
                     return View("Index", products);
             //    }

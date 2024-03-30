@@ -10,7 +10,8 @@ namespace Cafe_Site.Models
         public int Order_Id { get; set; }
         public DateTime Order_Date { get; set;}
         [Column(TypeName = "money")]
-        public decimal Order_TotalPrice { get; set;}
+        public decimal? Order_TotalPrice { get; set;}
+        public char Order_Status { get; set; }
 
         [ForeignKey("user")]
         public string userId { get; set; }
