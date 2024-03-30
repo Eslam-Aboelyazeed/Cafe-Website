@@ -4,7 +4,7 @@
 # Base - Genral & Typography
 
 ----------------------------------------------------------------------------- */
-html {
+/*html {
   font-size: 14px;
   font-weight: 400;
   line-height: 28px;
@@ -19,7 +19,7 @@ body {
   line-height: 1.8;
   color: #051922;
   overflow-x: hidden;
-}
+}*/
 
 body img {
   max-width: 100%;
@@ -925,7 +925,7 @@ h2.widget-title:after {
   outline: none;
 }
 
-.copyright {
+/*.copyright {
   background-color: #051922;
   border-top: 1px solid #232a35;
 }
@@ -945,7 +945,7 @@ h2.widget-title:after {
 
 .copyright a:hover {
   color: #f59d53;
-}
+}*/
 
 .social-icons ul {
   margin: 0;
@@ -1375,9 +1375,9 @@ a.mobile-show.search-bar-icon:hover {
   z-index: 1;
 }
 
-html, body {
+/*html, body {
   height: 100%;
-}
+}*/
 
 .hero-area:after {
   position: absolute;
