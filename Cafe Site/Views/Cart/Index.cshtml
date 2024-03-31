@@ -40,11 +40,11 @@
             <div class="col-lg-8">
                 <div class="checkout-accordion-wrap">
                     <div class="accordion" id="accordionExample">
-                        <div class="card single-accordion">
-                            <div class="card-header" id="headingOne">
-                                <h5 class="mb-0">
+                        <div class="card single-accordion" style="background-color: #181818; border: none">
+                            <div class="card-header" id="headingOne" style="background-color: #181818; border: none">
+                                <h5 class="mb-0" style="border: none">
                                     <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-                                            aria-expanded="true" aria-controls="collapseOne">
+                                            aria-expanded="true" aria-controls="collapseOne" style="background-color: #181818; color: var(--bs-gray-400)">
                                         Billing Address
                                     </button>
                                 </h5>
@@ -67,11 +67,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card single-accordion">
-                            <div class="card-header" id="headingTwo">
-                                <h5 class="mb-0">
+                        <div class="card single-accordion" style="background-color: #181818; border: none">
+                            <div class="card-header" id="headingTwo" style="background-color: #181818; border: none">
+                                <h5 class="mb-0" style="border: none;">
                                     <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                            data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="background-color: #181818; color: var(--bs-gray-400)">
                                         Shipping Address
                                     </button>
                                 </h5>
@@ -84,23 +84,23 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card single-accordion">
-                            <div class="card-header" id="headingThree">
+                        <div class="card single-accordion" style="background-color: #181818; border: none">
+                            <div class="card-header" id="headingThree" style="background-color: #181818; border: none">
                                 <h5 class="mb-0">
                                     <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                            data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="background-color: #181818; color: var(--bs-gray-400)">
                                         Card Details
                                     </button>
                                 </h5>
                             </div>
-                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                                <div class="card-body">
-                                    <div class="card-details">
-                                        <div class="col-lg-12 col-md-12">
-                                            <div class="cart-table-wrap">
-                                                <table class="cart-table">
-                                                    <thead class="cart-table-head">
-                                                        <tr class="table-head-row">
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample" style="background-color: #181818;">
+                                <div class="card-body" style="background-color: #181818;">
+                                    <div class="card-details" style="background-color: #181818;">
+                                        <div class="col-lg-12 col-md-12" style="background-color: #181818;">
+                                            <div class="cart-table-wrap" style="background-color: #181818;">
+                                                <table class="cart-table" style="background-color: #181818; color: var(--bs-gray-500);">
+                                                    <thead class="cart-table-head" style="background-color: #181818;">
+                                                        <tr class="table-head-row" style="background-color: #181818;">
                                                             <th class="product-remove"></th>
                                                             <th class="product-image">Product Image</th>
                                                             <th class="product-name">Name</th>
@@ -110,11 +110,11 @@
                                                             <th class="product-total">Total</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
+                                                    <tbody style="background-color: #181818;">
 
                                                         @foreach (var item in Model)
                                                         {
-                                                            <tr class="table-body-row" id="@item.Product_Id">
+                                                            <tr class="table-body-row" id="@item.Product_Id" style="background-color: #181818;">
                                                                 <td class="product-remove"><a href="/Cart/RemoveFromCart/@item.Order_Id?pid=@item.Product_Id"><i class="far fa-window-close"></i></a></td>
                                                                 <td class="product-image"><img src="data:image/png;base64,@item.Product_Image" alt="@item.Product_Name Image" style="height:50px"></td>
                                                                 <td class="product-name">@item.Product_Name</td>
@@ -161,13 +161,13 @@
                 </div>
             </div>
 
-            <div class="col-lg-4">
-                <div class="order-details-wrap">
-                    <table class="order-details">
-                        <thead>
-                            <tr>
-                                <th>Your order Details</th>
-                                <th>Price</th>
+            <div class="col-lg-4" style="background-color: #181818; color: var(--bs-gray-500)">
+                <div class="order-details-wrap" style="background-color: #181818;">
+                    <table class="order-details" style="background-color: #181818;">
+                        <thead style="background-color: #181818;">
+                            <tr style="background-color: #181818; color: var(--bs-gray-400)" ">
+                                <th style="background-color: #181818;">Your order Details</th>
+                                <th style="background-color: #181818;">Price</th>
                             </tr>
                         </thead>
                         <tbody class="order-details-body">
