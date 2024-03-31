@@ -33,9 +33,18 @@ namespace Cafe_Site.Services
         {
             return prodRepo.GetElement(p=>p.Product_Id==productID,null);
         }
-        public void addReview(int rate, string review)
+        public void addReview(int rate, string review, int id,string user, Product p)
         {
-            
+            Product_Reviews rev = new Product_Reviews()
+            {
+               Product_Id=id,
+               Product_Rate=rate,
+               Product_Review=review,
+               User_Name=user,
+               product=p
+            };
+            reviewRepo.Insert(rev);
+            reviewRepo.SaveChanges();
         }
     }
 }
