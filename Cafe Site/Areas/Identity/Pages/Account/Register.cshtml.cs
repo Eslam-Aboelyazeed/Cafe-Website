@@ -89,7 +89,7 @@ namespace Cafe_Site.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 //var userCheck = _userManager.Users.FirstOrDefault();
-                var user = new ApplicationUser {  User_Fname=Input.FName,User_Lname=Input.LName,User_Address=Input.Address,UserName = Input.Email, Email = Input.Email};
+                var user = new ApplicationUser {  User_Fname=Input.FName,User_Lname=Input.LName,User_Address=Input.Address,UserName = $"{Input.FName}_{Input.LName}", Email = Input.Email};
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

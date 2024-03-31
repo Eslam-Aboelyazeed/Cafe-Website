@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<CartViewModel>
+@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_CustomCartLayout.cshtml";
 }
@@ -104,12 +105,26 @@
                                                             <th class="product-image">Product Image</th>
                                                             <th class="product-name">Name</th>
                                                             <th class="product-price">Price</th>
+                                                            <th class="product-Size">Size</th>
                                                             <th class="product-quantity">Quantity</th>
                                                             <th class="product-total">Total</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr class="table-body-row">
+
+                                                        @foreach (var item in Model)
+                                                        {
+                                                            <tr class="table-body-row" id="@item.Product_Id">
+                                                                <td class="product-remove"><a href="/Cart/RemoveFromCart/@item.Order_Id?pid=@item.Product_Id"><i class="far fa-window-close"></i></a></td>
+                                                                <td class="product-image"><img src="data:image/png;base64,@item.Product_Image" alt="@item.Product_Name Image" style="height:50px"></td>
+                                                                <td class="product-name">@item.Product_Name</td>
+                                                                <td class="product-price" id="p(@item.Product_Id)">$@item.Product_Price</td>
+                                                                <td class="product-size">@item.Product_Size</td>
+                                                                <td class="product-quantity"><input type="number" id="q(@item.Product_Id)" placeholder="1" value="@item.Quantity" min="1" onchange="ModifyQuantity(@item.Product_Id)"></td>
+                                                                <td class="product-total" id="t(@item.Product_Id)">$@(item.Product_Price * item.Quantity)</td>
+                                                            </tr>
+                                                        }
+                                                        @* <tr class="table-body-row">
                                                             <td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a></td>
                                                             <td class="product-image"><img src="" alt=""></td>
                                                             <td class="product-name">Strawberry</td>
@@ -132,7 +147,7 @@
                                                             <td class="product-price">$35</td>
                                                             <td class="product-quantity"><input type="number" placeholder="0"></td>
                                                             <td class="product-total">1</td>
-                                                        </tr>
+                                                        </tr> *@
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -160,7 +175,14 @@
                                 <td>Product</td>
                                 <td>Total</td>
                             </tr>
-                            <tr>
+                            @foreach (var item in @Model)
+                            {
+                                <tr>
+                                    <td>@item.Product_Name (X<span id="qq(@item.Product_Id)">@item.Quantity</span>)</td>
+                                    <td class="proPrices" id="tt(@item.Product_Id)">$@(item.Product_Price * item.Quantity)</td>
+                                </tr>
+                            }
+@*                             <tr>
                                 <td>Strawberry</td>
                                 <td>$85.00</td>
                             </tr>
@@ -171,12 +193,12 @@
                             <tr>
                                 <td>Lemon</td>
                                 <td>$35.00</td>
-                            </tr>
+                            </tr> *@
                         </tbody>
                         <tbody class="checkout-details">
                             <tr>
                                 <td>Subtotal</td>
-                                <td>$190</td>
+                                <td id="Subtotal"></td>
                             </tr>
                             <tr>
                                 <td>Shipping</td>
@@ -184,7 +206,7 @@
                             </tr>
                             <tr>
                                 <td>Total</td>
-                                <td>$240</td>
+                                <td id="Total"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -213,4 +235,47 @@
     <script src="/js/sticker.js"></script>
 
     <script src="/js/cartmain.js"></script>
+
+    <script>
+
+        function CalculateTotal(){
+            let total = document.getElementById("Total");
+            let stotal = document.getElementById("Subtotal");
+
+            let sum = 0;
+
+            let proPrices = document.getElementsByClassName("proPrices");
+            for (let i = 0; i < proPrices.length; i++){
+                let x = proPrices[i].innerText.split('');
+                x.shift();
+                let y = x.join('');
+                // sum += Number(proPrices[i].innerText.split('').splice(0, 1).join(''));
+                sum += Number(y);
+                console.log(y);
+            }
+
+            stotal.innerText = "$" + sum;
+            total.innerText = "$" + ( sum + 50);
+        }
+
+        CalculateTotal();
+
+        function ModifyQuantity(id) {
+            let pid = document.getElementById(`p(${id})`);
+            let tid = document.getElementById(`t(${id})`);
+            let qid = document.getElementById(`q(${id})`);
+            let qqid = document.getElementById(`qq(${id})`);
+            let ttid = document.getElementById(`tt(${id})`);
+
+            let a = pid.innerText.split('');
+            a.shift();
+            let b = a.join('');
+
+            tid.innerText = "$"+(Number(qid.value) * Number(b));
+            qqid.innerText = qid.value;
+            ttid.innerText = tid.innerText;
+
+            CalculateTotal();
+        }
+    </script>
 }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Cafe_Site.Models
 {
@@ -9,8 +10,10 @@ namespace Cafe_Site.Models
         [ForeignKey("product")]
         public int Product_Id { get; set; }
         public int Quantity { get; set; }
-    
-    
+        [Column(TypeName = "money")]
+        public decimal Price { get; set; }
+        public char Size { get; set; }
+
         public Order order { get; set; }
         public Product product { get; set; }
     }

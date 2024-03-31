@@ -6,7 +6,7 @@ namespace Cafe_Site.Repository
 {
 	public class DefaultRepository<T> : IDefaultRepository<T> where T : class
 	{
-		private readonly CafeSiteContext db;
+		protected readonly CafeSiteContext db;
 
 		public DefaultRepository(CafeSiteContext cafeSiteContext)
         {
