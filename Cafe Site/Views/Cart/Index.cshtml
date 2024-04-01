@@ -110,7 +110,7 @@
                                                             <th class="product-total">Total</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody style="background-color: #181818;">
+                                                    <tbody style="background-color: #181818; color: var(--bs-gray-400)">
 
                                                         @foreach (var item in Model)
                                                         {
@@ -118,10 +118,15 @@
                                                                 <td class="product-remove"><a href="/Cart/RemoveFromCart/@item.Order_Id?pid=@item.Product_Id"><i class="far fa-window-close"></i></a></td>
                                                                 <td class="product-image"><img src="data:image/png;base64,@item.Product_Image" alt="@item.Product_Name Image" style="height:50px"></td>
                                                                 <td class="product-name">@item.Product_Name</td>
-                                                                <td class="product-price" id="p(@item.Product_Id)">$@item.Product_Price</td>
+                                                                <td class="product-price" id="p(@item.Product_Id)">$@Convert.ToDecimal(item.Product_Price).ToString("F2")</td>
                                                                 <td class="product-size">@item.Product_Size</td>
-                                                                <td class="product-quantity"><input type="number" id="q(@item.Product_Id)" placeholder="1" value="@item.Quantity" min="1" onchange="ModifyQuantity(@item.Product_Id)"></td>
-                                                                <td class="product-total" id="t(@item.Product_Id)">$@(item.Product_Price * item.Quantity)</td>
+                                                                <td class="product-quantity"><input type="number" id="q(@item.Product_Id)" placeholder="1" value="@item.Quantity" min="1" onchange="ModifyQuantity(@item.Product_Id)" style="background-color: #181818; color: var(--bs-gray-400); text-align: center;"></td>
+                                                                <td class="product-total" id="t(@item.Product_Id)">
+                                                                    $@Math.Round(Convert.ToDecimal(item.Product_Price * item.Quantity), 2).ToString("F2")
+                                                                </td>
+
+
+
                                                             </tr>
                                                         }
                                                         @* <tr class="table-body-row">
@@ -179,7 +184,11 @@
                             {
                                 <tr>
                                     <td>@item.Product_Name (X<span id="qq(@item.Product_Id)">@item.Quantity</span>)</td>
-                                    <td class="proPrices" id="tt(@item.Product_Id)">$@(item.Product_Price * item.Quantity)</td>
+                                    <td class="proPrices" id="tt(@item.Product_Id)">
+                                        $@Convert.ToDecimal(item.Product_Price * item.Quantity).ToString("F2")
+                                    </td>
+
+
                                 </tr>
                             }
 @*                             <tr>
