@@ -44,11 +44,13 @@ namespace Cafe_Site.Controllers
             return RedirectToAction("Index",id);
         }
         [Authorize]
-        public void addProductToCart(string product, char size, List<string> productAdds)
+        public void addProductToCart(int product, char size, List<int> productAdds)
         {
+            var userId = User.Claims.FirstOrDefault()?.Value;
             var prodID = product;
             var s = size;
             var adds= productAdds;
+            productDetailsServ.addProductToOrder(prodID, s, adds, userId);
         }
     }
 }

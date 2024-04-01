@@ -63,7 +63,7 @@ namespace Cafe_Site.Models
                 .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Order_Products>()
-                .HasKey("Product_Id", "Order_Id");
+                .HasKey("Product_Id", "Order_Id", "Size");
 
             modelBuilder.Entity<Product_Size_Price>()
                 .HasKey("Product_Id", "Size");
