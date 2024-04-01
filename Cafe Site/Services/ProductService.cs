@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using System.Drawing;
 using System.Security.Claims;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Cafe_Site.Services
 {
@@ -39,9 +40,9 @@ namespace Cafe_Site.Services
                 Product_Type = p.Product_Type,
                 Product_Quantity = p.Product_Quantity,
                 Product_Description = p.Product_Description,
-                SPrice = (p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'S') != null) ? p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'S').Price.ToString() : "-",
-                MPrice = (p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'M') != null) ? p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'M').Price.ToString() : "-",
-                LPrice = (p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'L') != null) ? p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'L').Price.ToString() : "-",
+                SPrice = (p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'S') != null) ? p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'S').Price.ToString("0.00") : "-",
+                MPrice = (p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'M') != null) ? p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'M').Price.ToString("0.00") : "-",
+                LPrice = (p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'L') != null) ? p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'L').Price.ToString("0.00") : "-",
                 Product_Image = Convert.ToBase64String(p.Product_Image?? defaultByteArray),
                 //Product_Image = p.Product_Image,
                 userId = p.userId
@@ -69,7 +70,7 @@ namespace Cafe_Site.Services
 
         //}
 
-        public void InsertProduct(ProductInfoViewModel productInfo)
+        public void InsertProduct(ProductInfoViewModel productInfo, string uid)
         {
             var ProductImage = defaultService.ImageToByteArray(productInfo.Product_Image);
 
@@ -81,7 +82,7 @@ namespace Cafe_Site.Services
                 Product_Image = ProductImage,
                 Product_Description = productInfo.Product_Description,
 
-                userId = "76c682ad-e525-41e5-8e90-c3f226999314"
+                userId = uid
             });
 
             repository.SaveChanges();
@@ -90,7 +91,7 @@ namespace Cafe_Site.Services
                 p => p.Product_Name == productInfo.Product_Name &&
                 p.Product_Quantity == productInfo.Product_Quantity &&
                 p.Product_Type == productInfo.Product_Type &&
-                p.Product_Description == productInfo.Product_Description && p.userId == "76c682ad-e525-41e5-8e90-c3f226999314 ", null).Product_Id;
+                p.Product_Description == productInfo.Product_Description && p.userId == uid, null).Product_Id;
 
             decimal value;
             bool flag = decimal.TryParse(productInfo.SPrice, out value); 
@@ -101,7 +102,7 @@ namespace Cafe_Site.Services
                 {
                     Product_Id = pid,
                     Size = 'S',
-                    Price = value
+                    Price = Math.Round(value,2)
                 });
             }
 
@@ -113,7 +114,7 @@ namespace Cafe_Site.Services
                 {
                     Product_Id = pid,
                     Size = 'M',
-                    Price = value
+                    Price = Math.Round(value, 2)
                 });
             }
 
@@ -125,7 +126,7 @@ namespace Cafe_Site.Services
                 {
                     Product_Id = pid,
                     Size = 'L',
-                    Price = value
+                    Price = Math.Round(value, 2)
                 });
             }
 
@@ -143,9 +144,9 @@ namespace Cafe_Site.Services
                 Product_Type = product.Product_Type,
                 Product_Quantity = product.Product_Quantity,
                 Product_Description = product.Product_Description,
-                SPrice = (product.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == product.Product_Id && ps.Size == 'S') != null) ? product.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == product.Product_Id && ps.Size == 'S').Price.ToString() : "-",
-                MPrice = (product.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == product.Product_Id && ps.Size == 'M') != null) ? product.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == product.Product_Id && ps.Size == 'M').Price.ToString() : "-",
-                LPrice = (product.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == product.Product_Id && ps.Size == 'L') != null) ? product.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == product.Product_Id && ps.Size == 'L').Price.ToString() : "-",
+                SPrice = (product.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == product.Product_Id && ps.Size == 'S') != null) ? product.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == product.Product_Id && ps.Size == 'S').Price.ToString("0.00") : "0",  //"-",
+                MPrice = (product.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == product.Product_Id && ps.Size == 'M') != null) ? product.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == product.Product_Id && ps.Size == 'M').Price.ToString("0.00") : "0",  //"-",
+                LPrice = (product.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == product.Product_Id && ps.Size == 'L') != null) ? product.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == product.Product_Id && ps.Size == 'L').Price.ToString("0.00") : "0",  //"-",
                 //Product_Image = Convert.ToBase64String(product.Product_Image),
                 userId = product.userId
             };
@@ -179,7 +180,7 @@ namespace Cafe_Site.Services
                 var smallSizedProduct = psrepository.GetElement(ps => ps.Product_Id == productInfo.Product_Id && ps.Size == 'S', null);
                 if(smallSizedProduct != null)
                 {
-                    smallSizedProduct.Price = value;
+                    smallSizedProduct.Price = Math.Round(value, 2);
                     psrepository.Update(smallSizedProduct);
                 }
                 else
@@ -188,7 +189,7 @@ namespace Cafe_Site.Services
                     {
                         Product_Id = productInfo.Product_Id,
                         Size = 'S',
-                        Price = value
+                        Price = Math.Round(value, 2)
                     });
                 }
             }
@@ -208,7 +209,7 @@ namespace Cafe_Site.Services
                 var mediumSizedProduct = psrepository.GetElement(ps => ps.Product_Id == productInfo.Product_Id && ps.Size == 'M', null);
                 if(mediumSizedProduct != null)
                 {
-                    mediumSizedProduct.Price = value;
+                    mediumSizedProduct.Price = Math.Round(value, 2);
                     psrepository.Update(mediumSizedProduct);
                 }
                 else
@@ -217,7 +218,7 @@ namespace Cafe_Site.Services
                     {
                         Product_Id = productInfo.Product_Id,
                         Size = 'M',
-                        Price = value
+                        Price = Math.Round(value, 2)
                     });
                 }
             }
@@ -237,7 +238,7 @@ namespace Cafe_Site.Services
                 var largeSizedProduct = psrepository.GetElement(ps => ps.Product_Id == productInfo.Product_Id && ps.Size == 'L', null);
                 if(largeSizedProduct != null)
                 {
-                    largeSizedProduct.Price = value;
+                    largeSizedProduct.Price = Math.Round(value, 2);
                     psrepository.Update(largeSizedProduct);
                 }
                 else
@@ -246,7 +247,7 @@ namespace Cafe_Site.Services
                     {
                         Product_Id = productInfo.Product_Id,
                         Size = 'L',
-                        Price = value
+                        Price = Math.Round(value, 2)
                     });
                 }
             }

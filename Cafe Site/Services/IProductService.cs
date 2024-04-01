@@ -9,7 +9,7 @@ namespace Cafe_Site.Services
     {
         public List<ProductInfoViewModel> GetAllProducts();
         public ProductInfoViewModel GetProduct(int id);
-        public void InsertProduct(ProductInfoViewModel productInfo);
+        public void InsertProduct(ProductInfoViewModel productInfo, string uid);
         public void UpdateProduct(ProductInfoViewModel productInfo);
         public void DeleteProduct(int id);
         public void DeleteSize(int id, char size);

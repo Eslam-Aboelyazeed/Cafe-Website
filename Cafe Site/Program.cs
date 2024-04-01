@@ -29,6 +29,8 @@ namespace Cafe_Site
             
             builder.Services.AddScoped<IDefaultRepository<Product_Size_Price>, DefaultRepository<Product_Size_Price>>();
 
+            builder.Services.AddScoped<IDefaultRepository<Order>, DefaultRepository<Order>>();
+
             builder.Services.AddScoped<IDefaultRepository<Order_Products>, DefaultRepository<Order_Products>>();
 
             builder.Services.AddScoped<ICartRepository, CartRepository>();

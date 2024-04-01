@@ -20,5 +20,21 @@ namespace Cafe_Site.Controllers
 
             return View("Index", products);
         }
+
+        public IActionResult RemoveFromCart(int oid, int pid)
+        {
+            cartService.DeleteFromCart(oid, pid);
+
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public IActionResult Checkout([FromBody] Dictionary<string, string> data)
+        {
+            //var d = data;
+
+            cartService.Checkout(data);
+
+            return Json(new { success = true });
+        }
     }
 }

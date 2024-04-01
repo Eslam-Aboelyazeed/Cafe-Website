@@ -12,6 +12,10 @@ namespace Cafe_Site.Models
         public int Quantity { get; set; }
         [Column(TypeName = "money")]
         public decimal Price { get; set; }
+        //[Column(TypeName = "money")]
+        //public decimal UnitPrice { get; set; }
+        //[Column(TypeName = "money")]
+        //public decimal TotalPrice { get; set; }
         public char Size { get; set; }
 
         public Order order { get; set; }
