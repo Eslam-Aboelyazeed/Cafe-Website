@@ -1,6 +1,7 @@
 ﻿using Cafe_Site.Models;
 using Cafe_Site.Services;
 using Cafe_Site.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cafe_Site.Controllers
@@ -8,11 +9,13 @@ namespace Cafe_Site.Controllers
     public class ProductDetailsController : Controller
     {
         private readonly IProductDetailsService productDetailsServ;
+        private readonly IDefaultService defaultService;
         Product product;
-        static int id;
-        public ProductDetailsController(IProductDetailsService productDetails)
+        static int id=0;
+        public ProductDetailsController(IProductDetailsService productDetails, IDefaultService Service)
         {
             productDetailsServ=productDetails;
+            defaultService=Service;
         }
         public IActionResult Index(int Id)
         {
@@ -31,17 +34,16 @@ namespace Cafe_Site.Controllers
             };
             return View("ProductDetails", viewModel);
         }
+        [Authorize]
         public IActionResult review(int rate, string review)
         {
-            var user = (User.Claims.FirstOrDefault()?.Value == null) ? false : true;
-            if(user)
-            {
-                var name= User.Claims.FirstOrDefault()?.Value;
-                productDetailsServ.addReview(rate, review, id, User.Claims.FirstOrDefault()?.Value,product);
-            }
+            
+            var name= User.Claims.FirstOrDefault()?.Value;
+            productDetailsServ.addReview(rate, review, id, User.Claims.FirstOrDefault()?.Value,product);
+            
             return RedirectToAction("Index",id);
         }
-
+        [Authorize]
         public void addProductToCart(string product, char size, List<string> productAdds)
         {
             var prodID = product;

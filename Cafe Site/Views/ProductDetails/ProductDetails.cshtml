@@ -29,7 +29,7 @@
     <div class="prodimg col-md-6">
         <div class="row w-100 d-flex flex-row justify-content-center">
             <div class="col">
-                <img class="prodImg img-responsive w-100 mb-5" src="/images/coffee.jpg" alt="...">
+                <img class="prodImg img-responsive w-100 mb-5" src="data:image/png;base64,@Convert.ToBase64String(Model.Product.Product_Image ?? new byte[0])" alt="...">
 
             </div>
         </div>
@@ -52,7 +52,7 @@
                             @for (var i = 0; i < Model.productSizePrices.Count; i++)
                             {
                                 <input type="radio" class="btn-check" name="size" value="@Model.productSizePrices[i].Size" id="btnradio @(i+1)" autocomplete="off" checked>
-                                <label class="btn btn-outline-light" for="btnradio @(i+1)">@Model.productSizePrices[i].Size</label>
+                                <label class="sizeLabel btn btn-outline-light" for="btnradio @(i+1)">@Model.productSizePrices[i].Size</label>
                             }
 
                         </div>
@@ -201,6 +201,17 @@
         //     /*Model.selectedAddProducts.Append();*/
         // });
 
+        $(".sizeLabel").on("click", function () {
+            var size = $(this).html();
+            console.log(this);
+            if (size == "M")
+                $(".price").html(@Model.productSizePrices.Where(x => x.Size=='M' && x.Product_Id==Model.Product.Product_Id).Select(p => p.Price).FirstOrDefault());
+            else if(size == "S")
+                $(".price").html(@Model.productSizePrices.Where(x => x.Size == 'S' && x.Product_Id == Model.Product.Product_Id).Select(p => p.Price).FirstOrDefault());
+            else
+                $(".price").html(@Model.productSizePrices.Where(x => x.Size == 'L' && x.Product_Id == Model.Product.Product_Id).Select(p => p.Price).FirstOrDefault());
+
+        })
 
         $(".additions").on("click", function () {
                 
@@ -214,6 +225,7 @@
                 $(this).siblings("label").html("<i class='fa-regular fa-square-plus fa-xl' style='color:#1d9d1b'></i>")
             }
         })
+
         
     </script>
 }
