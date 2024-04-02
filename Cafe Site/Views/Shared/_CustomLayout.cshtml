@@ -53,27 +53,35 @@
 	<div id="page">
 	<nav class="fh5co-nav" role="navigation">
 		<!-- <div class="top-menu"> -->
-			<div class="container">
+			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12 text-center logo-wrap">
 						<div id="fh5co-logo"><a href="index.html">Tasty<span>.</span></a></div>
 					</div>
 					<div class="col-xs-12 text-center menu-1 menu-wrap">
 						<ul>
-							<li><a href="/Home/Index">Home</a></li>
-							<li><a href="/Menu/Index">Menu</a></li>
-							<li class="has-dropdown">
+							<li><a href="/Home">Home</a></li>
+							<li><a href="/Menu">Menu</a></li>
+							<li><a href="/Gallery">Gallery</a></li>
+@* 							<li class="has-dropdown">
 								<a href="gallery.html">Gallery</a>
 								<ul class="dropdown">
 									<li><a href="#">Events</a></li>
 									<li><a href="#">Food</a></li>
 									<li><a href="#">Coffees</a></li>
 								</ul>
-							</li>
+							</li> *@
 							<li><a href="/Contact/Contact">Contact</a></li>
-							<li><a href="about.html">About</a></li>
-							<li id="adminlink"><a href="/AdminDashboard/index">Admin Dashboard</a></li>
-							<partial name="_LoginPartial">
+							<li><a href="/About/About">About</a></li>
+							@if (User.IsInRole("Admin"))
+							{
+								<li id="adminlink"><a href="/AdminDashboard/index">Admin Dashboard</a></li>
+							}
+							@if (User.IsInRole("Admin") || User.IsInRole("User"))
+							{
+								<li><a href="/Cart">Cart</a></li>
+							}
+								<partial name="_LoginPartial">
 						</ul>
 					</div>			
 				</div>

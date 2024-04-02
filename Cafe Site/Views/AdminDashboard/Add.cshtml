@@ -76,7 +76,7 @@
                     <span asp-validation-for="Product_Description" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="SPrice" class="control-label"></label>
+                    <label asp-for="SPrice" id="sp" class="control-label"></label>
                     <input asp-for="SPrice" type="number" class="form-control" placeholder="Please Enter The Price For the Small Size of The Product" />
                     <span asp-validation-for="SPrice" class="text-danger"></span>
                 </div>
@@ -86,7 +86,7 @@
                     <span asp-validation-for="MPrice" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="LPrice" class="control-label"></label>
+                    <label asp-for="LPrice" id="lp" class="control-label"></label>
                     <input asp-for="LPrice" type="number" class="form-control" placeholder="Please Enter The Price For the Large Size of The Product" />
                     <span asp-validation-for="LPrice" class="text-danger"></span>
                 </div>
@@ -128,6 +128,23 @@
                 productType.value = pt.value;
 
                 pt.style.opacity = 1;
+
+                if (pt.value.includes("Add-")) {
+                    document.getElementById("SPrice").value = null;
+                    document.getElementById("SPrice").hidden = true;
+                    document.getElementById("sp").hidden = true;
+
+                    document.getElementById("LPrice").value = null;
+                    document.getElementById("LPrice").hidden = true;
+                    document.getElementById("lp").hidden = true;
+                }
+                else {
+                    document.getElementById("SPrice").hidden = false;
+                    document.getElementById("sp").hidden = false;
+
+                    document.getElementById("LPrice").hidden = false;
+                    document.getElementById("lp").hidden = false;
+                }
 
             } else {
                 productType.value = null;

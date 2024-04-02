@@ -44,12 +44,20 @@
 					</div>
 					<div class="col-xs-12 text-center menu-1 menu-wrap">
 						<ul>
-							<li><a href="home">Home</a></li>
-							<li><a href="menu">Menu</a></li>
-							<li><a href="gallery">Gallery</a></li>
-							<li><a href="reservation.html">Reservation</a></li>
-							<li><a href="about">About</a></li>
-							<li><a href="contact">Contact</a></li>
+							<li><a href="/Home">Home</a></li>
+							<li><a href="/Menu">Menu</a></li>
+							<li><a href="/Gallery">Gallery</a></li>
+							<li><a href="/Contact/Contact">Contact</a></li>
+							<li><a href="/About/About">About</a></li>
+							@if (User.IsInRole("Admin"))
+							{
+								<li id="adminlink"><a href="/AdminDashboard/index">Admin Dashboard</a></li>
+							}
+							@if (User.IsInRole("Admin") || User.IsInRole("User"))
+							{
+								<li><a href="/Cart">Cart</a></li>
+							}
+							<partial name="_LoginPartial">
 						</ul>
 					</div>
 				</div>

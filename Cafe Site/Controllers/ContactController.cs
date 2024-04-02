@@ -11,11 +11,11 @@ namespace Cafe_Site.Controllers
 	public class ContactController : Controller
 	{
 
-		private readonly CafeSiteContext cafeSiteContext;
+		private readonly CafeSiteContext db;
 
 		public ContactController(CafeSiteContext cafeSiteContext)
 		{
-			this.cafeSiteContext = cafeSiteContext;
+			this.db = cafeSiteContext;
 		}
 		public ActionResult Contact()
 		{
@@ -25,8 +25,7 @@ namespace Cafe_Site.Controllers
 		[HttpPost]
 		public ActionResult Contact(ContactViewModels model)
 		{
-			CafeSiteContext db = new CafeSiteContext();
-
+			
 			if (ModelState.IsValid)
 			{
 
@@ -41,7 +40,7 @@ namespace Cafe_Site.Controllers
 					};
 
 					// Add contact to database
-					db.Contact.Add(contact);
+					db.Add(contact);
 					db.SaveChanges();
 
 					ViewBag.Message = "Message sent successfully!";

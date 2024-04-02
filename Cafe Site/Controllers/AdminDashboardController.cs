@@ -70,7 +70,7 @@ namespace Cafe_Site.Controllers
         {
             if (ModelState.IsValid)
             {
-                productService.InsertProduct(product);
+                productService.InsertProduct(product, User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value);
 
                 return RedirectToAction("Index");
             }

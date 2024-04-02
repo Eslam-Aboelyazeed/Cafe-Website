@@ -32,191 +32,219 @@
         </div>
     </div>
 </div> *@
-<!-- end breadcrumb section -->
-<!-- check out section -->
-<div class="checkout-section mt-150 mb-150">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="checkout-accordion-wrap">
-                    <div class="accordion" id="accordionExample">
-                        <div class="card single-accordion" style="background-color: #181818; border: none">
-                            <div class="card-header" id="headingOne" style="background-color: #181818; border: none">
-                                <h5 class="mb-0" style="border: none">
-                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-                                            aria-expanded="true" aria-controls="collapseOne" style="background-color: #181818; color: var(--bs-gray-400)">
-                                        Billing Address
-                                    </button>
-                                </h5>
-                            </div>
 
-                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
-                                 data-parent="#accordionExample">
-                                <div class="card-body">
-                                    <div class="billing-address-form">
-                                        <form action="index.html">
-                                            <p><input type="text" placeholder="Name"></p>
-                                            <p><input type="email" placeholder="Email"></p>
-                                            <p><input type="text" placeholder="Address"></p>
-                                            <p><input type="tel" placeholder="Phone"></p>
-                                            <p>
-                                                <textarea name="bill" id="bill" cols="30" rows="10" placeholder="Say Something"></textarea>
-                                            </p>
-                                        </form>
+@if(Model != null && Model?.Count > 0)
+{
+    <!-- end breadcrumb section -->
+    <!-- check out section -->
+    <div class="checkout-section mt-150 mb-150">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="checkout-accordion-wrap">
+                        <div class="accordion" id="accordionExample">
+                            <div class="card single-accordion" style="background-color:#181818; border:none">
+                                <div class="card-header" id="headingOne" style="background-color:#181818; border:none">
+                                    <h5 class="mb-0" style="border:none">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                                aria-expanded="true" aria-controls="collapseOne" style="background-color:#181818; color:var(--bs-gray-400)">
+                                            Billing Address
+                                        </button>
+                                    </h5>
+                                </div>
+
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                     data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <div class="billing-address-form">
+                                            <form action="index.html">
+                                                <p><input type="text" placeholder="Name"></p>
+                                                <p><input type="email" placeholder="Email"></p>
+                                                <p><input type="text" placeholder="Address"></p>
+                                                <p><input type="tel" placeholder="Phone"></p>
+                                                <p>
+                                                    <textarea name="bill" id="bill" cols="30" rows="10" placeholder="Say Something"></textarea>
+                                                </p>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card single-accordion" style="background-color: #181818; border: none">
-                            <div class="card-header" id="headingTwo" style="background-color: #181818; border: none">
-                                <h5 class="mb-0" style="border: none;">
-                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                            data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="background-color: #181818; color: var(--bs-gray-400)">
-                                        Shipping Address
-                                    </button>
-                                </h5>
-                            </div>
-                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                                <div class="card-body">
-                                    <div class="shipping-address-form">
-                                        <p>Your shipping address form is here.</p>
+                            <div class="card single-accordion" style="background-color:#181818; border:none">
+                                <div class="card-header" id="headingTwo" style="background-color:#181818; border:none">
+                                    <h5 class="mb-0" style="border:none">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="background-color:#181818; color:var(--bs-gray-400)">
+                                            Shipping Address
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <div class="shipping-address-form">
+                                            <p>Your shipping address form is here.</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card single-accordion" style="background-color: #181818; border: none">
-                            <div class="card-header" id="headingThree" style="background-color: #181818; border: none">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                            data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="background-color: #181818; color: var(--bs-gray-400)">
-                                        Card Details
-                                    </button>
-                                </h5>
-                            </div>
-                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample" style="background-color: #181818;">
-                                <div class="card-body" style="background-color: #181818;">
-                                    <div class="card-details" style="background-color: #181818;">
-                                        <div class="col-lg-12 col-md-12" style="background-color: #181818;">
-                                            <div class="cart-table-wrap" style="background-color: #181818;">
-                                                <table class="cart-table" style="background-color: #181818; color: var(--bs-gray-500);">
-                                                    <thead class="cart-table-head" style="background-color: #181818;">
-                                                        <tr class="table-head-row" style="background-color: #181818;">
-                                                            <th class="product-remove"></th>
-                                                            <th class="product-image">Product Image</th>
-                                                            <th class="product-name">Name</th>
-                                                            <th class="product-price">Price</th>
-                                                            <th class="product-Size">Size</th>
-                                                            <th class="product-quantity">Quantity</th>
-                                                            <th class="product-total">Total</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody style="background-color: #181818;">
-
-                                                        @foreach (var item in Model)
-                                                        {
-                                                            <tr class="table-body-row" id="@item.Product_Id" style="background-color: #181818;">
-                                                                <td class="product-remove"><a href="/Cart/RemoveFromCart/@item.Order_Id?pid=@item.Product_Id"><i class="far fa-window-close"></i></a></td>
-                                                                <td class="product-image"><img src="data:image/png;base64,@item.Product_Image" alt="@item.Product_Name Image" style="height:50px"></td>
-                                                                <td class="product-name">@item.Product_Name</td>
-                                                                <td class="product-price" id="p(@item.Product_Id)">$@item.Product_Price</td>
-                                                                <td class="product-size">@item.Product_Size</td>
-                                                                <td class="product-quantity"><input type="number" id="q(@item.Product_Id)" placeholder="1" value="@item.Quantity" min="1" onchange="ModifyQuantity(@item.Product_Id)"></td>
-                                                                <td class="product-total" id="t(@item.Product_Id)">$@(item.Product_Price * item.Quantity)</td>
+                            <div class="card single-accordion" style="background-color:#181818; border:none">
+                                <div class="card-header" id="headingThree" style="background-color:#181818; border:none">
+                                    <h5 class="mb-0" style="border:none">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="background-color:#181818; color:var(--bs-gray-400)">
+                                            Card Details
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample" style="background-color:#181818;">
+                                    <div class="card-body" style="background-color:#181818;">
+                                        <div class="card-details" style="background-color:#181818;">
+                                            <div class="col-lg-12 col-md-12" style="background-color:#181818;">
+                                                <div class="cart-table-wrap" style="background-color:#181818;">
+                                                    <table class="cart-table" style="background-color:#181818; color:var(--bs-gray-500)">
+                                                        <thead class="cart-table-head" style="background-color:#181818;">
+                                                            <tr class="table-head-row" style="background-color:#181818;">
+                                                                <th class="product-remove"></th>
+                                                                <th class="product-image">Product Image</th>
+                                                                <th class="product-name">Name</th>
+                                                                <th class="product-price">Price</th>
+                                                                <th class="product-Size">Size</th>
+                                                                <th class="product-quantity">Quantity</th>
+                                                                <th class="product-total">Total</th>
                                                             </tr>
-                                                        }
-                                                        @* <tr class="table-body-row">
-                                                            <td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a></td>
-                                                            <td class="product-image"><img src="" alt=""></td>
-                                                            <td class="product-name">Strawberry</td>
-                                                            <td class="product-price">$85</td>
-                                                            <td class="product-quantity"><input type="number" placeholder="0"></td>
-                                                            <td class="product-total">1</td>
+                                                        </thead>
+                                                        <tbody style="background-color:#181818; color:var(--bs-gray-400)">
+
+                                                            @foreach (var item in Model)
+                                                            {
+                                                                <tr class="table-body-row" id="@item.Product_Id" style="background-color:#181818;">
+                                                                    <td class="product-remove"><button type="button" class="bg-transparent text-danger border-0" onclick="ShowModal(@item.Order_Id, @item.Product_Id)"><i class="far fa-window-close"></i></button></td>
+                                                                    <td class="product-image"><img src="data:image/png;base64,@item.Product_Image" alt="@item.Product_Name Image" style="height:50px"></td>
+                                                                    <td class="product-name">@item.Product_Name</td>
+                                                                    <td class="product-price" id="p(@item.Product_Id)">$@item.Product_Price</td>
+                                                                    <td class="product-size" id="s(@item.Product_Id)">@item.Product_Size</td>
+                                                                    <td class="product-quantity"><input type="number" id="q(@item.Product_Id)" placeholder="1" value="@item.Quantity" min="1" onchange="ModifyQuantity(@item.Product_Id)"></td>
+                                                                    <td class="product-total" id="t(@item.Product_Id)">$@(item.Product_Price * item.Quantity)</td>
+                                                                </tr>
+                                                            }
+
+                                                            <div class="modal fade" id="m1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body text-dark" id="ModalText">Are You Sure You Want To Remove This Product From Your Cart?</div>
+                                                                        <div class="modal-footer" id="mf"></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            @* <tr class="table-body-row">
+                                                        <td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a></td>
+                                                        <td class="product-image"><img src="" alt=""></td>
+                                                        <td class="product-name">Strawberry</td>
+                                                        <td class="product-price">$85</td>
+                                                        <td class="product-quantity"><input type="number" placeholder="0"></td>
+                                                        <td class="product-total">1</td>
                                                         </tr>
                                                         <tr class="table-body-row">
-                                                            <td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a></td>
-                                                            <td class="product-image"><img src="" alt=""></td>
-                                                            <td class="product-name">Berry</td>
-                                                            <td class="product-price">$70</td>
-                                                            <td class="product-quantity"><input type="number" placeholder="0"></td>
-                                                            <td class="product-total">1</td>
+                                                        <td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a></td>
+                                                        <td class="product-image"><img src="" alt=""></td>
+                                                        <td class="product-name">Berry</td>
+                                                        <td class="product-price">$70</td>
+                                                        <td class="product-quantity"><input type="number" placeholder="0"></td>
+                                                        <td class="product-total">1</td>
                                                         </tr>
                                                         <tr class="table-body-row">
-                                                            <td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a></td>
-                                                            <td class="product-image"><img src="" alt=""></td>
-                                                            <td class="product-name">Lemon</td>
-                                                            <td class="product-price">$35</td>
-                                                            <td class="product-quantity"><input type="number" placeholder="0"></td>
-                                                            <td class="product-total">1</td>
+                                                        <td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a></td>
+                                                        <td class="product-image"><img src="" alt=""></td>
+                                                        <td class="product-name">Lemon</td>
+                                                        <td class="product-price">$35</td>
+                                                        <td class="product-quantity"><input type="number" placeholder="0"></td>
+                                                        <td class="product-total">1</td>
                                                         </tr> *@
-                                                    </tbody>
-                                                </table>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
-
                 </div>
-            </div>
 
-            <div class="col-lg-4" style="background-color: #181818; color: var(--bs-gray-500)">
-                <div class="order-details-wrap" style="background-color: #181818;">
-                    <table class="order-details" style="background-color: #181818;">
-                        <thead style="background-color: #181818;">
-                            <tr style="background-color: #181818; color: var(--bs-gray-400)" ">
-                                <th style="background-color: #181818;">Your order Details</th>
-                                <th style="background-color: #181818;">Price</th>
-                            </tr>
-                        </thead>
-                        <tbody class="order-details-body">
-                            <tr>
-                                <td>Product</td>
-                                <td>Total</td>
-                            </tr>
-                            @foreach (var item in @Model)
-                            {
-                                <tr>
-                                    <td>@item.Product_Name (X<span id="qq(@item.Product_Id)">@item.Quantity</span>)</td>
-                                    <td class="proPrices" id="tt(@item.Product_Id)">$@(item.Product_Price * item.Quantity)</td>
+                <div class="col-lg-4" style="background-color:#181818; color:var(--bs-gray-500)">
+                    <div class="order-details-wrap" style="background-color:#181818;">
+                        <table class="order-details" style="background-color:#181818;">
+                            <thead style="background-color:#181818;">
+                                <tr style="background-color:#181818; color:var(--bs-gray-400)">
+                                    <th style="background-color:#181818;">Your order Details</th>
+                                    <th style="background-color:#181818;">Price</th>
                                 </tr>
-                            }
-@*                             <tr>
-                                <td>Strawberry</td>
-                                <td>$85.00</td>
+                            </thead>
+                            <tbody class="order-details-body">
+                                <tr>
+                                    <td>Product</td>
+                                    <td>Total</td>
+                                </tr>
+                                @foreach (var item in @Model)
+                                {
+                                    <tr>
+                                        <td>@item.Product_Name (X<span id="qq(@item.Product_Id)">@item.Quantity</span>)</td>
+                                        <td class="proPrices" id="tt(@item.Product_Id)">$@(item.Product_Price * item.Quantity)</td>
+                                    </tr>
+                                }
+                                @*                             <tr>
+                            <td>Strawberry</td>
+                            <td>$85.00</td>
                             </tr>
                             <tr>
-                                <td>Berry</td>
-                                <td>$70.00</td>
+                            <td>Berry</td>
+                            <td>$70.00</td>
                             </tr>
                             <tr>
-                                <td>Lemon</td>
-                                <td>$35.00</td>
+                            <td>Lemon</td>
+                            <td>$35.00</td>
                             </tr> *@
-                        </tbody>
-                        <tbody class="checkout-details">
-                            <tr>
-                                <td>Subtotal</td>
-                                <td id="Subtotal"></td>
-                            </tr>
-                            <tr>
-                                <td>Shipping</td>
-                                <td>$50</td>
-                            </tr>
-                            <tr>
-                                <td>Total</td>
-                                <td id="Total"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <a href="#" class="boxed-btn">Place Order</a>
+                            </tbody>
+                            <tbody class="checkout-details">
+                                <tr>
+                                    <td>Subtotal</td>
+                                    <td id="Subtotal"></td>
+                                </tr>
+                                <tr>
+                                    <td>Shipping</td>
+                                    <td>$50</td>
+                                </tr>
+                                <tr>
+                                    <td>Total</td>
+                                    <td id="Total"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a onclick="SendData(@Model[0].Order_Id)" class="boxed-btn">Place Order</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- end check out section -->
+    <!-- end check out section -->
+}
+else
+{
+    <div class="container text-center mt-5">
+        <div class="row justify-content-center align-content-center">
+            <div class="col-10">
+                <img src="~/images/remove-from-cart_4665232.png" />
+                <h2 class="text-light">Your Cart Is Empty</h2>
+            </div>
+        </div>
+    </div>
+}
 @section Scripts {
     @* <script src="/js/jquery-1.11.3.min.js"></script> *@
     
@@ -236,6 +264,8 @@
 
     <script src="/js/cartmain.js"></script>
 
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
 
         function CalculateTotal(){
@@ -251,7 +281,7 @@
                 let y = x.join('');
                 // sum += Number(proPrices[i].innerText.split('').splice(0, 1).join(''));
                 sum += Number(y);
-                console.log(y);
+                // console.log(y);
             }
 
             stotal.innerText = "$" + sum;
@@ -277,5 +307,87 @@
 
             CalculateTotal();
         }
+
+        function ShowModal(oid, pid) {
+            console.log("oid = " + oid);
+            console.log("pid = " + pid);
+            let modal = new bootstrap.Modal(document.getElementById('m1'));
+
+            let b1 = document.createElement("a");
+            let b2 = document.createElement("a");
+
+            b1.classList = "btn btn-secondary";
+
+            b2.classList = "btn btn-primary";
+
+            b1.innerText = "No";
+            b2.innerText = "Yes";
+
+            b1.setAttribute("data-bs-dismiss", "modal");
+            b2.setAttribute("href", `/Cart/RemoveFromCart?oid=${oid}&pid=${pid}`);
+
+            let mf = document.getElementById('mf');
+
+            // let mt = document.getElementById('ModalText');
+
+            mf.innerHTML = "";
+
+            mf.append(b1, b2);
+
+            modal.show();
+        }
+
+        function SendData(oid) {
+            let dict = {};
+            let list = @Html.Raw(Json.Serialize(Model));
+
+            // console.log(list);
+
+            for(let i = 0; i < list.length; i++){
+                dict[`${list[i].product_Id}`] = document.getElementById(`q(${list[i].product_Id})`).value;
+                let j = document.getElementById(`s(${list[i].product_Id})`).innerText.split('');
+                let k = j[0];
+
+                dict[`s${list[i].product_Id}`] = k;
+
+                // let a = document.getElementById(`p(${id})`).innerText.split('');
+                // a.shift();
+                // let b = a.join('');
+
+                // dict[`p${list[i].product_Id}`] = b;
+
+
+                // console.log(document.getElementById(`q(${list[i].product_Id})`).value);
+                // console.log(document.getElementById(`s(${list[i].product_Id})`).innerText);
+                // console.log(dict);
+            }
+
+            dict[`OID`] = oid.toString();
+
+            let x = document.getElementById("Total").innerText.split('');
+            x.shift();
+            let y = x.join('');
+
+            dict[`Total`] = y;
+
+            console.log(dict);
+
+            $.ajax({
+                type: "POST",
+                url: '/Cart/Checkout',
+                data: JSON.stringify(dict),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    console.log("Success:", response);
+                    location.reload();
+                },
+                error: function (error) {
+                    console.log("Error:", error);
+                }
+            });
+        }
+
+
     </script>
 }
