@@ -19,7 +19,7 @@ namespace Cafe_Site.Models
         //public decimal UnitPrice { get; set; }
         //[Column(TypeName = "money")]
         //public decimal TotalPrice { get; set; }
-        public char Size { get; set; }
+        //public char Size { get; set; }
 
         public Order order { get; set; }
         public Product product { get; set; }
