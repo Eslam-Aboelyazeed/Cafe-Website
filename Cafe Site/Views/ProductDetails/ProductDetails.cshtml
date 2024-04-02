@@ -6,6 +6,12 @@
 
 
 <link href="~/css/all.css" rel="stylesheet" />
+<style>
+    .add:hover
+    {
+        cursor:pointer;
+    }
+</style>
 <!--header start-->
 <header id="fh5co-header" class="fh5co-cover js-fullheight" role="banner" style="background-image: url('/images/hero_1.jpeg'); height: 702px; background-position: 0px 0px;" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
@@ -22,28 +28,42 @@
     </div>
 </header>
 <!--header end-->
-
-
+<!--  alert start -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Alert</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-black">
+                The product is added to cart
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-bs-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  alert end -->
 <div class="product-details row p-3 d-flex flex-row ">
     <!--product img start-->
     <div class="prodimg col-md-6">
         <div class="row w-100 d-flex flex-row justify-content-center">
             <div class="col">
-                <img class="prodImg img-responsive w-100 mb-5" src="data:image/png;base64,@Convert.ToBase64String(Model.Product.Product_Image ?? new byte[0])" alt="...">
+                <img class="prodImg img-responsive w-100 mb-5 p-5" src="data:image/png;base64,@Convert.ToBase64String(Model.Product.Product_Image ?? new byte[0])" alt="...">
 
             </div>
         </div>
     </div>
     <!--product img end-->
 
-        <div class="col-md-6 d-flex flex-column align-items-center align-items-md-start ">
-            <form asp-controller="ProductDetails" asp-action="addProductToCart" asp >
-          
+        <div class="col-md-6 d-flex flex-column align-items-center align-items-md-start ">  
                 <h1 class="name text-white-50" >@Model.Product.Product_Name</h1>
 
                 <h4 class="price font-monospace"
                     style="color: #BE9C79;">
-                    234.5$
+                        @Model.productSizePrices[Model.productSizePrices.Count-1].Price LE
                 </h4>
                 <!--size start-->
                 <p class="size fw-bolder" style=" color: #BE9C79;">
@@ -51,7 +71,7 @@
                         <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                             @for (var i = 0; i < Model.productSizePrices.Count; i++)
                             {
-                                <input type="radio" class="btn-check" name="size" value="@Model.productSizePrices[i].Size" id="btnradio @(i+1)" autocomplete="off" checked>
+                                <input id="sizeInput" type="radio" class="btn-check" name="size" value="@Model.productSizePrices[i].Size" id="btnradio @(i+1)" autocomplete="off" checked>
                                 <label class="sizeLabel btn btn-outline-light" for="btnradio @(i+1)">@Model.productSizePrices[i].Size</label>
                             }
 
@@ -62,7 +82,7 @@
                 <!--addToCard start-->
                 <div class="addToCardBtn row">
                     <div class="col-12">
-                    <button class="addToCard btn p-3 h-100 text-white border-0 rounded-2" type="submit" name="product" value="@Model.Product.Product_Id" style="background-color: #BE9C79;">ADD TO CART</button>
+                        <button  class="addToCard btn p-3 h-100 text-white border-0 rounded-2" data-bs-toggle="modal" data-bs-target="#exampleModal" type="submit" name="product" value="@Model.Product.Product_Id" style="background-color: #BE9C79;">ADD TO CART</button>
                     </div>
                 </div>
             
@@ -86,15 +106,7 @@
                     <div class="Adds tab-pane fade p-2" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
                         <div class="row w-100">
                             <label class="fs-4 mt-3 ">Choose Additions</label>
-                            @* <select class="form-control w-50 selected-add" name="add" >
-                                <option>test</option>
-                                @for (int i = 0; i < Model.AddProducts.Count; i++)
-                                {
-                                    <option class="" value="@Model.AddProducts[i].Product_Id" onclick="addAddition()">
-                                        @Model.AddProducts[i].Product_Name
-                                    </option>
-                                }
-                            </select> *@
+                           
                         </div>
                         <div class="row d-flex flex-row justify-content-around ">
                             <div class="cartproducts col">
@@ -121,12 +133,10 @@
                             </div>
 
                         </div>
-
-
-
                     </div>
                     <!--Additions end-->
-            </form>
+            
+            
                     <!--review start-->
                     <div class="Review tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
                         <div class="row">
@@ -158,7 +168,7 @@
                                 </div>
                                 <label class="d-block fs-4" for="message">Your review*</label>
                                 <textarea class="border-whitform-control-feedback" id="message" name="review" rows="4" cols="50"></textarea>
-                                <input class="btn btn-light d-block text-white p-3 mt-3 fs-5 rounded-1 form-control w-50 " style="background-color: #BE9C79;" type="submit" name="name" value="Send Review" />
+                        <button class="btn btn-light d-block text-white p-3 mt-3 fs-5 rounded-1 form-control w-50 " style="background-color: #BE9C79;" type="submit" name="id" value="@Model.Product.Product_Id">Send Review</button>
                             </form>
                         </div>
                     </div>
@@ -168,7 +178,9 @@
        
     </div>
 @section scripts{
+
     <script>
+
         /** set rating */
         let stars = document.getElementsByClassName("rate")[0].getElementsByTagName("label");
         let rate=0;
@@ -193,23 +205,15 @@
             }
         })
 
-        // /*add addition*/ 
-        // $(".selected-add").on("change", function () {
-
-        //     let id = this.value;
-        //     $(`.cartproducts #${id}`).removeClass("invisible");
-        //     /*Model.selectedAddProducts.Append();*/
-        // });
-
         $(".sizeLabel").on("click", function () {
             var size = $(this).html();
             console.log(this);
             if (size == "M")
-                $(".price").html(@Model.productSizePrices.Where(x => x.Size=='M' && x.Product_Id==Model.Product.Product_Id).Select(p => p.Price).FirstOrDefault());
+                $(".price").html(@Model.productSizePrices.Where(x => x.Size=='M' && x.Product_Id==Model.Product.Product_Id).Select(p => p.Price).FirstOrDefault()+" LE");
             else if(size == "S")
-                $(".price").html(@Model.productSizePrices.Where(x => x.Size == 'S' && x.Product_Id == Model.Product.Product_Id).Select(p => p.Price).FirstOrDefault());
+                $(".price").html(@Model.productSizePrices.Where(x => x.Size == 'S' && x.Product_Id == Model.Product.Product_Id).Select(p => p.Price).FirstOrDefault()+" LE");
             else
-                $(".price").html(@Model.productSizePrices.Where(x => x.Size == 'L' && x.Product_Id == Model.Product.Product_Id).Select(p => p.Price).FirstOrDefault());
+                $(".price").html(@Model.productSizePrices.Where(x => x.Size == 'L' && x.Product_Id == Model.Product.Product_Id).Select(p => p.Price).FirstOrDefault()+" LE");
 
         })
 
@@ -226,6 +230,37 @@
             }
         })
 
-        
+
+        $(".addToCard").on("click", function () {
+            console.log("buttonAddtoCart");
+            var productId = @Model.Product.Product_Id; // Assuming you're passing the product ID to the view model
+            var size = $('#sizeInput:checked').val(); // Assuming the size is selected from a dropdown
+            var productAdds = [];
+            $('.additions:checked').each(function () {
+                productAdds.push($(this).val());
+            });
+
+        $.ajax({
+            url: '@Url.Action("addProductToCart", "ProductDetails")',
+            type: 'POST',
+            data: {
+                product: productId,
+                size: size,
+                productAdds: productAdds
+            },
+            success: function (result) {
+                if (result.success) {
+                    // Handle success, update UI, etc.
+                    alert('Product added to cart successfully!');
+                } else {
+                    alert('Failed to add product to cart.');
+                }
+            },
+            error: function () {
+                alert('Error occurred while adding product to cart.');
+            }
+        });
+    });
     </script>
+    
 }

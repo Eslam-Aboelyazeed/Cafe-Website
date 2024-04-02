@@ -37,7 +37,7 @@ namespace Cafe_Site.Repository
             }
 		}
 
-        public List<T> GetElementsByFilter(Func<T, bool> func, string? include)
+        public List<T>? GetElementsByFilter(Func<T, bool> func, string? include)
         {
             try
             {

@@ -5,7 +5,7 @@
 		public List<T> GetAll(string? include);
 
 		public T GetElement(Func<T, bool> func, string? include);
-		public List<T> GetElementsByFilter(Func<T, bool> func, string? include);
+		public List<T>? GetElementsByFilter(Func<T, bool> func, string? include);
 
 
         public void Insert(T entity);
