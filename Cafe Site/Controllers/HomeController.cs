@@ -23,6 +23,7 @@ namespace Cafe_Site.Controllers
 		{
 			List<ProductInfoViewModel> products = _productService.GetAllProducts();
 
+			products = products.Where(p => p.Product_Quantity > 0).ToList();
 			// Get 4 random products
 			var random = new Random();
 			var randomProducts = products.OrderBy(p => random.Next()).Take(4).ToList();

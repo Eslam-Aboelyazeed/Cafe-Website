@@ -15,48 +15,17 @@ namespace Cafe_Site.Controllers
     public class AdminDashboardController : Controller
 	{
         private readonly IProductService productService;
-        //private readonly RoleManager<IdentityRole> roleManager;
-        //private readonly UserManager<ApplicationUser> userManager;
 
         public AdminDashboardController(IProductService productService)
         {
             this.productService = productService;
-            //this.roleManager = roleManager;
-            //this.userManager = userManager;
         }
 
         public IActionResult Index()
 		{
-            //var user = await userManager.GetUserAsync(User);
-
-            //var test = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            //var test2 = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
-            //var test3 = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
-            //var test4 = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
-
-            //try
-            //{
-            //    var flag = await userManager.GetRolesAsync(user);
-
-            //    if (flag[0] == "Admin")
-            //    {
             var products = productService.GetAllProducts();
 
-                    return View("Index", products);
-            //    }
-            //    else
-            //    {
-            //        //return View("Error", new ErrorViewModel() { RequestId = "Access Denied" });
-            //        return Content("Access Denied");
-            //    }
-            //}
-            //catch (Exception)
-            //{
-            //    //return View("Error", new ErrorViewModel() { RequestId = "Access Denied" });
-            //    return Content("Access Denied");
-            //}
-
-            //var flag = User.IsInRole("Admin");
+            return View("Index", products);
         }
 
         [HttpGet]
@@ -113,36 +82,9 @@ namespace Cafe_Site.Controllers
             return RedirectToAction("Index");
         }
 
-        //[HttpGet]
-        //public IActionResult AddRole()
+        //public IActionResult GetOrderHistory()
         //{
-        //    return View("AddRole");
-        //}
 
-        //[HttpPost]
-        //public async Task<IActionResult> AddRole(RoleViewModel newRoleVM)
-        //{
-        //    if (ModelState.IsValid == true)
-        //    {
-        //        IdentityRole roleModel = new IdentityRole()
-        //        {
-        //            Name = newRoleVM.RoleName
-        //        };
-        //        IdentityResult rust = await roleManager.CreateAsync(roleModel);
-
-        //    }
-        //    return View("AddRole");
-        //}
-
-        //public async Task<IActionResult> AssignRole()
-        //{
-        //    //var user = productService.GetUser(User.Claims.FirstOrDefault().Value);
-
-        //    var user = await userManager.GetUserAsync(User);
-
-        //    IdentityResult resultRole = await userManager.AddToRoleAsync(user, "Admin");
-
-        //    return RedirectToAction("Index");
         //}
     }
 }
