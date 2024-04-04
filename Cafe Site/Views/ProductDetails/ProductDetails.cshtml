@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = "~/Views/Shared/_CustomLayout.cshtml";
+    Layout = "~/Views/Shared/_CustomProductDetailsLayout.cshtml";
 }
 @model ProductDetailsModel
 
@@ -63,7 +63,7 @@
 
                 <h4 class="price font-monospace"
                     style="color: #BE9C79;">
-                        @Model.productSizePrices[Model.productSizePrices.Count-1].Price LE
+                        @Model.productSizePrices[Model.productSizePrices.Count-1].Price.ToString("0.00") $
                 </h4>
                 <!--size start-->
                 <p class="size fw-bolder" style=" color: #BE9C79;">
@@ -82,7 +82,7 @@
                 <!--addToCard start-->
                 <div class="addToCardBtn row">
                     <div class="col-12">
-                        <button  class="addToCard btn p-3 h-100 text-white border-0 rounded-2" data-bs-toggle="modal" data-bs-target="#exampleModal" type="submit" name="product" value="@Model.Product.Product_Id" style="background-color: #BE9C79;">ADD TO CART</button>
+                        <button  class="addToCart btn p-3 h-100 text-white border-0 rounded-2" data-bs-toggle="modal" data-bs-target="#exampleModal" type="submit" name="product" value="@Model.Product.Product_Id" style="background-color: #BE9C79;">ADD TO CART</button>
                     </div>
                 </div>
             
@@ -178,7 +178,7 @@
        
     </div>
 @section scripts{
-
+    <script src="~/js/bootstrap.bundle.js"></script>
     <script>
 
         /** set rating */
@@ -209,11 +209,11 @@
             var size = $(this).html();
             console.log(this);
             if (size == "M")
-                $(".price").html(@Model.productSizePrices.Where(x => x.Size=='M' && x.Product_Id==Model.Product.Product_Id).Select(p => p.Price).FirstOrDefault()+" LE");
+                    $(".price").text(@Model.productSizePrices.Where(x => x.Size == 'M' && x.Product_Id == Model.Product.Product_Id).Select(p => p.Price.ToString("0.00")).FirstOrDefault()+" $");
             else if(size == "S")
-                $(".price").html(@Model.productSizePrices.Where(x => x.Size == 'S' && x.Product_Id == Model.Product.Product_Id).Select(p => p.Price).FirstOrDefault()+" LE");
+                    $(".price").text(@Model.productSizePrices.Where(x => x.Size == 'S' && x.Product_Id == Model.Product.Product_Id).Select(p => p.Price.ToString("0.00")).FirstOrDefault()+" $");
             else
-                $(".price").html(@Model.productSizePrices.Where(x => x.Size == 'L' && x.Product_Id == Model.Product.Product_Id).Select(p => p.Price).FirstOrDefault()+" LE");
+                    $(".price").text(@Model.productSizePrices.Where(x => x.Size == 'L' && x.Product_Id == Model.Product.Product_Id).Select(p => p.Price.ToString("0.00")).FirstOrDefault()+" $");
 
         })
 
@@ -231,7 +231,7 @@
         })
 
 
-        $(".addToCard").on("click", function () {
+        $(".addToCart").on("click", function () {
             console.log("buttonAddtoCart");
             var productId = @Model.Product.Product_Id; // Assuming you're passing the product ID to the view model
             var size = $('#sizeInput:checked').val(); // Assuming the size is selected from a dropdown
@@ -239,6 +239,10 @@
             $('.additions:checked').each(function () {
                 productAdds.push($(this).val());
             });
+
+                console.log(productId)
+                console.log(size)
+                console.log(productAdds)
 
         $.ajax({
             url: '@Url.Action("addProductToCart", "ProductDetails")',

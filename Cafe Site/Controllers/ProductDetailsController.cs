@@ -11,7 +11,7 @@ namespace Cafe_Site.Controllers
         private readonly IProductDetailsService productDetailsServ;
         private readonly IDefaultService defaultService;
         Product product;
-        static int id=0;
+        //int id;
         public ProductDetailsController(IProductDetailsService productDetails, IDefaultService Service)
         {
             productDetailsServ=productDetails;
@@ -19,12 +19,12 @@ namespace Cafe_Site.Controllers
         }
         public IActionResult Index(int Id)
         {
-            id = Id;
-            product = productDetailsServ.Getproduct(id);
+            
+            product = productDetailsServ.Getproduct(Id);
             string type=product.Product_Type;
             List<Product> products = productDetailsServ.GetAddProducts(type);
-            List<Product_Reviews> productReview = productDetailsServ.GetProductReviews(id);
-            List<Product_Size_Price> productSizes = productDetailsServ.GetProductSizes(id);
+            List<Product_Reviews> productReview = productDetailsServ.GetProductReviews(Id);
+            List<Product_Size_Price> productSizes = productDetailsServ.GetProductSizes(Id);
             ProductDetailsModel viewModel = new ProductDetailsModel()
             {   
                 AddProducts=products,

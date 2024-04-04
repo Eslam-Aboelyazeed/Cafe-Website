@@ -1,5 +1,4 @@
-﻿
-using Cafe_Site.Models;
+﻿using Cafe_Site.Models;
 using Cafe_Site.Repository;
 
 namespace Cafe_Site.Services
@@ -79,7 +78,7 @@ namespace Cafe_Site.Services
                 {
                     Product_Id = productID,
                     Order_Id = cartOrder.Order_Id,
-                    Price = sizeRepo.GetElement(p => p.Product_Id == productID && p.Size == size, null).Price,
+                    Price = Math.Round( sizeRepo.GetElement(p => p.Product_Id == productID && p.Size == size, null).Price,2),
                     Quantity = 1,
                     Size = size
                 };
@@ -88,7 +87,10 @@ namespace Cafe_Site.Services
             }
             else
             {
-                orderProduct.Quantity++;
+                if(orderProduct.product.Product_Quantity > orderProduct.Quantity)
+                {
+                    orderProduct.Quantity++;
+                }
             }
             foreach (int add in adds)
             {
@@ -101,7 +103,7 @@ namespace Cafe_Site.Services
                     {
                         Order_Id = orderProduct.Order_Id,
                         Product_Id = addprod.Product_Id,
-                        Price = sizeRepo.GetElement(p=>p.Product_Id==addprod.Product_Id && p.Size=='M',null).Price ,
+                        Price = Math.Round( sizeRepo.GetElement(p=>p.Product_Id==addprod.Product_Id && p.Size=='M',null).Price,2) ,
                         Quantity = 1,
                         Size = 'M'
 
@@ -109,7 +111,10 @@ namespace Cafe_Site.Services
                     orderProdRepo.Insert(addition);
                 }else
                 {
-                    addition.Quantity++;
+                    if(addprod.Product_Quantity > addition.Quantity)
+                    {
+                        addition.Quantity++;
+                    }
                 }
             }
             orderProdRepo.SaveChanges();
