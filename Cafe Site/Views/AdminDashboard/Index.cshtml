@@ -22,7 +22,7 @@
     </div>
 </header>
 
-<p>
+<p class="mt-4">
     <a asp-action="Add">Add Product</a>
 </p>
 <table class="table text-center text-light">
@@ -57,7 +57,7 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+        <tr id="@item.Product_Id">
             <td class="align-middle">
                 @Html.DisplayFor(modelItem => item.Product_Name)
             </td>
@@ -70,13 +70,13 @@
             <td class="align-middle">
                 @Html.DisplayFor(modelItem => item.Product_Description)
             </td>
-            <td class="align-middle" id="s@(item.Product_Id)">
+            <td class="align-middle" id="S@(item.Product_Id)">
                 @Html.DisplayFor(modelItem => item.SPrice)
             </td>
             <td class="align-middle">
                 @Html.DisplayFor(modelItem => item.MPrice)
             </td>
-            <td class="align-middle" id="l@(item.Product_Id)">
+            <td class="align-middle" id="L@(item.Product_Id)">
                 @Html.DisplayFor(modelItem => item.LPrice)
             </td>
             <td class="align-middle">
@@ -86,7 +86,8 @@
             <td class="align-middle">
                 @Html.ActionLink("Update", "Update", new { id = item.Product_Id }) |
                 <button type="button" class="bg-transparent text-danger border-0" onclick="ShowModal(@item.Product_Id)">Delete</button> |
-                <button type="button" class="bg-transparent text-danger border-0" onclick="ShowModalSize(@item.Product_Id)">Delete Size</button>
+                <button type="button" class="bg-transparent text-danger border-0" onclick="ShowModalSize(@item.Product_Id)">Delete Size</button> |
+                    @Html.ActionLink("View Order History", "GetOrdersHistory", new { id = item.Product_Id })
                     @* <a href="" onclick="ShowModal(@item.Product_Id)">Delete</a> *@
                 @* @Html.ActionLink("Delete", "Delete", "AdminDashboard", new { id = item.Product_Id }, new { onclick = $"ShowModal({item.Product_Id})" }) *@
             </td>
@@ -94,6 +95,8 @@
 }
     </tbody>
 </table>
+
+<!--Start Modal Section-->
 
 <div class="modal fade" id="m1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -112,6 +115,28 @@
         </div>
     </div>
 </div>
+<!-- End Modal Section-->
+
+<!-- Start Modal 2 Section-->
+
+<div class="modal fade" id="m2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-dark" id="ModalText2">
+            </div>
+            <div class="modal-footer" id="mf2">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Modal 2 Section-->
 
 @section scripts{
     <script>
@@ -139,7 +164,10 @@
 
             b1.setAttribute("data-bs-dismiss", "modal");
             b1.style.color = "white";
-            b2.setAttribute("href", `/AdminDashboard/Delete/${id}`);
+            b2.style.color = "white";
+            b2.setAttribute("data-bs-dismiss", "modal");
+            b2.onclick = DeleteProduct.bind(this, id);
+            // b2.setAttribute("href", `/AdminDashboard/Delete/${id}`);
 
             let mf = document.getElementById('mf');
 
@@ -160,8 +188,8 @@
 
             let mt = document.getElementById('ModalText');
 
-            let sp = document.getElementById(`s${id}`);
-            let lp = document.getElementById(`l${id}`);
+            let sp = document.getElementById(`S${id}`);
+            let lp = document.getElementById(`L${id}`);
              
             mf.innerHTML = "";
 
@@ -177,12 +205,20 @@
                 let b2 = document.createElement("a");
                 b2.classList = "btn btn-primary";
                 b2.innerText = "Delete Size Small";
-                b2.setAttribute("href", `/AdminDashboard/DeleteSize/${id}?size=S`);
+                b2.onclick = DeleteProductSize.bind(this, id, 'S');
+                b2.setAttribute("data-bs-dismiss", "modal");
+                b2.style.color = "white";
+
+                // b2.setAttribute("href", `/AdminDashboard/DeleteSize/${id}?size=S`);
 
                 let b3 = document.createElement("a");
                 b3.classList = "btn btn-primary";
                 b3.innerText = "Delete Size Large";
-                b3.setAttribute("href", `/AdminDashboard/DeleteSize/${id}?size=L`);
+                b3.onclick = DeleteProductSize.bind(this, id, 'L');
+                b3.setAttribute("data-bs-dismiss", "modal");
+                b3.style.color = "white";
+
+                // b3.setAttribute("href", `/AdminDashboard/DeleteSize/${id}?size=L`);
 
                 // mt.innerText = "Choose The Size You Want to Delete";
 
@@ -192,7 +228,11 @@
                 let b2 = document.createElement("a");
                 b2.classList = "btn btn-primary";
                 b2.innerText = "Delete Size Small";
-                b2.setAttribute("href", `/AdminDashboard/DeleteSize/${id}?size=S`);
+                b2.onclick = DeleteProductSize.bind(this, id, 'S');
+                b2.setAttribute("data-bs-dismiss", "modal");
+                b2.style.color = "white";
+
+                // b2.setAttribute("href", `/AdminDashboard/DeleteSize/${id}?size=S`);
 
                 // mt.innerText = "Choose The Size You Want to Delete";
 
@@ -202,7 +242,11 @@
                 let b3 = document.createElement("a");
                 b3.classList = "btn btn-primary";
                 b3.innerText = "Delete Size Large";
-                b3.setAttribute("href", `/AdminDashboard/DeleteSize/${id}?size=L`);
+                b3.onclick = DeleteProductSize.bind(this, id, 'L');
+                b3.setAttribute("data-bs-dismiss", "modal");
+                b3.style.color = "white";
+
+                // b3.setAttribute("href", `/AdminDashboard/DeleteSize/${id}?size=L`);
 
                 // mt.innerText = "Choose The Size You Want to Delete";
 
@@ -221,5 +265,152 @@
 
             modal.show();
         }
+
+        function DeleteProduct(id){
+            $.ajax({
+                url: `/AdminDashboard/Delete/${id}`,
+                type: "DELETE",
+                dataType: "json",
+                success: function (data) {
+
+                    if(data.success){
+
+                        let modal = new bootstrap.Modal(document.getElementById('m2'));
+
+                        let b1 = document.createElement("a");
+
+                        b1.classList = "btn btn-secondary";
+
+                        b1.innerText = "Ok";
+
+                        b1.setAttribute("data-bs-dismiss", "modal");
+                        b1.style.color = "white";
+
+                        let mf = document.getElementById('mf2');
+
+                        let mt = document.getElementById('ModalText2');
+
+                        let ml = document.getElementById('exampleModalLongTitle');
+
+                        ml.innerText = "Deleted";
+
+                        mt.innerHTML = "<div class='text-center'><img class='h-25 w-25' src='/images/checked.png' alt='' /><p class='text-dark mt-2'>Product Deleted Sucessfully!</p></div>";
+
+                        mf.innerHTML = "";
+
+                        mf.append(b1);
+
+                        modal.show();
+
+                        document.getElementById(`${id}`).remove();
+                    } else {
+                        let modal = new bootstrap.Modal(document.getElementById('m2'));
+
+                        let b1 = document.createElement("a");
+
+                        b1.classList = "btn btn-secondary";
+
+                        b1.innerText = "Ok";
+
+                        b1.setAttribute("data-bs-dismiss", "modal");
+                        b1.style.color = "white";
+
+                        let mf = document.getElementById('mf2');
+
+                        let mt = document.getElementById('ModalText2');
+
+                        let ml = document.getElementById('exampleModalLongTitle');
+
+                        ml.innerText = "Error";
+
+                        mt.innerHTML = "<div class='text-center'><img class='h-25 w-25' src='/images/cancel.png' alt='' /><p class='text-dark mt-2'>Deletion Failed!</p></div>";
+
+                        mf.innerHTML = "";
+
+                        mf.append(b1);
+
+                        modal.show();
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function DeleteProductSize(id, psize) {
+            // console.log(psize);
+
+            $.ajax({
+                url: `/AdminDashboard/DeleteSize/${id}?size=${psize}`,
+                type: "DELETE",
+                dataType: "json",
+                success: function (data) {
+
+                    if(data.success){
+                        let modal = new bootstrap.Modal(document.getElementById('m2'));
+
+                        let b1 = document.createElement("a");
+
+                        b1.classList = "btn btn-secondary";
+
+                        b1.innerText = "Ok";
+
+                        b1.setAttribute("data-bs-dismiss", "modal");
+                        b1.style.color = "white";
+
+                        let mf = document.getElementById('mf2');
+
+                        let mt = document.getElementById('ModalText2');
+
+                        let ml = document.getElementById('exampleModalLongTitle');
+
+                        ml.innerText = "Deleted";
+
+                        mt.innerHTML = "<div class='text-center'><img class='h-25 w-25' src='/images/checked.png' alt='' /><p class='text-dark mt-2'>Product Size Deleted Sucessfully!</p></div>";
+
+                        mf.innerHTML = "";
+
+                        mf.append(b1);
+
+                        modal.show();
+
+                        document.getElementById(`${psize}${id}`).innerText = '-';
+                    }else{
+                        let modal = new bootstrap.Modal(document.getElementById('m2'));
+
+                        let b1 = document.createElement("a");
+
+                        b1.classList = "btn btn-secondary";
+
+                        b1.innerText = "Ok";
+
+                        b1.setAttribute("data-bs-dismiss", "modal");
+                        b1.style.color = "white";
+
+                        let mf = document.getElementById('mf2');
+
+                        let mt = document.getElementById('ModalText2');
+
+                        let ml = document.getElementById('exampleModalLongTitle');
+
+                        ml.innerText = "Error";
+
+                        mt.innerHTML = "<div class='text-center'><img class='h-25 w-25' src='/images/cancel.png' alt='' /><p class='text-dark mt-2'>Deletion Failed!</p></div>";
+
+                        mf.innerHTML = "";
+
+                        mf.append(b1);
+
+                        modal.show();
+
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
     </script>
 }

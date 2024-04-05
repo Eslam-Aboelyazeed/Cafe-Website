@@ -1,0 +1,248 @@
+﻿@model IEnumerable<Cafe_Site.ViewModels.OrderHistoryViewModel>
+
+@{
+    ViewData["Title"] = "GetOrdersHistory";
+    Layout = "~/Views/Shared/_CustomOrderHistoryLayout.cshtml";
+}
+
+@* <header id="fh5co-header" class="fh5co-cover js-fullheight" role="banner" style="background-image: url(/images/hero_1.jpeg);" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="display-t js-fullheight">
+                    <div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
+                        <h1>Admin Dashboard</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header> *@
+
+
+
+@if(Model.ToList().Count != 0 && Model != null)
+{
+
+    <h1 class="text-center text-light mt-5">@Model.ToList()[0].Product_Name Order History</h1>
+
+    <p>
+        <a href="/AdminDashboard/Index" style="color:#ea272d">&lt; Back To Product List</a>
+    </p>
+
+    @* <h1 class="heading" style="text-align:center; margin-top:50px">Product Sales</h1>
+<div class="wrapper">
+    <div class="pie-wrap">
+        <div class="light-yellow entry" style="--p: @Model.ToList()[0].Product_Percentage; background: conic-gradient(from 0drg, transparent var(--p)%, #f9e79f var(--p) @Model.ToList()[0].Product_Percentage); border: 2px solid #f9e79f;transition: var(--p) 1s ease;">
+            <p>@Model.ToList()[0].Product_Percentage%</p>
+            <p class="entry-value">@Model.ToList()[0].Product_Name</p>
+        </div>
+        <div class="light-yellow entry" style="--p: @(100 - Model.ToList()[0].Product_Percentage); background: conic-gradient(from 0drg, transparent var(--p)%, #f9e79f var(--p) @(100 - Model.ToList()[0].Product_Percentage));  border: 2px solid #f9e79f;transition: var(--p) 1s ease;">
+            <p>@(100 - Model.ToList()[0].Product_Percentage)%</p>
+            <p class="entry-value">Total</p>
+        </div>
+    </div>
+    <div class="key-wrap"></div>
+</div> *@
+    <section id="s-team" class="section">
+        <div class="b-skills">
+            <div class="container">
+                <h2>@Model.ToList()[0].Product_Name Sales</h2>
+
+                <div class="row">
+                    <div class="col-sm-6 col-md-3">
+                        <div class="skill-item center-block">
+                            <div class="chart-container">
+                                <div class="chart " data-percent="@Model.ToList()[0].Product_Percentage" data-bar-color="#23afe3">
+                                    <span class="percent" data-after="%">@Model.ToList()[0].Product_Percentage</span>
+                                </div>
+                            </div>
+
+                            <p>Total Sales</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-3">
+                        <div class="skill-item center-block">
+                            <div class="chart-container">
+                                <div class="chart " data-percent="@Model.ToList()[0].Small_Product_Percentage" data-bar-color="#a7d212">
+                                    <span class="percent" data-after="%">@Model.ToList()[0].Small_Product_Percentage</span>
+                                </div>
+                            </div>
+
+                            <p>Small Size Sales</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-3">
+                        <div class="skill-item center-block">
+                            <div class="chart-container">
+                                <div class="chart " data-percent="@Model.ToList()[0].Medium_Product_Percentage" data-bar-color="#ff4241">
+                                    <span class="percent" data-after="%">@Model.ToList()[0].Medium_Product_Percentage</span>
+                                </div>
+                            </div>
+
+                            <p>Medium Size Sales</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-3">
+                        <div class="skill-item center-block">
+                            <div class="chart-container">
+                                <div class="chart " data-percent="@Model.ToList()[0].Large_Product_Percentage" data-bar-color="#edc214">
+                                    <span class="percent" data-after="%">@Model.ToList()[0].Large_Product_Percentage</span>
+                                </div>
+                            </div>
+
+                            <p>Large Size Sales</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <table class="table text-center text-light mt-5">
+        <thead>
+            <tr>
+                <th style="text-align:center">
+                    @Html.DisplayNameFor(model => model.Order_Date)
+                </th>
+                <th style="text-align:center">
+                    @Html.DisplayNameFor(model => model.Size)
+                </th>
+                <th style="text-align:center">
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                <th style="text-align:center">
+                    @Html.DisplayNameFor(model => model.UnitPrice)
+                </th>
+                <th style="text-align:center">
+                    @Html.DisplayNameFor(model => model.TotalPrice)
+                </th>
+                @* <th></th> *@
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="align-middle">
+                        @Html.DisplayFor(modelItem => item.Order_Date)
+                    </td>
+                    <td class="align-middle">
+                        @Html.DisplayFor(modelItem => item.Size)
+                    </td>
+                    <td class="align-middle">
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td class="align-middle">
+                        @* @Html.DisplayFor(modelItem => item.UnitPrice) *@
+                        $@item.UnitPrice
+                    </td>
+                    <td class="align-middle">
+                        @* @Html.DisplayFor(modelItem => item.TotalPrice) *@
+                        $@item.TotalPrice
+                    </td>
+                    @*             <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td> *@
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+@*     <div class="container text-center vh-100">
+        <div class="row justify-content-center align-content-center">
+            <div class="col-10">
+                <img src="~/images/remove-from-cart_4665232.png" />
+                <h2 class="text-light">This Product Hasn't Been Purchased Yet!"</h2>
+            </div>
+        </div>
+    </div> *@
+
+@*     <div class="d-flex justify-content-center align-items-center vh-100">
+        <div class="text-center">
+            <img src="~/images/remove-from-cart_4665232.png" />
+            <h2 class="text-light">This Product Hasn't Been Purchased Yet!"</h2>
+        </div>
+    </div> *@
+
+    <div class="container-fluid d-flex flex-column vh-100">
+        <header>
+            <h1 class="text-center text-light mt-5">Order History</h1>
+
+            <p>
+                <a href="/AdminDashboard/Index" style="color:#ea272d">&lt; Back To Product List</a>
+            </p>
+        </header>
+
+        <main class="my-auto">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center">
+                    <img src="~/images/remove-from-cart_4665232.png" />
+                    <h2 class="text-light">This Product Hasn't Been Purchased Yet!</h2>
+                </div>
+            </div>
+        </main>
+    </div>
+}
+
+
+@section Scripts {
+<script>
+    'use strict';
+
+    var $window = $(window);
+
+    function run() {
+        var fName = arguments[0],
+            aArgs = Array.prototype.slice.call(arguments, 1);
+        try {
+            fName.apply(window, aArgs);
+        } catch (err) {
+
+        }
+    };
+
+    /* chart
+    ================================================== */
+    function _chart() {
+        $('.b-skills').appear(function () {
+            setTimeout(function () {
+                $('.chart').easyPieChart({
+                    easing: 'easeOutElastic',
+                    delay: 3000,
+                    barColor: '#369670',
+                    trackColor: '#fff',
+                    scaleColor: false,
+                    lineWidth: 21,
+                    trackWidth: 21,
+                    size: 250,
+                    lineCap: 'round',
+                    onStep: function (from, to, percent) {
+                        this.el.children[0].innerHTML = Math.round(percent);
+                    }
+                });
+            }, 150);
+        });
+    };
+
+
+    $(document).ready(function () {
+
+        run(_chart);
+
+
+    });
+
+
+
+</script>
+}

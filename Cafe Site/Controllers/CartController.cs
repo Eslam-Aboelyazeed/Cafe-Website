@@ -23,18 +23,21 @@ namespace Cafe_Site.Controllers
 
         public IActionResult RemoveFromCart(int oid, int pid)
         {
-            cartService.DeleteFromCart(oid, pid);
+            var result = cartService.DeleteFromCart(oid, pid);
 
-            return RedirectToAction("Index");
+            //var result = true;
+
+            //return RedirectToAction("Index");
+            return Json(new { success = result });
         }
         [HttpPost]
         public IActionResult Checkout([FromBody] Dictionary<string, string> data)
         {
             //var d = data;
 
-            cartService.Checkout(data);
+            var result = cartService.Checkout(data);
 
-            return Json(new { success = true });
+            return Json(new { success = result });
         }
     }
 }

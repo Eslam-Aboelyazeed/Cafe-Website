@@ -70,21 +70,31 @@ namespace Cafe_Site.Controllers
 
         public IActionResult Delete(int id)
         {
-            productService.DeleteProduct(id);
+            var result = productService.DeleteProduct(id);
 
-            return RedirectToAction("Index");
+            //var result = true;
+
+            //return RedirectToAction("Index");
+
+            return Json(new { success = result });
         }
 
         public IActionResult DeleteSize(int id, char size)
         {
-            productService.DeleteSize(id, size);
+            var result = productService.DeleteSize(id, size);
 
-            return RedirectToAction("Index");
+            //var result = false;
+
+            //return RedirectToAction("Index");
+
+            return Json(new { success = result });
         }
 
-        //public IActionResult GetOrderHistory()
-        //{
+        public IActionResult GetOrdersHistory(int id)
+        {
+            var orders = productService.GetOrderHistory(id);
 
-        //}
+            return View("GetOrdersHistory", orders);
+        }
     }
 }

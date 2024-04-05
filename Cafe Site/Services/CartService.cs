@@ -9,11 +9,13 @@ namespace Cafe_Site.Services
     {
         private readonly ICartRepository repository;
         private readonly IDefaultRepository<Order> orderRepository;
+        private readonly IDefaultRepository<Product> pRepository;
 
-        public CartService(ICartRepository repository, IDefaultRepository<Order> OrderRepository)
+        public CartService(ICartRepository repository, IDefaultRepository<Order> OrderRepository, IDefaultRepository<Product> pRepository)
         {
             this.repository = repository;
             orderRepository = OrderRepository;
+            this.pRepository = pRepository;
         }
         public List<CartViewModel> GetProducts(string uid)
         {
@@ -27,18 +29,28 @@ namespace Cafe_Site.Services
                 Product_Name = p.product.Product_Name,
                 Product_Price = Math.Round(p.Price, 2),
                 Product_Size = (p.Size == 'S') ? "Small" : (p.Size == 'M') ? "Medium" : "Large",
-                Quantity = p.Quantity
+                Quantity = p.Quantity,
+                MaxQuantity = p.product.Product_Quantity
             }).ToList();
         }
 
-        public void DeleteFromCart(int oid, int pid)
+        public bool DeleteFromCart(int oid, int pid)
         {
-            repository.Delete(repository.GetElement(op => op.Order_Id == oid && op.Product_Id == pid, null));
+            try
+            {
+                repository.Delete(repository.GetElement(op => op.Order_Id == oid && op.Product_Id == pid, null));
 
-            repository.SaveChanges();
+                repository.SaveChanges();
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
-        public void Checkout(Dictionary<string, string> data)
+		public bool Checkout(Dictionary<string, string> data)
         {
             foreach (var item in data.Keys)
             {
@@ -49,14 +61,28 @@ namespace Cafe_Site.Services
 
                 if (flag)
                 {
-                    var product = repository.GetElement(
+                    var oproduct = repository.GetElement(
                         op => op.Product_Id == value && op.Order_Id == int.Parse(data["OID"]) && op.Size == char.Parse(data[$"s{item}"]), null);
 
-                    if (product != null)
+                    if (oproduct != null)
                     {
-                        product.Quantity = int.Parse(data[item]);
+                        oproduct.Quantity = int.Parse(data[item]);
 
-                        repository.Update(product);
+                        repository.Update(oproduct);
+
+                        var product = pRepository.GetElement(p => p.Product_Id == value, null);
+                        
+                        if(product != null)
+                        {
+                            if ((product.Product_Quantity - int.Parse(data[item])) < 0)
+                            {
+                                return false;
+                            }
+
+                            product.Product_Quantity -= int.Parse(data[item]);
+
+                            pRepository.Update(product);
+                        }
                     }
                 }
                 //if (item[0]. == Type.)
@@ -78,6 +104,8 @@ namespace Cafe_Site.Services
             orderRepository.Update(order);
 
             repository.SaveChanges();
+
+            return true;
         }
     }
 }

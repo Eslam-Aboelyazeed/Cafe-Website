@@ -15,16 +15,20 @@ namespace Cafe_Site.Services
         private readonly IDefaultRepository<Product> repository;
         private readonly IDefaultRepository<Product_Size_Price> psrepository;
         private readonly IDefaultService defaultService;
+		private readonly ICartRepository crepository;
+        //private readonly IDefaultRepository<Order> orepository;
 
         //private readonly UserManager<ApplicationUser> urepo;
 
         //private readonly IDefaultRepository<aspnet> urepo;
 
-        public ProductService(IDefaultRepository<Product> repository, IDefaultRepository<Product_Size_Price> psrepository, IDefaultService defaultService)
+        public ProductService(IDefaultRepository<Product> repository, IDefaultRepository<Product_Size_Price> psrepository, IDefaultService defaultService, ICartRepository crepository)
         {
             this.repository = repository;
             this.psrepository = psrepository;
             this.defaultService = defaultService;
+			this.crepository = crepository;
+            //this.orepository = orepository;
             //this.urepo = urepo;
         }
 
@@ -50,25 +54,6 @@ namespace Cafe_Site.Services
 
             return products;
         }
-
-        //public byte[] ImageToByteArray(string path)
-        //{
-        //    try
-        //    {
-        //        Image imageIn = Image.FromFile(path);
-
-        //        using (var ms = new MemoryStream())
-        //        {
-        //            imageIn.Save(ms, imageIn.RawFormat);
-        //            return ms.ToArray();
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return new byte[0];
-        //    }
-
-        //}
 
         public void InsertProduct(ProductInfoViewModel productInfo, string uid)
         {
@@ -263,54 +248,153 @@ namespace Cafe_Site.Services
             repository.SaveChanges();
         }
 
-        public void DeleteProduct(int id)
+        public bool DeleteProduct(int id)
         {
-            var product = repository.GetElement(p => p.Product_Id == id, null);
-
-            if (product != null)
+            try
             {
-                repository.Delete(product);
-            }
+                var product = repository.GetElement(p => p.Product_Id == id, null);
 
-            var smallSizedProduct = psrepository.GetElement(ps => ps.Product_Id == id && ps.Size == 'S', null);
+                if (product != null)
+                {
+                    repository.Delete(product);
+                }
 
-            if(smallSizedProduct != null)
-            {
-                psrepository.Delete(smallSizedProduct);
-            }
+                var smallSizedProduct = psrepository.GetElement(ps => ps.Product_Id == id && ps.Size == 'S', null);
 
-            var MediumSizedProduct = psrepository.GetElement(ps => ps.Product_Id == id && ps.Size == 'M', null);
+                if (smallSizedProduct != null)
+                {
+                    psrepository.Delete(smallSizedProduct);
+                }
 
-            if (MediumSizedProduct != null)
-            {
-                psrepository.Delete(MediumSizedProduct);
-            }
+                var MediumSizedProduct = psrepository.GetElement(ps => ps.Product_Id == id && ps.Size == 'M', null);
 
-            var LargeSizedProduct = psrepository.GetElement(ps => ps.Product_Id == id && ps.Size == 'L', null);
+                if (MediumSizedProduct != null)
+                {
+                    psrepository.Delete(MediumSizedProduct);
+                }
 
-            if (LargeSizedProduct != null)
-            {
-                psrepository.Delete(LargeSizedProduct);
-            }
+                var LargeSizedProduct = psrepository.GetElement(ps => ps.Product_Id == id && ps.Size == 'L', null);
 
-            repository.SaveChanges();
-        }
-
-        public void DeleteSize(int id, char size)
-        {
-            var SizedProduct = psrepository.GetElement(ps => ps.Product_Id == id && ps.Size == size, null);
-
-            if (SizedProduct != null)
-            {
-                psrepository.Delete(SizedProduct);
+                if (LargeSizedProduct != null)
+                {
+                    psrepository.Delete(LargeSizedProduct);
+                }
 
                 repository.SaveChanges();
+
+                return true;
             }
+            catch (Exception)
+            {
+                return false;
+            }
+
         }
 
-        //public ApplicationUser GetUser(string userId)
-        //{
-        //    return urepo.Users.FirstOrDefault(u => u.Id == userId);
-        //}
-    }
+        public bool DeleteSize(int id, char size)
+        {
+            try
+            {
+                var SizedProduct = psrepository.GetElement(ps => ps.Product_Id == id && ps.Size == size, null);
+
+                if (SizedProduct != null)
+                {
+                    psrepository.Delete(SizedProduct);
+
+                    repository.SaveChanges();
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+        }
+
+		public List<OrderHistoryViewModel> GetOrderHistory(int pid)
+		{
+            try
+            {
+                var orders = crepository.GetAllByTwoIncludesAndFilter("product", "order", op => op.Product_Id == pid && op.order.Order_Status == 'D').ToList();
+
+                var totalQuantity = crepository.GetElementsByFilter(op => op.order.Order_Status == 'D', null).Select(op => op.Quantity).ToList();
+
+                int totalCount = 0;
+
+                foreach(var i in totalQuantity)
+                {
+                    totalCount += i;
+                }
+
+                var proQuantity = crepository.GetAllByTwoIncludesAndFilter("order", "product", op => op.Product_Id == pid && op.order.Order_Status == 'D').Select(op => op.Quantity).ToList();
+
+                var proCount = 0;
+
+                foreach(var i in proQuantity)
+                {
+                    proCount += i;
+                }
+
+                var proPer = (proCount / totalCount * 100);
+
+                var sproQuantity = crepository.GetAllByTwoIncludesAndFilter("order", "product", op => op.Product_Id == pid && op.order.Order_Status == 'D' && op.Size == 'S').Select(op => op.Quantity).ToList();
+                
+                var sproCount = 0;
+
+                foreach(var i in sproQuantity)
+                {
+                    sproCount += i;
+                }
+
+                var sproPer = sproCount / proCount * 100;
+                
+                var mproQuantity = crepository.GetAllByTwoIncludesAndFilter("order", "product", op => op.Product_Id == pid && op.order.Order_Status == 'D' && op.Size == 'M').Select(op => op.Quantity).ToList();
+                
+                var mproCount = 0;
+
+                foreach(var i in mproQuantity)
+                {
+                    mproCount += i;
+                }
+
+                var mproPer = mproCount / proCount * 100;
+                
+                var lproQuantity = crepository.GetAllByTwoIncludesAndFilter("order", "product", op => op.Product_Id == pid && op.order.Order_Status == 'D' && op.Size == 'L').Select(op => op.Quantity).ToList();
+
+                var lproCount = 0;
+
+                foreach(var i in lproQuantity)
+                {
+                    lproCount += i;
+                }
+
+                var lproPer = lproCount / proCount * 100;
+                
+                return orders.Select(o => new OrderHistoryViewModel
+                {
+                    Product_Name = o.product.Product_Name,
+                    Order_Date = o.order.Order_Date,
+                    Size = (o.Size == 'S') ? "Small" : (o.Size == 'M') ? "Medium" : "Large",
+                    Quantity = o.Quantity,
+                    UnitPrice = o.Price.ToString("0.00"),
+                    TotalPrice = (o.Price * o.Quantity).ToString("0.00"),
+                    Product_Percentage = proPer,
+                    Small_Product_Percentage = sproPer,
+                    Medium_Product_Percentage = mproPer,
+                    Large_Product_Percentage = lproPer
+                }).ToList();
+            }
+            catch (Exception)
+            {
+                return new List<OrderHistoryViewModel>();
+            }
+
+		}
+	}
 }
