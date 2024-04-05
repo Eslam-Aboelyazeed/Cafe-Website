@@ -1,5 +1,4 @@
-﻿
-using Cafe_Site.Models;
+﻿using Cafe_Site.Models;
 using Cafe_Site.Repository;
 
 namespace Cafe_Site.Services
@@ -11,11 +10,13 @@ namespace Cafe_Site.Services
         private readonly IDefaultRepository<Product_Size_Price> sizeRepo;
         private readonly IDefaultRepository<Order> orderRepo;
         private readonly IDefaultRepository<Order_Products> orderProdRepo;
-        public ProductDetailsService(IDefaultRepository<Product> prod, IDefaultRepository<Product_Reviews>reviews, IDefaultRepository<Product_Size_Price> sizes )
-        {
+        public ProductDetailsService(IDefaultRepository<Product> prod, IDefaultRepository<Product_Reviews>reviews, IDefaultRepository<Product_Size_Price> sizes , IDefaultRepository<Order> order, IDefaultRepository<Order_Products> orderProd)
+        {                                                                                                                                                        
             prodRepo=prod;
             reviewRepo=reviews;
             sizeRepo=sizes;
+            orderRepo=order;
+            orderProdRepo=orderProd;
         }
         public List<Product> GetAddProducts(string productType)
         {
@@ -51,7 +52,7 @@ namespace Cafe_Site.Services
 
         public Order? GetOrder(string userID)
         {
-            return orderRepo.GetElementsByFilter(p=> p.userId== userID && p.Order_Status=='C',null).FirstOrDefault();
+            return orderRepo.GetElement(p=> p.userId== userID && p.Order_Status=='C',null);
         }
 
         public void addProductToOrder(int productID, char size, List<int>adds, string userId)
@@ -73,16 +74,23 @@ namespace Cafe_Site.Services
             Order_Products? orderProduct = orderProdRepo.GetElement(p => p.Product_Id == productID && p.Size == size && p.Order_Id==cartOrder.Order_Id, null);
             if (orderProduct == null)
             {
-                Order_Products op = new Order_Products()
+                orderProduct = new Order_Products()
                 {
                     Product_Id = productID,
                     Order_Id = cartOrder.Order_Id,
-                    Price = sizeRepo.GetElement(p => p.Product_Id == productID && p.Size == size, null).Price,
+                    Price = Math.Round( sizeRepo.GetElement(p => p.Product_Id == productID && p.Size == size, null).Price,2),
                     Quantity = 1,
                     Size = size
                 };
-                orderProdRepo.Insert(op);
+                orderProdRepo.Insert(orderProduct);
 
+            }
+            else
+            {
+                if(orderProduct.product.Product_Quantity > orderProduct.Quantity)
+                {
+                    orderProduct.Quantity++;
+                }
             }
             foreach (int add in adds)
             {
@@ -91,16 +99,22 @@ namespace Cafe_Site.Services
 
                 if (addition == null)
                 {
-                    Order_Products Oproduct = new Order_Products()
+                    addition = new Order_Products()
                     {
                         Order_Id = orderProduct.Order_Id,
                         Product_Id = addprod.Product_Id,
-                        Price = addprod.Product_Size_Prices[0].Price,
+                        Price = Math.Round( sizeRepo.GetElement(p=>p.Product_Id==addprod.Product_Id && p.Size=='M',null).Price,2) ,
                         Quantity = 1,
                         Size = 'M'
 
                     };
-                    orderProdRepo.Insert(Oproduct);
+                    orderProdRepo.Insert(addition);
+                }else
+                {
+                    if(addprod.Product_Quantity > addition.Quantity)
+                    {
+                        addition.Quantity++;
+                    }
                 }
             }
             orderProdRepo.SaveChanges();
