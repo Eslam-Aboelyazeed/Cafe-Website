@@ -135,6 +135,14 @@
                         </div>
                     </div>
 
+                    <div class="col-md-12">
+                        <button class="filter-button" data-filter="All" id="All">All</button>
+                        <button class="filter-button" data-filter="Hot Drinks" id="Hot Drinks">Hot Drinks</button>
+                        <button class="filter-button" data-filter="Cold Drinks" id="Cold Drinks">Cold Drinks</button>
+                        <button class="filter-button" data-filter="Deserts" id="Deserts">Deserts</button>
+                        <button class="filter-button" data-filter="Pastry" id="Pastry">Pastry</button>
+                    </div>
+
                     <div id="parView">
                         <partial name="_ProductsPartial" />
                     </div>
@@ -280,19 +288,44 @@
     <script src="js/main.js"></script>
     <script>
         $(document).ready(function () {
+            var f = @Html.Raw(Json.Serialize(Model.Filter));
+            //var totalPages = @Html.Raw(Json.Serialize(Model.TotalPages)));
+
+            document.getElementById(f).classList.add("active");
+
+            $(".filter-button").click(function () {
+                var value = $(this).attr('data-filter');
+
+                // if (value == "All") {
+                //     $('.filter').show('1000');
+                // }
+                // else {
+                //     $(".filter").not('.' + value).hide('3000');
+                //     $('.filter').filter('.' + value).show('3000');
+                // }
+
+                $(".filter-button").removeClass("active");
+                $(this).addClass("active");
+            });
+
             $("#container").on('click', '.pagination-link', function (e) {
                 e.preventDefault(); // Prevent default navigation behavior
                 var page = $(this).data("page");
                 var url = '/menu/getproducts';
+                var filter = $(".filter-button.active").data("filter");
 
                 console.log("Fetching page:", page);
                 console.log("URL:", url);
                 console.log("Data:", { page: page });
 
                 $.ajax({
-                    url: url,
+                    //url: url,
+                    url: `/menu/getproducts?page=${page}&pageSize=4&filter=${filter}`,
                     type: "GET",
-                    data: { page: page },
+                    // data: { 
+                    //     page: page,
+                    //     filter: filter
+                    // },
                     beforeSend: function () {
                         // Show loading spinner or message
                     },
@@ -371,7 +404,7 @@
 
             console.log("currentPage " + currentPage);
             console.log("totalPages " + totalPages);
-
+            
             // Previous button
             if (Number(currentPage) > 1) {
                 var prevLink = $("<li>").append($("<a>").addClass("pagination-link").attr("href", "#").attr("data-page", Number(currentPage) - 1).text("Previous"));
@@ -396,6 +429,7 @@
             // Append pagination links to container
             paginationContainer.append(paginationList);
         }
+
     </script>
 
   </body>
