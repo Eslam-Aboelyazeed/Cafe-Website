@@ -8,43 +8,44 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <style>
+body {
+    background: #181818;
+    color: orange;
+}
+
 .input-wrapper {
   position: relative;
   margin-top:20px;
 }
 
 .inputself {
-        border: 3px solid #751F53;
+  border: 3px solid orange;
   border-radius: 15px;
   position: relative;
   width: 400px;
   margin: 10px;
   line-height: 6ex;
   transition: border-color 1s;
+  margin-bottom: 20px;
   font-size:18px;
 }
 input:hover{
-        border-color: #751F53;
+        border-color: orange;
 }
 
 .labelself {
-  color: #00224D;
-  font-size:17px;
+  color: orange;
+  font-size:18px;
   position: absolute;
   top: 0.2ex;
   z-index: 1;
   left: 2em;
-  background-color: white;
+  background-color: transparent;
   padding: 0 5px;
+  font-weight: bold;
+  margin-top: -15px;
 }
 
-.butn{
-        margin-left: 130px;
-        margin-top: 23px;
-        margin-bottom: 22px;
-        width:100px;
-        height:50px;
-    }
 p{
     margin-top:20px;
 }
@@ -66,12 +67,12 @@ p{
 }
 
     .btn {
-        background: #b53187;
-        background-image: -webkit-linear-gradient(top, #b53187, #d4359f);
-        background-image: -moz-linear-gradient(top, #b53187, #d4359f);
-        background-image: -ms-linear-gradient(top, #b53187, #d4359f);
-        background-image: -o-linear-gradient(top, #b53187, #d4359f);
-        background-image: linear-gradient(to bottom, #b53187, #d4359f);
+        background: orange;
+        background-image: -webkit-linear-gradient(top, orange, orange);
+        background-image: -moz-linear-gradient(top, orange, orange);
+        background-image: -ms-linear-gradient(top, orange, orange);
+        background-image: -o-linear-gradient(top, orange, orange);
+        background-image: linear-gradient(to bottom, orange, orange);
         -webkit-border-radius: 12;
         -moz-border-radius: 12;
         border-radius: 12px;
@@ -79,21 +80,28 @@ p{
         color: #ffffff;
         font-size: 20px;
         text-decoration: none;
-
         cursor: pointer;
         margin: auto;
         display: block;
         padding: 7px;
         width: 56%;
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border: 3px solid orange;
+        border-radius: 15px;
+        transition: all .3s;
+        font-size: 18px;
+        padding: 6px;
     }
 
         .btn:hover {
-            background: #c963a7;
-            background-image: -webkit-linear-gradient(top, #c963a7, #d66db3);
-            background-image: -moz-linear-gradient(top, #c963a7, #d66db3);
-            background-image: -ms-linear-gradient(top, #c963a7, #d66db3);
-            background-image: -o-linear-gradient(top, #c963a7, #d66db3);
-            background-image: linear-gradient(to bottom, #c963a7, #d66db3);
+            background: orange;
+            background-image: -webkit-linear-gradient(top, #fff, #fff);
+            background-image: -moz-linear-gradient(top, #fff, #fff);
+            background-image: -ms-linear-gradient(top, #fff, #fff);
+            background-image: -o-linear-gradient(top, #fff, #fff);
+            background-image: linear-gradient(to bottom, #fff, #fff);
             text-decoration: none;
         }
 
@@ -132,7 +140,7 @@ p{
                             <label asp-for="Input.Email" class="labelself"></label>
                             <input asp-for="Input.Email" class="inputself" />
                         </div>
-                        <span asp-validation-for="Input.Email" class="text-danger d-flex"></span>
+                        <span asp-validation-for="Input.Email" class="text-danger d-flex" style="margin-bottom:30px;"></span>
 
                         <div>
                             <label asp-for="Input.Password" class="labelself"></label>
@@ -141,7 +149,7 @@ p{
                                 <i id="eyeIcon" class="fa-solid fa-eye-slash invisible" style="font-size: large;color: #878787;"></i>
                             </a>
                         </div>
-                        <span asp-validation-for="Input.Password" class="text-danger d-flex"></span>
+                        <span asp-validation-for="Input.Password" class="text-danger d-flex" style="margin-bottom:30px;"></span>
 
                         <div class="linksContainer">
                             <div class="form-group">
@@ -186,7 +194,7 @@ p{
     </div>
     <div class="col-md-6 col-md-offset-2">
         <section class="mx-5">
-            <img src="/images/Login.gif" />
+            <img src="/images/Login-amico-removebg.png" style="width: 500px;" />
         </section>
        
     </div>
