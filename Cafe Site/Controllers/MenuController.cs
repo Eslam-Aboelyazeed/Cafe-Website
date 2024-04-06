@@ -38,11 +38,20 @@ namespace Cafe_Site.Controllers
             return View(viewModel);
         }
 
-        public IActionResult GetProducts(int page = 1, int pageSize = 4)
+        public IActionResult GetProducts(int page = 1, int pageSize = 4, string filter = "All")
         {
-            List<ProductInfoViewModel> menuItems = _productService.GetAllProducts();
+            List<ProductInfoViewModel> menuItems;
 
-            var count = menuItems.Count;
+			if (filter == "All")
+            {
+				menuItems = _productService.GetAllProducts();
+			}
+            else
+            {
+				menuItems = _productService.GetProductsByFilter(filter);
+			}
+
+			var count = menuItems.Count;
             var items = menuItems.Skip((page - 1) * pageSize).Take(pageSize).ToList();
 
             var viewModel = new MenuViewModel

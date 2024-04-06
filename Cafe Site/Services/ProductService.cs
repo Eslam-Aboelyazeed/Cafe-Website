@@ -55,6 +55,28 @@ namespace Cafe_Site.Services
             return products;
         }
 
+        public List<ProductInfoViewModel> GetProductsByFilter(string filter)
+        {
+			byte[] defaultByteArray = new byte[0];
+
+			var products = repository.GetElementsByFilter(p => p.Product_Type == filter, "Product_Size_Prices")?.Select(p => new ProductInfoViewModel()
+			{
+				Product_Id = p.Product_Id,
+				Product_Name = p.Product_Name,
+				Product_Type = p.Product_Type,
+				Product_Quantity = p.Product_Quantity,
+				Product_Description = p.Product_Description,
+				SPrice = (p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'S') != null) ? p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'S').Price.ToString("0.00") : "-",
+				MPrice = (p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'M') != null) ? p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'M').Price.ToString("0.00") : "-",
+				LPrice = (p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'L') != null) ? p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'L').Price.ToString("0.00") : "-",
+				Product_Image = Convert.ToBase64String(p.Product_Image ?? defaultByteArray),
+				//Product_Image = p.Product_Image,
+				userId = p.userId
+			}).ToList();
+
+			return products;
+		}
+
         public void InsertProduct(ProductInfoViewModel productInfo, string uid)
         {
             var ProductImage = defaultService.ImageToByteArray(productInfo.Product_Image);

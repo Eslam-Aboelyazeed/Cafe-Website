@@ -8,7 +8,8 @@ namespace Cafe_Site.Services
     public interface IProductService
     {
         public List<ProductInfoViewModel> GetAllProducts();
-        public ProductInfoViewModel GetProduct(int id);
+        public List<ProductInfoViewModel> GetProductsByFilter(string filter);
+		public ProductInfoViewModel GetProduct(int id);
         public void InsertProduct(ProductInfoViewModel productInfo, string uid);
         public void UpdateProduct(ProductInfoViewModel productInfo);
         public bool DeleteProduct(int id);
