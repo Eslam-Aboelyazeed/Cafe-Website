@@ -40,7 +40,7 @@
         }
 
             .pagination-container ul.pagination li a,
-            .pagination-container ul.pagination li span {
+            .pagination-container ul.pagination li span, .filter-button {
                 color: #ffffff; /* Text color */
                 background-color: #f0ad4e; /* Yellow background color */
                 border: 1px solid #eea236; /* Darker yellow border */
@@ -49,19 +49,19 @@
                 border-radius: 4px; /* Rounded corners */
             }
 
-            .pagination-container ul.pagination li.active span {
+            .pagination-container ul.pagination li.active span, .filter-button.active, .filter-button[disabled]:hover {
                 background-color: gray; /* Gray background for active page */
                 border-color: #555555; /* Darker border for active page */
             }
 
             .pagination-container ul.pagination li.disabled span,
-            .pagination-container ul.pagination li.disabled a {
+            .pagination-container ul.pagination li.disabled a{
                 color: #aaaaaa; /* Disabled text color */
                 background-color: #ffffff; /* Disabled background color */
                 border-color: #dddddd; /* Disabled border color */
             }
 
-            .pagination-container ul.pagination li a:hover {
+            .pagination-container ul.pagination li a:hover, .filter-button:hover {
                 background-color: #e0a21d; /* Darker yellow on hover */
             }
     </style>
@@ -135,7 +135,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12">
+                    <div class="col-md-12" style="padding-bottom:20px">
                         <button class="filter-button" data-filter="All" id="All">All</button>
                         <button class="filter-button" data-filter="Hot Drinks" id="Hot Drinks">Hot Drinks</button>
                         <button class="filter-button" data-filter="Cold Drinks" id="Cold Drinks">Cold Drinks</button>
@@ -289,11 +289,13 @@
     <script>
         $(document).ready(function () {
             var f = @Html.Raw(Json.Serialize(Model.Filter));
-            //var totalPages = @Html.Raw(Json.Serialize(Model.TotalPages)));
+            //var totalPages = Html.Raw(Json.Serialize(Model.TotalPages)));
 
             document.getElementById(f).classList.add("active");
+            // document.getElementById(f).setAttribute("disabled", "true");
+            $(`#${f}`).prop('disabled', true);
 
-            $(".filter-button").click(function () {
+            $(".filter-button").on('click',function (e) {
                 var value = $(this).attr('data-filter');
 
                 // if (value == "All") {
@@ -305,94 +307,104 @@
                 // }
 
                 $(".filter-button").removeClass("active");
+                $(".filter-button").prop('disabled', false);
                 $(this).addClass("active");
+                $(this).prop('disabled', true);
+
+                // $(this).addClass("disabled");
+                e.preventDefault(); 
+                MakeAjaxCall();
             });
 
             $("#container").on('click', '.pagination-link', function (e) {
                 e.preventDefault(); // Prevent default navigation behavior
-                var page = $(this).data("page");
-                var url = '/menu/getproducts';
-                var filter = $(".filter-button.active").data("filter");
-
-                console.log("Fetching page:", page);
-                console.log("URL:", url);
-                console.log("Data:", { page: page });
-
-                $.ajax({
-                    //url: url,
-                    url: `/menu/getproducts?page=${page}&pageSize=4&filter=${filter}`,
-                    type: "GET",
-                    // data: { 
-                    //     page: page,
-                    //     filter: filter
-                    // },
-                    beforeSend: function () {
-                        // Show loading spinner or message
-                    },
-                    success: function (result) {
-                        console.log("AJAX Response:", result);
-
-                        var newContent = result;
-
-                        // Check if newContent is defined
-                        if (newContent) {
-                            // Update image URLs to force reload
-                            var timestamp = new Date().getTime();
-
-                            $("#parView").html(newContent);
-                            var i = 0;
-
-                            $(".problem").waypoint(function (direction) {
-
-                                if (direction === 'down' && !$(this.element).hasClass('animated-fast')) {
-
-                                    i++;
-
-                                    $(this.element).addClass('item-animate');
-                                    setTimeout(function () {
-
-                                        $('body .animate-box.item-animate').each(function (k) {
-                                            var el = $(this);
-                                            setTimeout(function () {
-                                                var effect = el.data('animate-effect');
-                                                if (effect === 'fadeIn') {
-                                                    el.addClass('fadeIn animated-fast');
-                                                } else if (effect === 'fadeInLeft') {
-                                                    el.addClass('fadeInLeft animated-fast');
-                                                } else if (effect === 'fadeInRight') {
-                                                    el.addClass('fadeInRight animated-fast');
-                                                } else {
-                                                    el.addClass('fadeInUp animated-fast');
-                                                }
-
-                                                el.removeClass('item-animate');
-                                            }, k * 200, 'easeInOutExpo');
-                                        });
-
-                                    }, 100);
-
-                                }
-
-                            }, { offset: '85%' });
-
-                            var newPage = document.getElementById("products-section").getAttribute("data-current-page");
-                            var totalPages = document.getElementById("products-section").getAttribute("data-total-pages");
-
-                            // Update pagination links
-                            updatePaginationLinks(newPage, totalPages);
-                        } else {
-                            console.log("Error: New content is undefined");
-                        }
-                    },
-
-
-                    error: function (error) {
-                        console.log("Error:", error);
-                        console.log("Error Response:", error.responseText);
-                    }
-                });
+                MakeAjaxCall(this);
             });
         });
+
+        function MakeAjaxCall(p){
+            var page = $(p).data("page");
+            var url = '/menu/getproducts';
+            var filter = $(".filter-button.active").data("filter");
+
+            console.log("Fetching page:", page);
+            console.log("URL:", url);
+            console.log("Data:", { page: page });
+
+            $.ajax({
+                //url: url,
+                url: `/menu/getproducts?page=${page}&pageSize=4&filter=${filter}`,
+                type: "GET",
+                // data: {
+                //     page: page,
+                //     filter: filter
+                // },
+                beforeSend: function () {
+                    // Show loading spinner or message
+                },
+                success: function (result) {
+                    console.log("AJAX Response:", result);
+
+                    var newContent = result;
+
+                    // Check if newContent is defined
+                    if (newContent) {
+                        // Update image URLs to force reload
+                        var timestamp = new Date().getTime();
+
+                        $("#parView").html(newContent);
+                        var i = 0;
+
+                        $(".problem").waypoint(function (direction) {
+
+                            if (direction === 'down' && !$(this.element).hasClass('animated-fast')) {
+
+                                i++;
+
+                                $(this.element).addClass('item-animate');
+                                setTimeout(function () {
+
+                                    $('body .animate-box.item-animate').each(function (k) {
+                                        var el = $(this);
+                                        setTimeout(function () {
+                                            var effect = el.data('animate-effect');
+                                            if (effect === 'fadeIn') {
+                                                el.addClass('fadeIn animated-fast');
+                                            } else if (effect === 'fadeInLeft') {
+                                                el.addClass('fadeInLeft animated-fast');
+                                            } else if (effect === 'fadeInRight') {
+                                                el.addClass('fadeInRight animated-fast');
+                                            } else {
+                                                el.addClass('fadeInUp animated-fast');
+                                            }
+
+                                            el.removeClass('item-animate');
+                                        }, k * 200, 'easeInOutExpo');
+                                    });
+
+                                }, 100);
+
+                            }
+
+                        }, { offset: '85%' });
+
+                        var newPage = document.getElementById("products-section").getAttribute("data-current-page");
+                        var totalPages = document.getElementById("products-section").getAttribute("data-total-pages");
+
+                        // Update pagination links
+                        updatePaginationLinks(newPage, totalPages);
+                    } else {
+                        console.log("Error: New content is undefined");
+                    }
+                },
+
+
+                error: function (error) {
+                    console.log("Error:", error);
+                    console.log("Error Response:", error.responseText);
+                }
+            });
+        }
 
         function updatePaginationLinks(currentPage, totalPages) {
             // Clear existing pagination links
