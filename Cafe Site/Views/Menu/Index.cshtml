@@ -289,7 +289,7 @@
     <script>
         $(document).ready(function () {
             var f = @Html.Raw(Json.Serialize(Model.Filter));
-            //var totalPages = @Html.Raw(Json.Serialize(Model.TotalPages)));
+            //var totalPages = Html.Raw(Json.Serialize(Model.TotalPages)));
 
             document.getElementById(f).classList.add("active");
 
