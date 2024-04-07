@@ -11,6 +11,7 @@
     {
         cursor:pointer;
     }
+    
 </style>
 <!--header start-->
 <header id="fh5co-header" class="fh5co-cover js-fullheight" role="banner" style="background-image: url('/images/hero_1.jpeg'); height: 702px; background-position: 0px 0px;" data-stellar-background-ratio="0.5">
@@ -40,7 +41,7 @@
                
             </div>
             <div class="modal-footer">
-                <button type="button" class="border-0 px-4 rounded-1" style="background-color:#106EBE; color:antiquewhite" data-bs-dismiss="modal">OK</button>
+                <button type="button" class=" modalBtn border-0 px-4 rounded-1" style="background-color:#106EBE; color:antiquewhite" data-bs-dismiss="modal">OK</button>
             </div>
         </div>
     </div>
@@ -185,6 +186,8 @@
     </div>
 @section scripting{
     <script>
+        
+
 
         /** set rating */
         let stars = document.getElementsByClassName("rate")[0].getElementsByTagName("label");
@@ -294,9 +297,19 @@
 
                                 $(".reviewError").removeClass("invisible");
                             }
+                        else if (result.success == "Your review is added successfully!")
+                            {
+                                $("#exampleModal").modal("show");
+                                $(".modal-body").html(result.success);
+                                $(".modalBtn").on("click", function () {
+                                    location.reload();
+                                })
+
+                            }
                             else {
                                 $("#exampleModal").modal("show");
                                 $(".modal-body").html(result.success);
+                                
 
                             }
                            
