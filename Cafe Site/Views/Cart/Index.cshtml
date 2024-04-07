@@ -33,7 +33,7 @@
                                     <div class="card-header" id="headingOne" style="background-color:#181818; border:none">
                                         <h5 class="mb-0" style="border:none">
                                             <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-                                                    aria-expanded="true" aria-controls="collapseOne" style="background-color:#181818; color:var(--bs-gray-400)">
+                                                    aria-expanded="true" aria-controls="collapseOne" style="background-color:#181818; color:#ddd;">
                                                 Billing Address
                                             </button>
                                         </h5>
@@ -60,7 +60,7 @@
                                     <div class="card-header" id="headingTwo" style="background-color:#181818; border:none">
                                         <h5 class="mb-0" style="border:none">
                                             <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                                    data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="background-color:#181818; color:var(--bs-gray-400)">
+                                                    data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="background-color:#181818; color:#ddd;">
                                                 Shipping Address
                                             </button>
                                         </h5>
@@ -77,7 +77,7 @@
                                     <div class="card-header" id="headingThree" style="background-color:#181818; border:none">
                                         <h5 class="mb-0" style="border:none">
                                             <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                                    data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="background-color:#181818; color:var(--bs-gray-400)">
+                                                    data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="background-color:#181818; color:#ddd;">
                                                 Card Details
                                             </button>
                                         </h5>
@@ -111,7 +111,7 @@
                                                                         <td class="product-name">@item.Product_Name</td>
                                                                         <td class="product-price" id="p(@item.Product_Id)">$@item.Product_Price</td>
                                                                         <td class="product-size" id="s(@item.Product_Id)">@item.Product_Size</td>
-                                                                        <td class="product-quantity"><input type="number" id="q(@item.Product_Id)" placeholder="1" value="@item.Quantity" min="1" max="@item.MaxQuantity" onchange="ModifyQuantity(@item.Product_Id)"></td>
+                                                                    <td class="product-quantity" style="text-align: center;"><input style="text-align: center; font-weight:bold; background: #181818; color: #ddd;" type="number" id="q(@item.Product_Id)" placeholder="1" value="@item.Quantity" min="1" max="@item.MaxQuantity" onchange="ModifyQuantity(@item.Product_Id)"></td>
                                                                         <td class="product-total" id="t(@item.Product_Id)">$@(item.Product_Price * item.Quantity)</td>
                                                                     </tr>
                                                                     @*                                                                     </div>
@@ -167,7 +167,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <a onclick="SendData(@Model[0].Order_Id)" class="boxed-btn">Place Order</a>
+                            <a onclick="SendData(@Model[0].Order_Id)" class="boxed-btn" style="color: #ddd;">Place Order</a>
                         </div>
                     </div>
                 </div>
