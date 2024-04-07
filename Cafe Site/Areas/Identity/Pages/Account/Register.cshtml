@@ -7,8 +7,13 @@
 
 <style>
 
+body {
+    background: #181818;
+    color: orange;
+}
+
 .inputself {
-   border: 3px solid #751F53;
+   border: 3px solid orange;
    border-radius: 15px;
    position: relative;
    width: 100%;
@@ -20,18 +25,20 @@
 }
    
 input:hover {
-   border-color: #751F53;
+   border-color: orange;
 }
 
 .labelself {
-   color: #00224D;
-   font-size: 17px;
+   color: orange;
+   font-size: 18px;
    position: absolute;
    top: 0.2ex;
    z-index: 1;
    left: 2em;
-   background-color: white;
+   background-color: transparent;
    padding: 0 5px;
+   font-weight: bold;
+   margin-top: -15px;
 }
 
 .input-wrapper {
@@ -40,12 +47,12 @@ input:hover {
 }
 
 .btn {
-  background: #b53187;
-  background-image: -webkit-linear-gradient(top, #b53187, #d4359f);
-  background-image: -moz-linear-gradient(top, #b53187, #d4359f);
-  background-image: -ms-linear-gradient(top, #b53187, #d4359f);
-  background-image: -o-linear-gradient(top, #b53187, #d4359f);
-  background-image: linear-gradient(to bottom, #b53187, #d4359f);
+  background: orange;
+  background-image: -webkit-linear-gradient(top, orange, orange);
+  background-image: -moz-linear-gradient(top, orange, orange);
+  background-image: -ms-linear-gradient(top, orange, orange);
+  background-image: -o-linear-gradient(top, orange, orange);
+  background-image: linear-gradient(to bottom, orange, orange);
   -webkit-border-radius: 12;
   -moz-border-radius: 12;
   border-radius: 12px;
@@ -58,16 +65,26 @@ input:hover {
   display: block;
   padding: 7px;
   width: 56%;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 3px solid orange;
+  border-radius: 15px;
+  transition: all .3s;
+  font-size: 18px;
+  padding: 6px;
+
 }
 
 .btn:hover {
-  background: #c963a7;
-  background-image: -webkit-linear-gradient(top, #c963a7, #d66db3);
-  background-image: -moz-linear-gradient(top, #c963a7, #d66db3);
-  background-image: -ms-linear-gradient(top, #c963a7, #d66db3);
-  background-image: -o-linear-gradient(top, #c963a7, #d66db3);
-  background-image: linear-gradient(to bottom, #c963a7, #d66db3);
+  background: orange;
+  background-image: -webkit-linear-gradient(top, #fff, #fff);
+  background-image: -moz-linear-gradient(top, #fff, #fff);
+  background-image: -ms-linear-gradient(top, #fff, #fff);
+  background-image: -o-linear-gradient(top, #fff, #fff);
+  background-image: linear-gradient(to bottom, #fff, #fff);
   text-decoration: none;
+
 }
 
     .passinput {
@@ -94,7 +111,7 @@ input:hover {
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post" style="width: fit-content;">
             <div class="passinput">
                 <h2 class="loginHeader">Register</h2>
-            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="text-danger"></div>
 
             <div class="inputsContainer" style="width: 100%;display: flex;justify-content: space-between;">
                 <div class="input-wrapper" style="width: 47%;margin-right: 6px;">
@@ -141,7 +158,7 @@ input:hover {
         </form>
     </div>
     <div class="col-md-6 col-md-offset-2">
-        <img src="/images/Register.gif"/>
+        <img src="/images/Placeholder-rafiki-removebg-preview.png" style="margin-top: 50px;" />
     </div>
 </div>
 

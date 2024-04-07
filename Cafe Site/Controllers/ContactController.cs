@@ -44,6 +44,8 @@ namespace Cafe_Site.Controllers
 					db.SaveChanges();
 
 					ViewBag.Message = "Message sent successfully!";
+
+	  				//modelstate.clear();
 				}
 				catch (Exception ex)
 				{

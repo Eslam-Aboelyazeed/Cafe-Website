@@ -59,16 +59,18 @@
 <div id="products-section" data-current-page="@Model.CurrentPage" data-total-pages="@Model.TotalPages">
     @foreach (var product in Model.Products)
     {
+@*         if(!product.Product_Type.StartsWith("Add-"))
+        { *@
         <div class="col-md-3 col-sm-6 col-xs-6 col-xxs-12 fh5co-item-wrap">
             <div class="fh5co-item-group animate-box problem">
                 <div class="fh5co-item">
                     @try
                     {
                         <div style="position: relative;">
-                            <img src="data:image/png;base64,@product.Product_Image" class="img-responsive" alt="@product.Product_Name" style="width: 100%; @(product.Product_Quantity == 0 ? "filter: grayscale(100%);" : "")">
+                            <img src="data:image/png;base64,@product.Product_Image" class="img-responsive" alt="@product.Product_Name" style="width: 100%; @(product.Product_Quantity == 0 ? "filter: grayscale(100%) blur(2.5px);" : "")">
                             @if (product.Product_Quantity == 0)
                             {
-                                <img src="~/images/out-of-stock2.png" alt="Out of Stock" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; width: 50%; height: auto; margin: auto;">
+                                <img src="~/images/vecteezy_sold-out-stamp_7545723-removebg-preview.png" alt="Out of Stock" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; width: 50%; height: auto; margin: auto;">
                             }
                         </div>
                         @if (product.Product_Quantity > 0)
@@ -150,6 +152,8 @@
                     }
                 </div>
             </div>
-        </div>
+            </div>
+@*         }
+        continue; *@
     }
 </div>

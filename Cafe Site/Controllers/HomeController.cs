@@ -21,7 +21,7 @@ namespace Cafe_Site.Controllers
 
 		public IActionResult Index()
 		{
-			List<ProductInfoViewModel> products = _productService.GetAllProducts();
+			List<ProductInfoViewModel> products = _productService.GetProductsWithoutAddtions();
 
 			products = products.Where(p => p.Product_Quantity > 0).ToList();
 			// Get 4 random products

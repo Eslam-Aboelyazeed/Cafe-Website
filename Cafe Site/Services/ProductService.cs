@@ -15,16 +15,20 @@ namespace Cafe_Site.Services
         private readonly IDefaultRepository<Product> repository;
         private readonly IDefaultRepository<Product_Size_Price> psrepository;
         private readonly IDefaultService defaultService;
+		private readonly ICartRepository crepository;
+        //private readonly IDefaultRepository<Order> orepository;
 
         //private readonly UserManager<ApplicationUser> urepo;
 
         //private readonly IDefaultRepository<aspnet> urepo;
 
-        public ProductService(IDefaultRepository<Product> repository, IDefaultRepository<Product_Size_Price> psrepository, IDefaultService defaultService)
+        public ProductService(IDefaultRepository<Product> repository, IDefaultRepository<Product_Size_Price> psrepository, IDefaultService defaultService, ICartRepository crepository)
         {
             this.repository = repository;
             this.psrepository = psrepository;
             this.defaultService = defaultService;
+			this.crepository = crepository;
+            //this.orepository = orepository;
             //this.urepo = urepo;
         }
 
@@ -51,26 +55,51 @@ namespace Cafe_Site.Services
             return products;
         }
 
-        //public byte[] ImageToByteArray(string path)
-        //{
-        //    try
-        //    {
-        //        Image imageIn = Image.FromFile(path);
+        public List<ProductInfoViewModel> GetProductsWithoutAddtions()
+        {
+			byte[] defaultByteArray = new byte[0];
 
-        //        using (var ms = new MemoryStream())
-        //        {
-        //            imageIn.Save(ms, imageIn.RawFormat);
-        //            return ms.ToArray();
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return new byte[0];
-        //    }
+			var products = repository.GetElementsByFilter(p => !p.Product_Type.StartsWith("Add-"), "Product_Size_Prices")?.Select(p => new ProductInfoViewModel()
+			{
+				Product_Id = p.Product_Id,
+				Product_Name = p.Product_Name,
+				Product_Type = p.Product_Type,
+				Product_Quantity = p.Product_Quantity,
+				Product_Description = p.Product_Description,
+				SPrice = (p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'S') != null) ? p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'S').Price.ToString("0.00") : "-",
+				MPrice = (p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'M') != null) ? p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'M').Price.ToString("0.00") : "-",
+				LPrice = (p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'L') != null) ? p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'L').Price.ToString("0.00") : "-",
+				Product_Image = Convert.ToBase64String(p.Product_Image ?? defaultByteArray),
+				//Product_Image = p.Product_Image,
+				userId = p.userId
+			}).ToList();
 
-        //}
+			return products;
+		}
 
-        public void InsertProduct(ProductInfoViewModel productInfo, string uid)
+		public List<ProductInfoViewModel> GetProductsWithFilterWithoutAddtions(string filter)
+		{
+			byte[] defaultByteArray = new byte[0];
+
+			var products = repository.GetElementsByFilter(p => p.Product_Type == filter && !p.Product_Type.StartsWith("Add-"), "Product_Size_Prices")?.Select(p => new ProductInfoViewModel()
+			{
+				Product_Id = p.Product_Id,
+				Product_Name = p.Product_Name,
+				Product_Type = p.Product_Type,
+				Product_Quantity = p.Product_Quantity,
+				Product_Description = p.Product_Description,
+				SPrice = (p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'S') != null) ? p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'S').Price.ToString("0.00") : "-",
+				MPrice = (p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'M') != null) ? p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'M').Price.ToString("0.00") : "-",
+				LPrice = (p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'L') != null) ? p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'L').Price.ToString("0.00") : "-",
+				Product_Image = Convert.ToBase64String(p.Product_Image ?? defaultByteArray),
+				//Product_Image = p.Product_Image,
+				userId = p.userId
+			}).ToList();
+
+			return products;
+		}
+
+		public void InsertProduct(ProductInfoViewModel productInfo, string uid)
         {
             var ProductImage = defaultService.ImageToByteArray(productInfo.Product_Image);
 
@@ -263,54 +292,153 @@ namespace Cafe_Site.Services
             repository.SaveChanges();
         }
 
-        public void DeleteProduct(int id)
+        public bool DeleteProduct(int id)
         {
-            var product = repository.GetElement(p => p.Product_Id == id, null);
-
-            if (product != null)
+            try
             {
-                repository.Delete(product);
-            }
+                var product = repository.GetElement(p => p.Product_Id == id, null);
 
-            var smallSizedProduct = psrepository.GetElement(ps => ps.Product_Id == id && ps.Size == 'S', null);
+                if (product != null)
+                {
+                    repository.Delete(product);
+                }
 
-            if(smallSizedProduct != null)
-            {
-                psrepository.Delete(smallSizedProduct);
-            }
+                var smallSizedProduct = psrepository.GetElement(ps => ps.Product_Id == id && ps.Size == 'S', null);
 
-            var MediumSizedProduct = psrepository.GetElement(ps => ps.Product_Id == id && ps.Size == 'M', null);
+                if (smallSizedProduct != null)
+                {
+                    psrepository.Delete(smallSizedProduct);
+                }
 
-            if (MediumSizedProduct != null)
-            {
-                psrepository.Delete(MediumSizedProduct);
-            }
+                var MediumSizedProduct = psrepository.GetElement(ps => ps.Product_Id == id && ps.Size == 'M', null);
 
-            var LargeSizedProduct = psrepository.GetElement(ps => ps.Product_Id == id && ps.Size == 'L', null);
+                if (MediumSizedProduct != null)
+                {
+                    psrepository.Delete(MediumSizedProduct);
+                }
 
-            if (LargeSizedProduct != null)
-            {
-                psrepository.Delete(LargeSizedProduct);
-            }
+                var LargeSizedProduct = psrepository.GetElement(ps => ps.Product_Id == id && ps.Size == 'L', null);
 
-            repository.SaveChanges();
-        }
-
-        public void DeleteSize(int id, char size)
-        {
-            var SizedProduct = psrepository.GetElement(ps => ps.Product_Id == id && ps.Size == size, null);
-
-            if (SizedProduct != null)
-            {
-                psrepository.Delete(SizedProduct);
+                if (LargeSizedProduct != null)
+                {
+                    psrepository.Delete(LargeSizedProduct);
+                }
 
                 repository.SaveChanges();
+
+                return true;
             }
+            catch (Exception)
+            {
+                return false;
+            }
+
         }
 
-        //public ApplicationUser GetUser(string userId)
-        //{
-        //    return urepo.Users.FirstOrDefault(u => u.Id == userId);
-        //}
-    }
+        public bool DeleteSize(int id, char size)
+        {
+            try
+            {
+                var SizedProduct = psrepository.GetElement(ps => ps.Product_Id == id && ps.Size == size, null);
+
+                if (SizedProduct != null)
+                {
+                    psrepository.Delete(SizedProduct);
+
+                    repository.SaveChanges();
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+        }
+
+		public List<OrderHistoryViewModel> GetOrderHistory(int pid)
+		{
+            try
+            {
+                var orders = crepository.GetAllByTwoIncludesAndFilter("product", "order", op => op.Product_Id == pid && op.order.Order_Status == 'D').ToList();
+
+                var totalQuantity = crepository.GetElementsByFilter(op => op.order.Order_Status == 'D', null).Select(op => op.Quantity).ToList();
+
+                int totalCount = 0;
+
+                foreach(var i in totalQuantity)
+                {
+                    totalCount += i;
+                }
+
+                var proQuantity = crepository.GetAllByTwoIncludesAndFilter("order", "product", op => op.Product_Id == pid && op.order.Order_Status == 'D').Select(op => op.Quantity).ToList();
+
+                var proCount = 0;
+
+                foreach(var i in proQuantity)
+                {
+                    proCount += i;
+                }
+
+                decimal proPer = Math.Round((decimal)proCount / totalCount * 100);
+
+                var sproQuantity = crepository.GetAllByTwoIncludesAndFilter("order", "product", op => op.Product_Id == pid && op.order.Order_Status == 'D' && op.Size == 'S').Select(op => op.Quantity).ToList();
+                
+                var sproCount = 0;
+
+                foreach(var i in sproQuantity)
+                {
+                    sproCount += i;
+                }
+
+                decimal sproPer = Math.Round((decimal)sproCount / proCount * 100);
+                
+                var mproQuantity = crepository.GetAllByTwoIncludesAndFilter("order", "product", op => op.Product_Id == pid && op.order.Order_Status == 'D' && op.Size == 'M').Select(op => op.Quantity).ToList();
+                
+                var mproCount = 0;
+
+                foreach(var i in mproQuantity)
+                {
+                    mproCount += i;
+                }
+
+                decimal mproPer = Math.Round((decimal)mproCount / proCount * 100);
+                
+                var lproQuantity = crepository.GetAllByTwoIncludesAndFilter("order", "product", op => op.Product_Id == pid && op.order.Order_Status == 'D' && op.Size == 'L').Select(op => op.Quantity).ToList();
+
+                var lproCount = 0;
+
+                foreach(var i in lproQuantity)
+                {
+                    lproCount += i;
+                }
+
+                decimal lproPer = Math.Round((decimal)lproCount / proCount * 100);
+                
+                return orders.Select(o => new OrderHistoryViewModel
+                {
+                    Product_Name = o.product.Product_Name,
+                    Order_Date = o.order.Order_Date,
+                    Size = (o.Size == 'S') ? "Small" : (o.Size == 'M') ? "Medium" : "Large",
+                    Quantity = o.Quantity,
+                    UnitPrice = o.Price.ToString("0.00"),
+                    TotalPrice = (o.Price * o.Quantity).ToString("0.00"),
+                    Product_Percentage = (int)proPer,
+                    Small_Product_Percentage = (int)sproPer,
+                    Medium_Product_Percentage = (int)mproPer,
+                    Large_Product_Percentage = (int)lproPer
+                }).ToList();
+            }
+            catch (Exception)
+            {
+                return new List<OrderHistoryViewModel>();
+            }
+
+		}
+	}
 }

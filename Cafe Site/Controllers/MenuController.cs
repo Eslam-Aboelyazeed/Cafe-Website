@@ -16,9 +16,9 @@ namespace Cafe_Site.Controllers
             _productService = productService;
         }
 
-        public IActionResult Index(int page = 1, int pageSize = 4)
+        public IActionResult Index(int page = 1, int pageSize = 4, string filter = "All")
         {
-            List<ProductInfoViewModel> menuItems = _productService.GetAllProducts();
+            List<ProductInfoViewModel> menuItems = _productService.GetProductsWithoutAddtions();
 
             var count = menuItems.Count;
             var items = menuItems.Skip((page - 1) * pageSize).Take(pageSize).ToList();
@@ -27,7 +27,8 @@ namespace Cafe_Site.Controllers
             {
                 Products = items,
                 CurrentPage = page,
-                TotalPages = (int)Math.Ceiling(count / (double)pageSize)
+                TotalPages = (int)Math.Ceiling(count / (double)pageSize),
+                Filter = filter
             };
 
             //if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
@@ -38,18 +39,28 @@ namespace Cafe_Site.Controllers
             return View(viewModel);
         }
 
-        public IActionResult GetProducts(int page = 1, int pageSize = 4)
+        public IActionResult GetProducts(int page = 1, int pageSize = 4, string filter = "All")
         {
-            List<ProductInfoViewModel> menuItems = _productService.GetAllProducts();
+            List<ProductInfoViewModel> menuItems;
 
-            var count = menuItems.Count;
+			if (filter == "All")
+            {
+				menuItems = _productService.GetProductsWithoutAddtions();
+			}
+            else
+            {
+				menuItems = _productService.GetProductsWithFilterWithoutAddtions(filter);
+			}
+
+			var count = menuItems.Count;
             var items = menuItems.Skip((page - 1) * pageSize).Take(pageSize).ToList();
 
             var viewModel = new MenuViewModel
             {
                 Products = items,
                 CurrentPage = page,
-                TotalPages = (int)Math.Ceiling(count / (double)pageSize)
+                TotalPages = (int)Math.Ceiling(count / (double)pageSize),
+                Filter = filter
             };
 
 
