@@ -45,7 +45,7 @@ namespace Cafe_Site.Controllers
 
 					ViewBag.Message = "Message sent successfully!";
 
-	  				modelstate.clear();
+	  				//modelstate.clear();
 				}
 				catch (Exception ex)
 				{
