@@ -4,6 +4,7 @@ namespace Cafe_Site.ViewModels
 	public class OrderHistoryViewModel
 	{
         public string Product_Name { get; set; }
+        public string Product_Type { get; set; }
         public DateTime Order_Date { get; set; }
 		public string Size { get; set; }
 		public int Quantity { get; set; }

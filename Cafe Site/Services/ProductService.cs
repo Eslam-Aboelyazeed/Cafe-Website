@@ -365,74 +365,119 @@ namespace Cafe_Site.Services
 		{
             try
             {
-                var orders = crepository.GetAllByTwoIncludesAndFilter("product", "order", op => op.Product_Id == pid && op.order.Order_Status == 'D').ToList();
-
-                var totalQuantity = crepository.GetElementsByFilter(op => op.order.Order_Status == 'D', null).Select(op => op.Quantity).ToList();
-
-                int totalCount = 0;
-
-                foreach(var i in totalQuantity)
+                var item = repository.GetElement(p => p.Product_Id == pid, null)?.Product_Type;
+                if (item.StartsWith("Add-"))
                 {
-                    totalCount += i;
+                    var orders = crepository.GetAllByTwoIncludesAndFilter("product", "order", op => op.Product_Id == pid && op.order.Order_Status == 'D').ToList();
+
+                    var totalQuantity = crepository.GetAllByTwoIncludesAndFilter("product", "order", op => op.order.Order_Status == 'D' && op.product.Product_Type.StartsWith("Add-"))?.Select(op => op.Quantity).ToList();
+
+                    int totalCount = 0;
+
+                    foreach (var i in totalQuantity)
+                    {
+                        totalCount += i;
+                    }
+
+                    var proQuantity = crepository.GetAllByTwoIncludesAndFilter("order", "product", op => op.Product_Id == pid && op.order.Order_Status == 'D').Select(op => op.Quantity).ToList();
+
+                    var proCount = 0;
+
+                    foreach (var i in proQuantity)
+                    {
+                        proCount += i;
+                    }
+
+                    decimal proPer = Math.Round((decimal)proCount / totalCount * 100);
+
+                    return orders.Select(o => new OrderHistoryViewModel
+                    {
+                        Product_Name = o.product.Product_Name,
+                        Order_Date = o.order.Order_Date,
+                        Size = (o.Size == 'S') ? "Small" : (o.Size == 'M') ? "Medium" : "Large",
+                        Quantity = o.Quantity,
+                        UnitPrice = o.Price.ToString("0.00"),
+                        TotalPrice = (o.Price * o.Quantity).ToString("0.00"),
+                        Product_Percentage = (int)proPer,
+                        Small_Product_Percentage = 0,
+                        Medium_Product_Percentage = (int)proPer,
+                        Large_Product_Percentage = 0,
+                        Product_Type = o.product.Product_Type
+                    }).ToList();
+                }
+                else
+                {
+                    var orders = crepository.GetAllByTwoIncludesAndFilter("product", "order", op => op.Product_Id == pid && op.order.Order_Status == 'D').ToList();
+
+                    var totalQuantity = crepository.GetAllByTwoIncludesAndFilter("product", "order", op => op.order.Order_Status == 'D' && !op.product.Product_Type.StartsWith("Add-"))?.Select(op => op.Quantity).ToList();
+
+                    int totalCount = 0;
+
+                    foreach (var i in totalQuantity)
+                    {
+                        totalCount += i;
+                    }
+
+                    var proQuantity = crepository.GetAllByTwoIncludesAndFilter("order", "product", op => op.Product_Id == pid && op.order.Order_Status == 'D').Select(op => op.Quantity).ToList();
+
+                    var proCount = 0;
+
+                    foreach (var i in proQuantity)
+                    {
+                        proCount += i;
+                    }
+
+                    decimal proPer = Math.Round((decimal)proCount / totalCount * 100);
+
+                    var sproQuantity = crepository.GetAllByTwoIncludesAndFilter("order", "product", op => op.Product_Id == pid && op.order.Order_Status == 'D' && op.Size == 'S').Select(op => op.Quantity).ToList();
+
+                    var sproCount = 0;
+
+                    foreach (var i in sproQuantity)
+                    {
+                        sproCount += i;
+                    }
+
+                    decimal sproPer = Math.Round((decimal)sproCount / proCount * 100);
+
+                    var mproQuantity = crepository.GetAllByTwoIncludesAndFilter("order", "product", op => op.Product_Id == pid && op.order.Order_Status == 'D' && op.Size == 'M').Select(op => op.Quantity).ToList();
+
+                    var mproCount = 0;
+
+                    foreach (var i in mproQuantity)
+                    {
+                        mproCount += i;
+                    }
+
+                    decimal mproPer = Math.Round((decimal)mproCount / proCount * 100);
+
+                    var lproQuantity = crepository.GetAllByTwoIncludesAndFilter("order", "product", op => op.Product_Id == pid && op.order.Order_Status == 'D' && op.Size == 'L').Select(op => op.Quantity).ToList();
+
+                    var lproCount = 0;
+
+                    foreach (var i in lproQuantity)
+                    {
+                        lproCount += i;
+                    }
+
+                    decimal lproPer = Math.Round((decimal)lproCount / proCount * 100);
+
+                    return orders.Select(o => new OrderHistoryViewModel
+                    {
+                        Product_Name = o.product.Product_Name,
+                        Order_Date = o.order.Order_Date,
+                        Size = (o.Size == 'S') ? "Small" : (o.Size == 'M') ? "Medium" : "Large",
+                        Quantity = o.Quantity,
+                        UnitPrice = o.Price.ToString("0.00"),
+                        TotalPrice = (o.Price * o.Quantity).ToString("0.00"),
+                        Product_Percentage = (int)proPer,
+                        Small_Product_Percentage = (int)sproPer,
+                        Medium_Product_Percentage = (int)mproPer,
+                        Large_Product_Percentage = (int)lproPer,
+                        Product_Type = o.product.Product_Type
+                    }).ToList();
                 }
 
-                var proQuantity = crepository.GetAllByTwoIncludesAndFilter("order", "product", op => op.Product_Id == pid && op.order.Order_Status == 'D').Select(op => op.Quantity).ToList();
-
-                var proCount = 0;
-
-                foreach(var i in proQuantity)
-                {
-                    proCount += i;
-                }
-
-                decimal proPer = Math.Round((decimal)proCount / totalCount * 100);
-
-                var sproQuantity = crepository.GetAllByTwoIncludesAndFilter("order", "product", op => op.Product_Id == pid && op.order.Order_Status == 'D' && op.Size == 'S').Select(op => op.Quantity).ToList();
-                
-                var sproCount = 0;
-
-                foreach(var i in sproQuantity)
-                {
-                    sproCount += i;
-                }
-
-                decimal sproPer = Math.Round((decimal)sproCount / proCount * 100);
-                
-                var mproQuantity = crepository.GetAllByTwoIncludesAndFilter("order", "product", op => op.Product_Id == pid && op.order.Order_Status == 'D' && op.Size == 'M').Select(op => op.Quantity).ToList();
-                
-                var mproCount = 0;
-
-                foreach(var i in mproQuantity)
-                {
-                    mproCount += i;
-                }
-
-                decimal mproPer = Math.Round((decimal)mproCount / proCount * 100);
-                
-                var lproQuantity = crepository.GetAllByTwoIncludesAndFilter("order", "product", op => op.Product_Id == pid && op.order.Order_Status == 'D' && op.Size == 'L').Select(op => op.Quantity).ToList();
-
-                var lproCount = 0;
-
-                foreach(var i in lproQuantity)
-                {
-                    lproCount += i;
-                }
-
-                decimal lproPer = Math.Round((decimal)lproCount / proCount * 100);
-                
-                return orders.Select(o => new OrderHistoryViewModel
-                {
-                    Product_Name = o.product.Product_Name,
-                    Order_Date = o.order.Order_Date,
-                    Size = (o.Size == 'S') ? "Small" : (o.Size == 'M') ? "Medium" : "Large",
-                    Quantity = o.Quantity,
-                    UnitPrice = o.Price.ToString("0.00"),
-                    TotalPrice = (o.Price * o.Quantity).ToString("0.00"),
-                    Product_Percentage = (int)proPer,
-                    Small_Product_Percentage = (int)sproPer,
-                    Medium_Product_Percentage = (int)mproPer,
-                    Large_Product_Percentage = (int)lproPer
-                }).ToList();
             }
             catch (Exception)
             {

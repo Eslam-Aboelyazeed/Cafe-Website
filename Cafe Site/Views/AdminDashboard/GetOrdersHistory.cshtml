@@ -50,55 +50,83 @@
             <div class="container">
                 <h2>@Model.ToList()[0].Product_Name Sales</h2>
 
-                <div class="row">
-                    <div class="col-sm-6 col-md-3">
-                        <div class="skill-item center-block">
-                            <div class="chart-container">
-                                <div class="chart " data-percent="@Model.ToList()[0].Product_Percentage" data-bar-color="#23afe3">
-                                    <span class="percent" data-after="%">@Model.ToList()[0].Product_Percentage</span>
-                                </div>
-                            </div>
 
-                            <p>Total Sales</p>
+                @if (Model.ToList()[0].Product_Type.StartsWith("Add-"))
+                {
+                    <div class="row justify-content-center">
+                        <div class="col-sm-3">
+                            <div class="skill-item center-block">
+                                <div class="chart-container">
+                                    <div class="chart " data-percent="@Model.ToList()[0].Product_Percentage" data-bar-color="#23afe3">
+                                        <span class="percent" data-after="%">@Model.ToList()[0].Product_Percentage</span>
+                                    </div>
+                                </div>
+
+                                <p>Total Sales Compared To Other Addtions</p>
+                            </div>
                         </div>
                     </div>
+                }
 
-                    <div class="col-sm-6 col-md-3">
-                        <div class="skill-item center-block">
-                            <div class="chart-container">
-                                <div class="chart " data-percent="@Model.ToList()[0].Small_Product_Percentage" data-bar-color="#a7d212">
-                                    <span class="percent" data-after="%">@Model.ToList()[0].Small_Product_Percentage</span>
+
+                @if (!Model.ToList()[0].Product_Type.StartsWith("Add-"))
+                {
+                    <div class="row">
+
+                        <div class="col-sm-6 col-md-3">
+                            <div class="skill-item center-block">
+                                <div class="chart-container">
+                                    <div class="chart " data-percent="@Model.ToList()[0].Product_Percentage" data-bar-color="#23afe3">
+                                        <span class="percent" data-after="%">@Model.ToList()[0].Product_Percentage</span>
+                                    </div>
                                 </div>
+
+                                <p>Total Sales Compared To Other Products</p>
                             </div>
-
-                            <p>Small Size Sales</p>
                         </div>
-                    </div>
 
-                    <div class="col-sm-6 col-md-3">
-                        <div class="skill-item center-block">
-                            <div class="chart-container">
-                                <div class="chart " data-percent="@Model.ToList()[0].Medium_Product_Percentage" data-bar-color="#ff4241">
-                                    <span class="percent" data-after="%">@Model.ToList()[0].Medium_Product_Percentage</span>
+
+                        <div class="col-sm-6 col-md-3">
+                            <div class="skill-item center-block">
+                                <div class="chart-container">
+                                    <div class="chart " data-percent="@Model.ToList()[0].Small_Product_Percentage" data-bar-color="#a7d212">
+                                        <span class="percent" data-after="%">@Model.ToList()[0].Small_Product_Percentage</span>
+                                    </div>
                                 </div>
+
+                                <p>Small Size Sales</p>
                             </div>
-
-                            <p>Medium Size Sales</p>
                         </div>
-                    </div>
+                    
 
-                    <div class="col-sm-6 col-md-3">
-                        <div class="skill-item center-block">
-                            <div class="chart-container">
-                                <div class="chart " data-percent="@Model.ToList()[0].Large_Product_Percentage" data-bar-color="#edc214">
-                                    <span class="percent" data-after="%">@Model.ToList()[0].Large_Product_Percentage</span>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="skill-item center-block">
+                                <div class="chart-container">
+                                    <div class="chart " data-percent="@Model.ToList()[0].Medium_Product_Percentage" data-bar-color="#ff4241">
+                                        <span class="percent" data-after="%">@Model.ToList()[0].Medium_Product_Percentage</span>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <p>Large Size Sales</p>
+                                <p>Medium Size Sales</p>
+                            </div>
                         </div>
+                    
+
+                        <div class="col-sm-6 col-md-3">
+                            <div class="skill-item center-block">
+                                <div class="chart-container">
+                                    <div class="chart " data-percent="@Model.ToList()[0].Large_Product_Percentage" data-bar-color="#edc214">
+                                        <span class="percent" data-after="%">@Model.ToList()[0].Large_Product_Percentage</span>
+                                    </div>
+                                </div>
+
+                                <p>Large Size Sales</p>
+                            </div>
+                        </div>
+
                     </div>
-                </div>
+                }
+
             </div>
         </div>
     </section>
