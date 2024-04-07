@@ -18,7 +18,7 @@ namespace Cafe_Site.Controllers
 
         public IActionResult Index(int page = 1, int pageSize = 4, string filter = "All")
         {
-            List<ProductInfoViewModel> menuItems = _productService.GetAllProducts();
+            List<ProductInfoViewModel> menuItems = _productService.GetProductsWithoutAddtions();
 
             var count = menuItems.Count;
             var items = menuItems.Skip((page - 1) * pageSize).Take(pageSize).ToList();
@@ -45,11 +45,11 @@ namespace Cafe_Site.Controllers
 
 			if (filter == "All")
             {
-				menuItems = _productService.GetAllProducts();
+				menuItems = _productService.GetProductsWithoutAddtions();
 			}
             else
             {
-				menuItems = _productService.GetProductsByFilter(filter);
+				menuItems = _productService.GetProductsWithFilterWithoutAddtions(filter);
 			}
 
 			var count = menuItems.Count;

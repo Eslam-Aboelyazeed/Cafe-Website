@@ -27,9 +27,9 @@
 
     <h1 class="text-center text-light mt-5">@Model.ToList()[0].Product_Name Order History</h1>
 
-    <p>
-        <a href="/AdminDashboard/Index" style="color:#ea272d">&lt; Back To Product List</a>
-    </p>
+    <div class="my-4 mx-2">
+        <a asp-action="Index" style="color:darkorange" onmouseover="this.style.color='red'; this.style.textDecoration='underline';" onmouseout="this.style.color='darkorange'; this.style.textDecoration='none';"><img src="~/images/back.png" alt="Plus" style="height:25px;padding-bottom:5px;padding-right:5px" />Back To The Products List</a>
+    </div>
 
     @* <h1 class="heading" style="text-align:center; margin-top:50px">Product Sales</h1>
 <div class="wrapper">
