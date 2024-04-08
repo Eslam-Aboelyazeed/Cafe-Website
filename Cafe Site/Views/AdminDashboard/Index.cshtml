@@ -101,10 +101,10 @@
                         <img src="data:image/png;base64,@item.Product_Image" alt="@item.Product_Name Image" style="height:50px">
                     </td>
                     <td class="align-middle">
-                        @Html.ActionLink("Update", "Update", new { id = item.Product_Id }) |
-                        <button type="button" class="bg-transparent text-danger border-0" onclick="ShowModal(@item.Product_Id)">Delete</button> |
-                        <button type="button" class="bg-transparent text-danger border-0" onclick="ShowModalSize(@item.Product_Id)">Delete Size</button> |
-                        @Html.ActionLink("View Order History", "GetOrdersHistory", new { id = item.Product_Id })
+                        @* @Html.ActionLink("Update", "Update", new { id = item.Product_Id }) *@ <a class="text-success" href="/admindashboard/update/@item.Product_Id">Update</a> |
+                       @*  <button type="button" class="bg-transparent text-danger border-0" onclick="ShowModal(@item.Product_Id)">Delete</button> *@ <a class="text-danger" style="cursor:pointer" onclick="ShowModal(@item.Product_Id)">Delete</a>  |
+                        @*  <button type="button" class="bg-transparent text-alert border-0" onclick="ShowModalSize(@item.Product_Id)">Delete Size</button> *@ <a class="text-warning" style="cursor:pointer" onclick="ShowModalSize(@item.Product_Id)">Delete Size</a> |
+                        @* @Html.ActionLink("Order History", "GetOrdersHistory", new { id = item.Product_Id }) *@ <a class="text-primary" href="/admindashboard/GetOrdersHistory/@item.Product_Id">Order History</a>
                         @* <a href="" onclick="ShowModal(@item.Product_Id)">Delete</a> *@
                         @* @Html.ActionLink("Delete", "Delete", "AdminDashboard", new { id = item.Product_Id }, new { onclick = $"ShowModal({item.Product_Id})" }) *@
                     </td>
