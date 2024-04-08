@@ -137,23 +137,27 @@
 								<div class="col-md-12">
 									<label for="name">Your Name</label>
 									<input asp-for="Name" type="text" class="form-control">
+									<span asp-validation-for="Name" class="text-danger"></span>
 								</div>
 							</div>
 							<div class="row form-group">
 								<div class="col-md-12">
 									<label for="email">Your Email</label>
 									<input asp-for="Email" type="text" class="form-control">
+									<span asp-validation-for="Email" class="text-danger"></span>
 								</div>
 							</div>
 							<div class="row form-group">
 								<div class="col-md-12">
 									<label for="message">Your Message</label>
 									<textarea asp-for="Message" cols="30" rows="10" class="form-control"></textarea>
+									<span asp-validation-for="Message" class="text-danger"></span>
 								</div>
 							</div>
 							<div class="row form-group">
 								<div class="col-md-12">
 									<input type="submit" class="btn btn-primary btn-outline btn-lg" value="Submit Form">
+									@* <button type="button" class="btn btn-primary btn-outline btn-lg" onclick="ShowModal()">Submit</button> *@
 								</div>
 							</div>
 
@@ -163,6 +167,48 @@
 
 			</div>
 		</div>
+
+		<!-- Start Modal Section -->
+
+		<div class="modal fade" id="m1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Submit Confirmation</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body text-dark" id="ModalText" style="color:black">Submit This Message?</div>
+					<div class="modal-footer" id="mf">
+						<button type="button" class="btn btn-secondary" style="background-color: gray; color:white" data-dismiss="modal">Cancel</button>
+						<button type="button" id="ConfirmSubmit" class="btn btn-primary" style="color:white">Confirm</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Modal Section -->
+
+		<!-- Start Modal 2 Section-->
+
+		<div class="modal fade" id="m2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle">Message Info</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body text-dark" id="ModalText2" style="color:black">Message Sent, We Will Get Back To You Soon</div>
+					<div class="modal-footer" id="mf2">
+						<button type="button" class="btn btn-secondary" style="background-color: gray; color:white" data-dismiss="modal">Ok</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- End Modal 2 Section-->
 
 		<footer id="fh5co-footer" role="contentinfo" class="fh5co-section">
 			<div class="container">
@@ -253,7 +299,58 @@
 	<!-- Main -->
 	<script src="~/js/main.js"></script>
 
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
 
+	<script>
+		$(document).ready(function () {
+
+			let m = @Html.Raw(Json.Serialize(Model));
+
+			console.log(m);
+
+			if (m) {
+				if (m.flag) {
+					window.scrollTo(0, 0);
+
+					document.getElementById("Name").value = "";
+					document.getElementById("Email").value = "";
+					document.getElementById("Message").value = "";
+
+					document.getElementById("form-wrap").focus();
+
+					document.getElementById("form-wrap").scrollIntoView({
+						behavior: 'smooth',
+						block: 'center'
+					});
+
+
+					setTimeout(() => $('#m2').modal('show'), 1500);
+					
+				}
+			}
+
+
+				// console.log(document.getElementById("Name").value);
+				// console.log(document.getElementById("Email").value);
+				// console.log(document.getElementById("Message").value);
+
+			$('#form-wrap').submit(function (e) {
+				e.preventDefault();
+				if ($('#Name').val() != "" && $('#Email').val() != "" && $('#Message').val() != "") { 
+					$('#m1').modal('show');
+				}
+			});
+
+
+			$('#ConfirmSubmit').click(function () {
+				$('#form-wrap').unbind('submit').submit();
+			});
+			
+
+		});
+	</script>
 
 
 </body>
