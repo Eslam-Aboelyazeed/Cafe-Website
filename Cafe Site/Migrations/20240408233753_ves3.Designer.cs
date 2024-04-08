@@ -4,6 +4,7 @@ using Cafe_Site.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cafe_Site.Migrations
 {
     [DbContext(typeof(CafeSiteContext))]
-    partial class CafeSiteContextModelSnapshot : ModelSnapshot
+    [Migration("20240408233753_ves3")]
+    partial class ves3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -221,7 +224,7 @@ namespace Cafe_Site.Migrations
                     b.Property<int>("Product_Id")
                         .HasColumnType("int");
 
-                    b.Property<string>("User_Id")
+                    b.Property<string>("User_Name")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Product_Rate")
@@ -230,11 +233,7 @@ namespace Cafe_Site.Migrations
                     b.Property<string>("Product_Review")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("User_Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Product_Id", "User_Id");
+                    b.HasKey("Product_Id", "User_Name");
 
                     b.ToTable("Product_Reviews");
                 });
