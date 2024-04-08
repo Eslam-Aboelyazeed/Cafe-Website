@@ -2,6 +2,7 @@
 using Cafe_Site.ViewModels;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Net;
 using System.Net.Mail;
@@ -45,7 +46,15 @@ namespace Cafe_Site.Controllers
 
 					ViewBag.Message = "Message sent successfully!";
 
-	  				//modelstate.clear();
+					//modelstate.clear();
+
+					return View("Contact",new ContactViewModels()
+					{
+						flag = true,
+						Name = "",
+						Email = "",
+						Message = ""
+					});
 				}
 				catch (Exception ex)
 				{

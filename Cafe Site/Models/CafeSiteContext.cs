@@ -70,7 +70,7 @@ namespace Cafe_Site.Models
 
 
             modelBuilder.Entity<Product_Reviews>()
-                .HasKey("Product_Id", "User_Name");
+                .HasKey("Product_Id", "User_Id");
         }
     }
 }
