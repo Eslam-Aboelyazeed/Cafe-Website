@@ -1,6 +1,7 @@
 ﻿using Cafe_Site.Models;
 using Cafe_Site.Repository;
 using Microsoft.AspNetCore.Diagnostics;
+using System.Security.Claims;
 
 namespace Cafe_Site.Services
 {
@@ -11,6 +12,7 @@ namespace Cafe_Site.Services
         private readonly IDefaultRepository<Product_Size_Price> sizeRepo;
         private readonly IDefaultRepository<Order> orderRepo;
         private readonly IDefaultRepository<Order_Products> orderProdRepo;
+        
         public ProductDetailsService(IDefaultRepository<Product> prod, IDefaultRepository<Product_Reviews>reviews, IDefaultRepository<Product_Size_Price> sizes , IDefaultRepository<Order> order, IDefaultRepository<Order_Products> orderProd)
         {                                                                                                                                                        
             prodRepo=prod;
@@ -37,23 +39,23 @@ namespace Cafe_Site.Services
         {
             return prodRepo.GetElement(p=>p.Product_Id==productID,null);
         }
-        public string addReview(int rate, string review, int id,string user, Product p)
+        public string addReview(int rate, string review, int id,string userId,string userName, Product p)
         {
             if (review == null || rate == 0)
             {
                 return "empty";
             }
             
-            Product_Reviews? oldReview = reviewRepo.GetElement(p => p.User_Name == user && p.Product_Id == id, null);
-            List<Order_Products> order_Products = orderProdRepo.GetElementsByFilter(p => p.order.userId == user && p.order.Order_Status == 'D' && p.Product_Id == id, "order");
-            if (oldReview == null && order_Products.Count() == 0)
+			Product_Reviews? oldReview = reviewRepo.GetElement(p => p.User_Name == userName && p.Product_Id == id, null);
+            List<Order_Products> order_Products = orderProdRepo.GetElementsByFilter(p => p.order.userId == userId && p.order.Order_Status == 'D' && p.Product_Id == id, "order");
+            if (oldReview == null && order_Products.Count() > 0)
             {
                 Product_Reviews rev = new Product_Reviews()
                 {
                     Product_Id = id,
                     Product_Rate = rate,
                     Product_Review = review,
-                    User_Name = user,
+                    User_Name = userName,
                     product = p
                 };
                 reviewRepo.Insert(rev);

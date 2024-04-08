@@ -99,7 +99,7 @@
                 <div class="tab-content" id="nav-tabContent">
                     <!--description start-->
                     <div class="Desc tab-pane fade show active text-white-50 m-auto" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-                        <p class="desc_website text-center text-md-start text-white-50 mt-4">Our website is designed to make your shopping experience as smooth and enjoyable as possible. You can browse by category, color, size, or brand, and filter your search results to find exactly what you’re looking for. We offer free shipping on orders over a certain amount and easy returns if you’re not completely satisfied with your purchase.</p>
+                        <p class="desc_website text-center text-md-start text-white-50 mt-4">@Model.Product.Product_Description</p>
 
                     </div>
                     <!--description end-->
@@ -116,7 +116,7 @@
                                     <div class="addedprod row " id="@Model.AddProducts[i].Product_Id">
                                        
                                         <div class="col-3 d-flex flex-row justify-content-between align-items-center ">
-                                            <img class="prodImg w-100 h-75 rounded-circle " src="/images/whipped-cream-1.jpg" style="aspect-ratio:1/1" alt="...">
+                                    <img class="prodImg w-100 h-75 rounded-circle " src="data:image/png;base64,@Convert.ToBase64String(Model.AddProducts[i].Product_Image ?? new byte[0])" style="aspect-ratio:1/1" alt="...">
                                         </div>
                                         <div class="col-4 d-flex flex-row justify-content-between align-items-center">
                                             <h6 class="prodName text-white mb-0">@Model.AddProducts[i].Product_Name</h6>

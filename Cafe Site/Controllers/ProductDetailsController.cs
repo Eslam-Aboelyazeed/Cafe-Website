@@ -3,6 +3,7 @@ using Cafe_Site.Services;
 using Cafe_Site.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Cafe_Site.Controllers
 {
@@ -38,9 +39,10 @@ namespace Cafe_Site.Controllers
         public IActionResult review(int rate, string review,int id)
         {
             
-            var name= User.Claims.FirstOrDefault()?.Value;
+            var userId= User.Claims.FirstOrDefault()?.Value;
+            var userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
 
-            string added=productDetailsServ.addReview(rate, review, id, User.Claims.FirstOrDefault()?.Value,product);
+			string added=productDetailsServ.addReview(rate, review, id,userId ,userName, product);
             
             //if (added == true)
             //{
