@@ -46,7 +46,7 @@ namespace Cafe_Site.Services
             
             Product_Reviews? oldReview = reviewRepo.GetElement(p => p.User_Name == user && p.Product_Id == id, null);
             List<Order_Products> order_Products = orderProdRepo.GetElementsByFilter(p => p.order.userId == user && p.order.Order_Status == 'D' && p.Product_Id == id, "order");
-            if (oldReview == null)
+            if (oldReview == null && order_Products.Count() == 0)
             {
                 Product_Reviews rev = new Product_Reviews()
                 {
