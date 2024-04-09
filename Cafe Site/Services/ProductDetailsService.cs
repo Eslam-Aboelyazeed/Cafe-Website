@@ -46,7 +46,7 @@ namespace Cafe_Site.Services
                 return "empty";
             }
             
-			Product_Reviews? oldReview = reviewRepo.GetElement(p => p.User_Name == userName && p.Product_Id == id, null);
+			Product_Reviews? oldReview = reviewRepo.GetElement(p => p.User_Id == userId && p.Product_Id == id, null);
             List<Order_Products> order_Products = orderProdRepo.GetElementsByFilter(p => p.order.userId == userId && p.order.Order_Status == 'D' && p.Product_Id == id, "order");
             if (oldReview == null && order_Products.Count() > 0)
             {
@@ -56,6 +56,7 @@ namespace Cafe_Site.Services
                     Product_Rate = rate,
                     Product_Review = review,
                     User_Name = userName,
+                    User_Id=userId,
                     product = p
                 };
                 reviewRepo.Insert(rev);
