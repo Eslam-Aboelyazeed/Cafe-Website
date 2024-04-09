@@ -59,7 +59,7 @@
 <style>
     .fh5co-item {
         overflow: hidden;
-        text-align: center;
+        text-align: left;
         padding: 2px;
         transition: all 0.5s ease-in-out;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Add shadow to the cards */
@@ -71,6 +71,10 @@
         cursor: pointer;
         transform: scale(1.05);
         box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); /* Increase the shadow on hover */
+    }
+
+    .txt-center {
+        text-align: center;
     }
 
 </style>
@@ -86,17 +90,24 @@
                     @try
                     {
                         <div style="position: relative;">
-                            <img src="data:image/png;base64,@product.Product_Image" class="img-responsive" alt="@product.Product_Name" style="width: 100%; @(product.Product_Quantity == 0 ? "filter: grayscale(100%) blur(2.5px);" : "")">
                             @if (product.Product_Quantity == 0)
                             {
+                                <img src="data:image/png;base64,@product.Product_Image" class="img-responsive" alt="@product.Product_Name" style="width: 100%; @(product.Product_Quantity == 0 ? "filter: grayscale(100%) blur(2.5px);" : "")">
+
                                 <img src="~/images/vecteezy_sold-out-stamp_7545723-removebg-preview.png" alt="Out of Stock" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; width: 50%; height: auto; margin: auto;">
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("Index", "ProductDetails", new { id = product.Product_Id })">
+                                    <img src="data:image/png;base64,@product.Product_Image" class="img-responsive" alt="@product.Product_Name" style="width: 100%;">
+                                </a>
                             }
                         </div>
                         @if (product.Product_Quantity > 0)
                         {
                             <a href="@Url.Action("Index", "ProductDetails", new { id = product.Product_Id })">
-                                <h3>@product.Product_Name</h3>
-                                <p>@product.Product_Type</p>
+                                <h3 class="txt-center">@product.Product_Name</h3>
+                                <p class="txt-center">@product.Product_Type</p>
 
                                 @if (product.SPrice == "-")
                                 {
@@ -131,8 +142,8 @@
                         else
                         {
                             <div>
-                                <h3>@product.Product_Name</h3>
-                                <p>@product.Product_Type</p>
+                                <h3 class="txt-center">@product.Product_Name</h3>
+                                <p class="txt-center">@product.Product_Type</p>
 
                                 @if (product.SPrice == "-")
                                 {
