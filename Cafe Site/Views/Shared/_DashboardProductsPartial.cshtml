@@ -1,0 +1,81 @@
+﻿@model DashboardViewModel
+
+
+<div id="products-section" data-current-page="@Model.CurrentPage" data-total-pages="@Model.TotalPages">
+@*     @foreach (var product in Model.Products)
+    { *@
+    <div class="container-fluid p-0" style="overflow:auto">
+        <table class="table text-center text-light">
+            <thead>
+                <tr>
+                    <th style="text-align:center">
+                        @Html.DisplayNameFor(model => model.Products[0].Product_Name)
+                    </th>
+                    <th style="text-align:center">
+                        @Html.DisplayNameFor(model => model.Products[0].Product_Type)
+                    </th>
+                    <th style="text-align:center">
+                        @Html.DisplayNameFor(model => model.Products[0].Product_Quantity)
+                    </th>
+                    <th style="text-align:center">
+                        @Html.DisplayNameFor(model => model.Products[0].Product_Description)
+                    </th>
+                    <th style="text-align:center">
+                        @Html.DisplayNameFor(model => model.Products[0].SPrice)
+                    </th>
+                    <th style="text-align:center">
+                        @Html.DisplayNameFor(model => model.Products[0].MPrice)
+                    </th>
+                    <th style="text-align:center">
+                        @Html.DisplayNameFor(model => model.Products[0].LPrice)
+                    </th>
+                    <th style="text-align:center">
+                        @Html.DisplayNameFor(model => model.Products[0].Product_Image)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Products)
+                {
+                    <tr id="@item.Product_Id">
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.Product_Name)
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.Product_Type)
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.Product_Quantity)
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.Product_Description)
+                        </td>
+                        <td class="align-middle" id="S@(item.Product_Id)">
+                            @Html.DisplayFor(modelItem => item.SPrice)
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.MPrice)
+                        </td>
+                        <td class="align-middle" id="L@(item.Product_Id)">
+                            @Html.DisplayFor(modelItem => item.LPrice)
+                        </td>
+                        <td class="align-middle">
+                            @* @Html.DisplayFor(modelItem => item.Product_Image) *@
+                            <img src="data:image/png;base64,@item.Product_Image" alt="@item.Product_Name Image" style="height:50px">
+                        </td>
+                        <td class="align-middle">
+                            @* @Html.ActionLink("Update", "Update", new { id = item.Product_Id }) *@ <a class="text-success" href="/admindashboard/update/@item.Product_Id">Update</a> |
+                            @*  <button type="button" class="bg-transparent text-danger border-0" onclick="ShowModal(@item.Product_Id)">Delete</button> *@ <a class="text-danger" style="cursor:pointer" onclick="ShowModal(@item.Product_Id)">Delete</a>  |
+                            @*  <button type="button" class="bg-transparent text-alert border-0" onclick="ShowModalSize(@item.Product_Id)">Delete Size</button> *@ <a class="text-warning" style="cursor:pointer" onclick="ShowModalSize(@item.Product_Id)">Delete Size</a> |
+                            @* @Html.ActionLink("Order History", "GetOrdersHistory", new { id = item.Product_Id }) *@ <a class="text-primary" href="/admindashboard/GetOrdersHistory/@item.Product_Id">Order History</a>
+                            @* <a href="" onclick="ShowModal(@item.Product_Id)">Delete</a> *@
+                            @* @Html.ActionLink("Delete", "Delete", "AdminDashboard", new { id = item.Product_Id }, new { onclick = $"ShowModal({item.Product_Id})" }) *@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    @* } *@
+</div>

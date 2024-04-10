@@ -21,11 +21,25 @@ namespace Cafe_Site.Controllers
             this.productService = productService;
         }
 
-        public IActionResult Index()
-		{
-            var products = productService.GetAllProducts();
+        //      public IActionResult Index()
+        //{
+        //          var products = productService.GetAllProducts();
 
-            return View("Index", products);
+        //          return View("Index", products);
+        //      }
+
+        public IActionResult Index(int page = 1, int pageSize = 5, string filter = "All", string type = "All")
+        {
+            var viewModel = productService.GetProductsForAdminIndex(page, pageSize, filter, type);
+
+            return View(viewModel);
+        }
+
+        public IActionResult GetProducts(int page = 1, int pageSize = 5, string filter = "All", string type = "All")
+        {
+            var viewModel = productService.GetProductsForAdminGetProducts(page, pageSize, filter, type);
+
+            return PartialView("_DashboardProductsPartial", viewModel);
         }
 
         [HttpGet]

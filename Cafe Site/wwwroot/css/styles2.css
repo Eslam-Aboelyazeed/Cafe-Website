@@ -85,3 +85,44 @@ body{
 p {
     font-weight: 900;
 }
+
+/*////////////////////////////////////////////////////////////////////////////////////////////*/
+
+.pagination-container {
+    margin-top: 20px;
+    text-align: center; /* Center the pagination */
+}
+
+.pagination-container ul.pagination li a,
+.pagination-container ul.pagination li span, .filter-button {
+    color: #ffffff; /* Text color */
+    background-color: #f0ad4e; /* Yellow background color */
+    border: 1px solid #eea236; /* Darker yellow border */
+    padding: 5px 10px; /* Padding */
+    margin: 0 5px; /* Margin between items */
+    border-radius: 4px; /* Rounded corners */
+}
+
+    .pagination-container ul.pagination li.active span, .filter-button.active, .filter-button[disabled]:hover {
+        background-color: gray; /* Gray background for active page */
+        border-color: #555555; /* Darker border for active page */
+    }
+
+.pagination-container ul.pagination li.disabled span,
+.pagination-container ul.pagination li.disabled a {
+    color: #aaaaaa; /* Disabled text color */
+    background-color: #ffffff; /* Disabled background color */
+    border-color: #dddddd; /* Disabled border color */
+}
+
+.pagination-container ul.pagination li a:hover, .filter-button:hover {
+    background-color: #e0a21d; /* Darker yellow on hover */
+}
+
+.row {
+    overflow: hidden;
+}
+
+#parView {
+    text-align: left;
+}

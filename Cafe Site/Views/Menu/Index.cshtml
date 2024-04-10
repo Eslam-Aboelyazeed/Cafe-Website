@@ -140,7 +140,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12 text-center" style="margin-bottom:50px">
+                    <div class="col-md-12 text-center" id="ProFilters" style="margin-bottom:50px">
                         <button class="filter-button" data-filter="All" id="All">All</button>
                         <button class="filter-button" data-filter="Hot Drinks" id="Hot Drinks">Hot Drinks</button>
                         <button class="filter-button" data-filter="Cold Drinks" id="Cold Drinks">Cold Drinks</button>
@@ -289,11 +289,29 @@
         $(document).ready(function () {
             var f = @Html.Raw(Json.Serialize(Model.Filter));
             //var totalPages = Html.Raw(Json.Serialize(Model.TotalPages)));
+            window.scrollTo(0, 0);
 
             document.getElementById(f).classList.add("active");
             document.getElementById(f).setAttribute("disabled", "true");
             // $(`#${f}`).prop('disabled', true);
+            
+            console.log("Filter = ", f);
+            if (f != "All") {
+                // console.log("testesttesttesttesttest");
+                document.getElementById("ProFilters").focus();
+                setTimeout(() => document.getElementById("ProFilters").scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                }), 200);
+                // document.getElementById("ProFilters").scrollIntoView({
+                //     behavior: 'smooth',
+                //     block: 'center'
+                // });
 
+                // console.log("tt2t2t2t22t2t22t2t2t2");
+            }
+
+            // setTimeout(() => MakeAjaxCall(), 2000);
             MakeAjaxCall();
 
             $(".filter-button").on('click',function (e) {

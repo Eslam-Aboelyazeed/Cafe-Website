@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Cafe_Site.ViewModels.ProductInfoViewModel>
+﻿@model DashboardViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -37,83 +37,65 @@
     </div>
 </div>
 
-<div class="container-fluid p-0" style="overflow:auto">
-    <div class="my-4 mx-2">
-        <a asp-action="Add" style="color:darkorange" onmouseover="this.style.color='red'; this.style.textDecoration='underline';" onmouseout="this.style.color='darkorange'; this.style.textDecoration='none';"><img src="~/images/plus.png" alt="Plus" style="height:25px;padding-bottom:5px;padding-right:5px" />Add Product</a>
+<div class="container-fluid mt-5"> 
+    <div class="row">
+        <div class="col-md-12 text-center" id="ProFilters">
+            <button class="filter-button mt-3" data-filter="All" id="All">All</button>
+            <button class="filter-button mt-3" data-filter="All Products" id="All Products">All Products</button>
+            <button class="filter-button mt-3" data-filter="Hot Drinks" id="Hot Drinks">Hot Drinks</button>
+            <button class="filter-button mt-3" data-filter="Cold Drinks" id="Cold Drinks">Cold Drinks</button>
+            <button class="filter-button mt-3" data-filter="Deserts" id="Deserts">Deserts</button>
+            <button class="filter-button mt-3" data-filter="Pastry" id="Pastry">Pastry</button>
+            <button class="filter-button mt-3" data-filter="All Additions" id="All Additions">All Additions</button>
+            <button class="filter-button mt-3" data-filter="Add-Hot Drinks" id="Add-Hot Drinks">Hot Drinks Additions</button>
+            <button class="filter-button mt-3" data-filter="Add-Cold Drinks" id="Add-Cold Drinks">Cold Drinks Additions</button>
+            <button class="filter-button mt-3" data-filter="Add-Deserts" id="Add-Deserts">Deserts Additions</button>
+            <button class="filter-button mt-3" data-filter="Add-Pastry" id="Add-Pastry">Pastry Additions</button>
+        </div>
     </div>
-    <table class="table text-center text-light">
-        <thead>
-            <tr>
-                <th style="text-align:center">
-                    @Html.DisplayNameFor(model => model.Product_Name)
-                </th>
-                <th style="text-align:center">
-                    @Html.DisplayNameFor(model => model.Product_Type)
-                </th>
-                <th style="text-align:center">
-                    @Html.DisplayNameFor(model => model.Product_Quantity)
-                </th>
-                <th style="text-align:center">
-                    @Html.DisplayNameFor(model => model.Product_Description)
-                </th>
-                <th style="text-align:center">
-                    @Html.DisplayNameFor(model => model.SPrice)
-                </th>
-                <th style="text-align:center">
-                    @Html.DisplayNameFor(model => model.MPrice)
-                </th>
-                <th style="text-align:center">
-                    @Html.DisplayNameFor(model => model.LPrice)
-                </th>
-                <th style="text-align:center">
-                    @Html.DisplayNameFor(model => model.Product_Image)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr id="@item.Product_Id">
-                    <td class="align-middle">
-                        @Html.DisplayFor(modelItem => item.Product_Name)
-                    </td>
-                    <td class="align-middle">
-                        @Html.DisplayFor(modelItem => item.Product_Type)
-                    </td>
-                    <td class="align-middle">
-                        @Html.DisplayFor(modelItem => item.Product_Quantity)
-                    </td>
-                    <td class="align-middle">
-                        @Html.DisplayFor(modelItem => item.Product_Description)
-                    </td>
-                    <td class="align-middle" id="S@(item.Product_Id)">
-                        @Html.DisplayFor(modelItem => item.SPrice)
-                    </td>
-                    <td class="align-middle">
-                        @Html.DisplayFor(modelItem => item.MPrice)
-                    </td>
-                    <td class="align-middle" id="L@(item.Product_Id)">
-                        @Html.DisplayFor(modelItem => item.LPrice)
-                    </td>
-                    <td class="align-middle">
-                        @* @Html.DisplayFor(modelItem => item.Product_Image) *@
-                        <img src="data:image/png;base64,@item.Product_Image" alt="@item.Product_Name Image" style="height:50px">
-                    </td>
-                    <td class="align-middle">
-                        @* @Html.ActionLink("Update", "Update", new { id = item.Product_Id }) *@ <a class="text-success" href="/admindashboard/update/@item.Product_Id">Update</a> |
-                       @*  <button type="button" class="bg-transparent text-danger border-0" onclick="ShowModal(@item.Product_Id)">Delete</button> *@ <a class="text-danger" style="cursor:pointer" onclick="ShowModal(@item.Product_Id)">Delete</a>  |
-                        @*  <button type="button" class="bg-transparent text-alert border-0" onclick="ShowModalSize(@item.Product_Id)">Delete Size</button> *@ <a class="text-warning" style="cursor:pointer" onclick="ShowModalSize(@item.Product_Id)">Delete Size</a> |
-                        @* @Html.ActionLink("Order History", "GetOrdersHistory", new { id = item.Product_Id }) *@ <a class="text-primary" href="/admindashboard/GetOrdersHistory/@item.Product_Id">Order History</a>
-                        @* <a href="" onclick="ShowModal(@item.Product_Id)">Delete</a> *@
-                        @* @Html.ActionLink("Delete", "Delete", "AdminDashboard", new { id = item.Product_Id }, new { onclick = $"ShowModal({item.Product_Id})" }) *@
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
 </div>
 
+<div class="my-4 mx-2">
+    <a asp-action="Add" style="color:darkorange" onmouseover="this.style.color='red'; this.style.textDecoration='underline';" onmouseout="this.style.color='darkorange'; this.style.textDecoration='none';"><img src="~/images/plus.png" alt="Plus" style="height:25px;padding-bottom:5px;padding-right:5px" />Add Product</a>
+</div>
+
+<div id="parView">
+    <partial name="_DashboardProductsPartial" />
+</div>
+
+@* <div class="container-fluid text-center">
+    <div class="row"> *@
+<div class="pagination-container col-md-12" id="container" style="display:grid; justify-content:center; align-items:center;">
+    @if (Model.TotalPages > 1)
+    {
+        <ul class="pagination">
+            @if (Model.CurrentPage > 1)
+            {
+                <li><a href="#" class="pagination-link" data-page="@(Model.CurrentPage - 1)">Previous</a></li>
+            }
+
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                if (i == Model.CurrentPage)
+                {
+                    <li class="active"><span>@i</span></li>
+                }
+                else
+                {
+                    <li><a href="#" class="pagination-link" data-page="@i">@i</a></li>
+                }
+            }
+
+            @if (Model.CurrentPage < Model.TotalPages)
+            {
+                <li><a href="#" class="pagination-link" data-page="@(Model.CurrentPage + 1)">Next</a></li>
+            }
+        </ul>
+    }
+</div>
+@*     </div>
+</div>
+ *@
 
 <!--Start Modal Section-->
 
@@ -429,6 +411,157 @@
                     console.log(error);
                 }
             });
+        }
+        var t = "All";
+        $(document).ready(function () {
+            var f = @Html.Raw(Json.Serialize(Model.Filter));
+
+            document.getElementById(f).classList.add("active");
+            document.getElementById(f).setAttribute("disabled", "true");
+
+            console.log("Filter = ", f);
+
+            MakeAjaxCall();
+
+            $(".filter-button").on('click', function (e) {
+                var value = $(this).attr('data-filter');
+
+                $(".filter-button").removeClass("active");
+                $(".filter-button").prop('disabled', false);
+                $(this).addClass("active");
+                $(this).prop('disabled', true);
+
+                if (value === "All") {
+                    t = "All";
+                } else if (value === "All Additions" || value.includes("Add-")) {
+                    t = "Addition";
+                }else {
+                    t = "Product";
+                }
+                
+                e.preventDefault();
+                MakeAjaxCall();
+            });
+
+            $("#container").on('click', '.pagination-link', function (e) {
+                e.preventDefault(); // Prevent default navigation behavior
+                MakeAjaxCall(this);
+            });
+        });
+
+        function MakeAjaxCall(p) {
+            var page = $(p).data("page");
+            var url = '/menu/getproducts';
+            var filter = $(".filter-button.active").data("filter");
+
+            console.log("Fetching page:", page);
+            console.log("URL:", url);
+            console.log("Data:", { page: page });
+
+            $.ajax({
+                url: `/admindashboard/getproducts?page=${page}&pageSize=5&filter=${filter}&type=${t}`,
+                type: "GET",
+                beforeSend: function () {
+                    // Show loading spinner or message
+                },
+                success: function (result) {
+                    console.log("AJAX Response:", result);
+
+                    var newContent = result;
+
+                    // Check if newContent is defined
+                    if (newContent) {
+                        // Update image URLs to force reload
+                        var timestamp = new Date().getTime();
+
+                        $("#parView").html(newContent);
+                        var i = 0;
+
+                        $(".problem").waypoint(function (direction) {
+
+                            if (direction === 'down' && !$(this.element).hasClass('animated-fast')) {
+
+                                i++;
+
+                                $(this.element).addClass('item-animate');
+                                setTimeout(function () {
+
+                                    $('body .animate-box.item-animate').each(function (k) {
+                                        var el = $(this);
+                                        setTimeout(function () {
+                                            var effect = el.data('animate-effect');
+                                            if (effect === 'fadeIn') {
+                                                el.addClass('fadeIn animated-fast');
+                                            } else if (effect === 'fadeInLeft') {
+                                                el.addClass('fadeInLeft animated-fast');
+                                            } else if (effect === 'fadeInRight') {
+                                                el.addClass('fadeInRight animated-fast');
+                                            } else {
+                                                el.addClass('fadeInUp animated-fast');
+                                            }
+
+                                            el.removeClass('item-animate');
+                                        }, k * 200, 'easeInOutExpo');
+                                    });
+
+                                }, 100);
+
+                            }
+
+                        }, { offset: '85%' });
+
+                        var newPage = document.getElementById("products-section").getAttribute("data-current-page");
+                        var totalPages = document.getElementById("products-section").getAttribute("data-total-pages");
+
+                        // Update pagination links
+                        updatePaginationLinks(newPage, totalPages);
+                    } else {
+                        console.log("Error: New content is undefined");
+                    }
+                },
+
+
+                error: function (error) {
+                    console.log("Error:", error);
+                    console.log("Error Response:", error.responseText);
+                }
+            });
+        }
+
+        function updatePaginationLinks(currentPage, totalPages) {
+            // Clear existing pagination links
+            $(".pagination-container").empty();
+
+            // Create new pagination links
+            var paginationContainer = $(".pagination-container");
+            var paginationList = $("<ul>").addClass("pagination");
+
+            console.log("currentPage " + currentPage);
+            console.log("totalPages " + totalPages);
+
+            // Previous button
+            if (Number(currentPage) > 1) {
+                var prevLink = $("<li>").append($("<a>").addClass("pagination-link").attr("href", "#").attr("data-page", Number(currentPage) - 1).text("Previous"));
+                paginationList.append(prevLink);
+            }
+
+            // Numbered pages
+            for (var i = 1; i <= Number(totalPages); i++) {
+                var pageLink = $("<li>").append($("<a>").addClass("pagination-link").attr("href", "#").attr("data-page", i).text(i));
+                if (i === Number(currentPage)) {
+                    pageLink = $("<li>").addClass("active").append($("<span>").text(i));
+                }
+                paginationList.append(pageLink);
+            }
+
+            // Next button
+            if (Number(currentPage) < Number(totalPages)) {
+                var nextLink = $("<li>").append($("<a>").addClass("pagination-link").attr("href", "#").attr("data-page", Number(currentPage) + 1).text("Next"));
+                paginationList.append(nextLink);
+            }
+
+            // Append pagination links to container
+            paginationContainer.append(paginationList);
         }
 
     </script>
