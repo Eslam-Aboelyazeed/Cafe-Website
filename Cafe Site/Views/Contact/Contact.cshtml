@@ -320,13 +320,17 @@
 
 					document.getElementById("form-wrap").focus();
 
-					document.getElementById("form-wrap").scrollIntoView({
+					setTimeout(() => document.getElementById("form-wrap").scrollIntoView({
 						behavior: 'smooth',
 						block: 'center'
-					});
+					}) , 200);
+					// document.getElementById("form-wrap").scrollIntoView({
+					// 	behavior: 'smooth',
+					// 	block: 'center'
+					// });
 
 
-					setTimeout(() => $('#m2').modal('show'), 1500);
+					setTimeout(() => $('#m2').modal('show'), 1200);
 					
 				}
 			}
