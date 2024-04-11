@@ -35,6 +35,7 @@
 
     <style>
         .pagination-container {
+            font-family: "Satisfy", cursive;
             margin-top: 20px;
             text-align: center; /* Center the pagination */
         }
@@ -42,15 +43,15 @@
             .pagination-container ul.pagination li a,
             .pagination-container ul.pagination li span, .filter-button {
                 color: #ffffff; /* Text color */
-                background-color: #f0ad4e; /* Yellow background color */
-                border: 1px solid #eea236; /* Darker yellow border */
+                background-color: #BE9C79; /* Yellow background color */
+                border: 1px solid #BE9C79; /* Darker yellow border */
                 padding: 5px 10px; /* Padding */
                 margin: 0 5px; /* Margin between items */
                 border-radius: 4px; /* Rounded corners */
             }
 
             .pagination-container ul.pagination li.active span, .filter-button.active, .filter-button[disabled]:hover {
-                background-color: gray; /* Gray background for active page */
+                background-color: black; /* Gray background for active page */
                 border-color: #555555; /* Darker border for active page */
             }
 
@@ -62,7 +63,7 @@
             }
 
             .pagination-container ul.pagination li a:hover, .filter-button:hover {
-                background-color: #e0a21d; /* Darker yellow on hover */
+                background-color: darkgoldenrod /* Darker yellow on hover */
             }
 
             .row {
@@ -140,7 +141,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12 text-center" id="ProFilters" style="margin-bottom:50px">
+                    <div class="col-md-12 text-center" id="ProFilters" style="margin-bottom:50px; font-family: 'Satisfy', cursive;">
                         <button class="filter-button" data-filter="All" id="All">All</button>
                         <button class="filter-button" data-filter="Hot Drinks" id="Hot Drinks">Hot Drinks</button>
                         <button class="filter-button" data-filter="Cold Drinks" id="Cold Drinks">Cold Drinks</button>

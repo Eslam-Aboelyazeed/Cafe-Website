@@ -43,10 +43,18 @@
 			border-radius: 5px; /* Round the corners of the cards */
 		}
 
-			.fh5co-item:hover { 
-				transform: scale(1.05);
-				box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); /* Increase the shadow on hover */
-			}
+		.fh5co-item:hover { 
+			transform: scale(1.05);
+			box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); /* Increase the shadow on hover */
+		}
+
+		.fh5co-item {
+			text-align: left;
+		}
+
+		.txt-center {
+			text-align: center;
+		}
 	</style>
 
 	</head>
@@ -146,8 +154,8 @@
 										{ *@
 										<a href="@Url.Action("Index", "ProductDetails", new { id=product.Product_Id })">
 											<img src="data:image/png;base64,@product.Product_Image" class="img-responsive" alt="@product.Product_Name">
-											<h3>@product.Product_Name</h3>
-											<p>@product.Product_Type</p>
+											<h3 class="txt-center">@product.Product_Name</h3>
+											<p class="txt-center">@product.Product_Type</p>
 
 											@if (product.SPrice == "-")
 											{
