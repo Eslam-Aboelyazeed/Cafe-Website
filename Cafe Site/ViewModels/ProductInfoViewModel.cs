@@ -12,7 +12,7 @@ namespace Cafe_Site.ViewModels
         [RegularExpression("^([a-zA-Z]:\\\\)?(?:[^\\\\/:*?\"<>|\\r\\n]+\\\\)*[^\\\\/:*?\"<>|\\r\\n]+\\.(?:jpg|jpeg|png|gif|bmp)(?![^\\\\/:*?\"<>|\\r\\n]*\")$", ErrorMessage = "Plaese Enter The Image Full Path")]
         public string? Product_Image { get; set; }
         //[Required(ErrorMessage = "The Product Quantity is Required")]
-        [Range(1, 100, ErrorMessage = "The Product Quantity Must be Higher Than 0 and Lower Than 100")]
+        [Range(0, 100, ErrorMessage = "The Product Quantity Must be between 0 and 100")]
         public int Product_Quantity { get; set; }
         [Required(ErrorMessage = "The Product Description is Required")]
         public string Product_Description { get; set; }
