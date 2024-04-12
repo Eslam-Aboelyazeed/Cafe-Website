@@ -64,11 +64,11 @@
                             @* @Html.DisplayFor(modelItem => item.Product_Image) *@
                             <img src="data:image/png;base64,@item.Product_Image" alt="@item.Product_Name Image" style="height:50px">
                         </td>
-                        <td class="align-middle">
-                            @* @Html.ActionLink("Update", "Update", new { id = item.Product_Id }) *@ <a class="text-success" href="/admindashboard/update/@item.Product_Id">Update</a> |
-                            @*  <button type="button" class="bg-transparent text-danger border-0" onclick="ShowModal(@item.Product_Id)">Delete</button> *@ <a class="text-danger" style="cursor:pointer" onclick="ShowModal(@item.Product_Id)">Delete</a>  |
-                            @*  <button type="button" class="bg-transparent text-alert border-0" onclick="ShowModalSize(@item.Product_Id)">Delete Size</button> *@ <a class="text-warning" style="cursor:pointer" onclick="ShowModalSize(@item.Product_Id)">Delete Size</a> |
-                            @* @Html.ActionLink("Order History", "GetOrdersHistory", new { id = item.Product_Id }) *@ <a class="text-primary" href="/admindashboard/GetOrdersHistory/@item.Product_Id">Order History</a>
+                        <td class="align-middle" style="display:grid;gap: 5px;font-family: 'Satisfy', cursive;">
+                            @* @Html.ActionLink("Update", "Update", new { id = item.Product_Id }) *@ <a class="update" href="/admindashboard/update/@item.Product_Id" style="color:#ddd !important; background:#BE9C79 !important; font-weight:bold; border-radius: 2px; width: 150px; padding: 5px 0;">Update</a>
+                            @*  <button type="button" class="bg-transparent text-danger border-0" onclick="ShowModal(@item.Product_Id)">Delete</button> *@ <a class="action" style="cursor:pointer;color:#ddd !important; background:#BE9C79 !important; font-weight:bold; border-radius: 2px; padding: 5px 0;" onclick="ShowModal(@item.Product_Id)">Delete</a>
+                            @*  <button type="button" class="bg-transparent text-alert border-0" onclick="ShowModalSize(@item.Product_Id)">Delete Size</button> *@ <a class="action" style="cursor:pointer;color:#ddd !important; background:#BE9C79 !important; font-weight:bold; border-radius: 2px; padding: 5px 0;" onclick="ShowModalSize(@item.Product_Id)">Delete Size</a>
+                            @* @Html.ActionLink("Order History", "GetOrdersHistory", new { id = item.Product_Id }) *@ <a class="action" href="/admindashboard/GetOrdersHistory/@item.Product_Id" style="cursor:pointer;color:#ddd !important; background:#BE9C79 !important; font-weight:bold; border-radius: 2px; padding: 5px 0;">Order History</a>
                             @* <a href="" onclick="ShowModal(@item.Product_Id)">Delete</a> *@
                             @* @Html.ActionLink("Delete", "Delete", "AdminDashboard", new { id = item.Product_Id }, new { onclick = $"ShowModal({item.Product_Id})" }) *@
                         </td>

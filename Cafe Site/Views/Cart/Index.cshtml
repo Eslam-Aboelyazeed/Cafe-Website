@@ -23,6 +23,10 @@
     .billing-address-form form p input {
         background-color: #ddd;
     }
+
+    .boxed-btn:hover {
+        background: darkorange;
+    }
 </style>
 
 @if(Model != null && Model?.Count > 0)
@@ -63,35 +67,18 @@
                                     </div>
                                 </div>
                                 <div class="card single-accordion" style="background-color:#181818; border:none">
-                                    <div class="card-header" id="headingTwo" style="background-color:#181818; border:none">
-                                        <h5 class="mb-0" style="border:none">
-                                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                                    data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="background-color:#181818; color:#ddd;">
-                                                Shipping Address
-                                            </button>
-                                        </h5>
-                                    </div>
-                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            <div class="shipping-address-form">
-                                                <p>Your shipping address form is here.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card single-accordion" style="background-color:#181818; border:none">
                                     <div class="card-header" id="headingThree" style="background-color:#181818; border:none">
                                         <h5 class="mb-0" style="border:none">
                                             <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                                                     data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="background-color:#181818; color:#ddd;">
-                                                Card Details
+                                                Cart Details
                                             </button>
                                         </h5>
                                     </div>
                                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample" style="background-color:#181818;">
                                         <div class="card-body" style="background-color:#181818;">
                                             <div class="card-details" style="background-color:#181818;">
-                                                <div class="col-lg-12 col-md-12" style="background-color:#181818;">
+                                                <div class="col-lg-12 col-md-12" style="background-color:#181818; color: #ddd;">
                                                     <div class="cart-table-wrap" style="background-color:#181818;">
                                                         <table id="cartTable" class="cart-table" style="background-color:#181818; color:var(--bs-gray-500)">
                                                             <thead class="cart-table-head" style="background-color:#181818;">
@@ -137,7 +124,7 @@
                     </div>
 
                     <div class="col-lg-4" style="background-color:#181818; color:var(--bs-gray-500)">
-                        <div class="order-details-wrap" style="background-color:#181818;">
+                        <div class="order-details-wrap" style="background-color:#181818; color: #ddd">
                             <table class="order-details" style="background-color:#181818;">
                                 <thead style="background-color:#181818;">
                                     <tr style="background-color:#181818; color:var(--bs-gray-400)">
@@ -173,7 +160,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <a onclick="SendData(@Model[0].Order_Id)" class="boxed-btn" style="color: #ddd;">Place Order</a>
+                        <a onclick="SendData(@Model[0].Order_Id)" class="boxed-btn" style="color: #ddd;background: #BE9C79; font-family: 'Satisfy', cursive;">Place Order</a>
                         </div>
                     </div>
                 </div>
