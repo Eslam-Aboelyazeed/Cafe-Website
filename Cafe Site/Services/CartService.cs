@@ -34,11 +34,11 @@ namespace Cafe_Site.Services
             }).ToList();
         }
 
-        public bool DeleteFromCart(int oid, int pid)
+        public bool DeleteFromCart(int oid, int pid, char psize)
         {
             try
             {
-                repository.Delete(repository.GetElement(op => op.Order_Id == oid && op.Product_Id == pid, null));
+                repository.Delete(repository.GetElement(op => op.Order_Id == oid && op.Product_Id == pid && op.Size == psize, null));
 
                 repository.SaveChanges();
 
@@ -52,21 +52,23 @@ namespace Cafe_Site.Services
 
 		public bool Checkout(Dictionary<string, string> data)
         {
-            foreach (var item in data.Keys)
+            foreach (var i in data.Keys)
             {
                 bool flag;
                 int value;
+                char size = i[i.Length - 1];
+                string item = i.Remove(i.Length - 1);
 
                 flag = int.TryParse(item, out value);
 
                 if (flag)
                 {
                     var oproduct = repository.GetElement(
-                        op => op.Product_Id == value && op.Order_Id == int.Parse(data["OID"]) && op.Size == char.Parse(data[$"s{item}"]), null);
+                        op => op.Product_Id == value && op.Order_Id == int.Parse(data["OID"]) && op.Size == size, null);
 
                     if (oproduct != null)
                     {
-                        oproduct.Quantity = int.Parse(data[item]);
+                        oproduct.Quantity = int.Parse(data[i]);
 
                         repository.Update(oproduct);
 
@@ -74,12 +76,12 @@ namespace Cafe_Site.Services
                         
                         if(product != null)
                         {
-                            if ((product.Product_Quantity - int.Parse(data[item])) < 0)
+                            if ((product.Product_Quantity - int.Parse(data[i])) < 0)
                             {
                                 return false;
                             }
 
-                            product.Product_Quantity -= int.Parse(data[item]);
+                            product.Product_Quantity -= int.Parse(data[i]);
 
                             pRepository.Update(product);
                         }

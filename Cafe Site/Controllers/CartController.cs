@@ -21,9 +21,9 @@ namespace Cafe_Site.Controllers
             return View("Index", products);
         }
 
-        public IActionResult RemoveFromCart(int oid, int pid)
+        public IActionResult RemoveFromCart(int oid, int pid, char psize)
         {
-            var result = cartService.DeleteFromCart(oid, pid);
+            var result = cartService.DeleteFromCart(oid, pid, psize);
 
             //var result = true;
 

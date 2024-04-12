@@ -6,8 +6,9 @@ namespace Cafe_Site.Services
     {
         public List<CartViewModel> GetProducts(string uid);
 
-        public bool DeleteFromCart(int oid, int pid);
+		public bool DeleteFromCart(int oid, int pid, char psize);
 
-        public bool Checkout(Dictionary<string, string> data);
+
+		public bool Checkout(Dictionary<string, string> data);
 	}
 }
