@@ -1,0 +1,207 @@
+@section scripting{
+    <script>
+        
+
+
+        /** set rating */
+        let stars = document.getElementsByClassName("rate")[0].getElementsByTagName("label");
+        let rate=0;
+        console.log(stars);
+        $(stars).hover(function () {
+            let hovered = $(this).attr("id");
+            for (var i = 0; i < hovered; i++) {
+                $(stars[i]).attr("style", "font-size: 40px; color: #f9f21a")
+            }
+        }, function(){
+            for (var i = rate; i < 5; i++) {
+                $(stars[i]).attr("style", "font-size: 40px; color: #878787")
+            }
+        })
+        $(stars).on("click", function () {
+            for (var i = 0; i < 5; i++) {
+                $(stars[i]).attr("style", "font-size: 40px; color: #878787")
+            }
+            rate = $(this).attr("id");
+            for (var i = 0; i < rate; i++) {
+                $(stars[i]).attr("style", "font-size: 40px; color: #f9f21a")
+            }
+        })
+
+        $(".sizeLabel").on("click", function () {
+            var size = $(this).html();
+            console.log(this);
+            if (size == "M")
+                    $(".price").text(@Model.productSizePrices.Where(x => x.Size == 'M' && x.Product_Id == Model.Product.Product_Id).Select(p => p.Price.ToString("0.00")).FirstOrDefault()+" $");
+            else if(size == "S")
+                    $(".price").text(@Model.productSizePrices.Where(x => x.Size == 'S' && x.Product_Id == Model.Product.Product_Id).Select(p => p.Price.ToString("0.00")).FirstOrDefault()+" $");
+            else
+                    $(".price").text(@Model.productSizePrices.Where(x => x.Size == 'L' && x.Product_Id == Model.Product.Product_Id).Select(p => p.Price.ToString("0.00")).FirstOrDefault()+" $");
+
+        })
+
+        $(".additions").on("click", function () {
+                
+            var id = $(this).attr("id");
+            console.log($(this).siblings("label").first());
+            if (this.checked) { 
+                $(this).siblings("label").html("<i class='fa-regular fa-trash-can fa-xl' style='color: #de1717; '></i>")
+            }
+            else
+            {
+                $(this).siblings("label").html("<i class='fa-regular fa-square-plus fa-xl' style='color:#1d9d1b'></i>")
+            }
+        })
+
+
+        $(".addToCart").on("click", function () {
+            console.log("buttonAddtoCart");
+            var productId = @Model.Product.Product_Id; // Assuming you're passing the product ID to the view model
+            var size = $('.sizeInput:checked').val(); // Assuming the size is selected from a dropdown
+            var productAdds = [];
+            $('.additions:checked').each(function () {
+                productAdds.push($(this).val());
+            });
+
+                console.log(productId)
+                console.log(size)
+                console.log(productAdds)
+
+        $.ajax({
+            url: '@Url.Action("addProductToCart", "ProductDetails")',
+            type: 'POST',
+            data: {
+                product: productId,
+                size: size,
+                productAdds: productAdds
+            },
+            success: function (result) {
+                if (result.success) {
+
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success',
+                                text: 'Product added to cart successfully!',
+                                confirmButtonColor: '#BE9C79',  // Set button color
+                                confirmButtonText: 'OK',
+                                theme: 'dark',
+                                customClass: {
+                                    container: 'dark-mode-alert',
+                                    title: 'dark-mode-title',
+                                    content: 'dark-mode-content',
+                                    confirmButton: 'dark-mode-confirm-button'
+                                }
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload(); // Reload the page or do any other action
+                                }
+                            });
+
+                           
+                } else {
+
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'This product is not available now',
+                                confirmButtonColor: '#BE9C79',  // Set button color
+                                confirmButtonText: 'OK',
+                                theme: 'dark',
+                                customClass: {
+                                    container: 'dark-mode-alert',
+                                    title: 'dark-mode-title',
+                                    content: 'dark-mode-content',
+                                    confirmButton: 'dark-mode-confirm-button'
+                                }
+                            });
+
+                }
+            },
+            error: function () {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Error occurred while adding product to cart.',
+                            confirmButtonColor: '#BE9C79',  // Set button color
+                            confirmButtonText: 'OK',
+                            theme: 'dark',
+                            customClass: {
+                                container: 'dark-mode-alert',
+                                title: 'dark-mode-title',
+                                content: 'dark-mode-content',
+                                confirmButton: 'dark-mode-confirm-button'
+                            }
+                        });
+
+            }
+        });
+    });
+
+        $(".addReview").on("click", function () {
+            var rate = $(".rate>input:checked").val();
+           
+            var review = $(".reviewMsg").val();
+
+            
+           
+                    $.ajax({
+                        url: '@Url.Action("review", "ProductDetails")',
+                        type: 'POST',
+                        data: {
+                            rate: rate,
+                            review: review,
+                            id: @Model.Product.Product_Id
+                                },
+                        success: function (result) {
+                       
+                            if (result.success == "empty") {
+
+                                $(".reviewError").removeClass("invisible");
+                            }
+                        else if (result.success == "Your review is added successfully!")
+                            {
+                                $("#exampleModal").modal("show");
+                                $(".modal-body").html(result.success);
+                                $(".modalBtn").on("click", function () {
+                                    location.reload();
+                                })
+
+                            }
+                            else {
+                                $("#exampleModal").modal("show");
+                                $(".modal-body").html(result.success);
+                                
+
+                            }
+                           
+                        },
+                        error: function () {
+                        $("#exampleModal").modal("show");
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Error occurred while adding review.',
+                            confirmButtonColor: '#BE9C79',  // Set button color
+                            confirmButtonText: 'OK',
+                            theme: 'dark',
+                            customClass: {
+                                container: 'dark-mode-alert',
+                                title: 'dark-mode-title',
+                                content: 'dark-mode-content',
+                                confirmButton: 'dark-mode-confirm-button'
+                            }
+                        });
+
+
+                        }
+                    });
+
+                $('.rate>input').prop('checked', false);
+                $(".rate>label").css("color", "#878787");
+                $(".reviewMsg").val("");
+
+
+                
+        });
+    </script>
+    
+}
