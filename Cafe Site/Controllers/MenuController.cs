@@ -31,11 +31,6 @@ namespace Cafe_Site.Controllers
                 Filter = filter
             };
 
-            //if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
-            //{
-            //    return PartialView("_ProductsPartial", viewModel);
-            //}
-
             return View(viewModel);
         }
 

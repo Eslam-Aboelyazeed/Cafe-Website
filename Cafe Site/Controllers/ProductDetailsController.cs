@@ -12,7 +12,6 @@ namespace Cafe_Site.Controllers
         private readonly IProductDetailsService productDetailsServ;
         private readonly IDefaultService defaultService;
         Product product;
-        //int id;
         public ProductDetailsController(IProductDetailsService productDetails, IDefaultService Service)
         {
             productDetailsServ=productDetails;
@@ -43,25 +42,6 @@ namespace Cafe_Site.Controllers
             var userName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
 
 			string added=productDetailsServ.addReview(rate, review, id,userId ,userName, product);
-            
-            //if (added == true)
-            //{
-            //    product = productDetailsServ.Getproduct(id);
-            //    string type = product.Product_Type;
-            //    List<Product> products = productDetailsServ.GetAddProducts(type);
-            //    List<Product_Reviews> productReview = productDetailsServ.GetProductReviews(id);
-            //    List<Product_Size_Price> productSizes = productDetailsServ.GetProductSizes(id);
-
-            //    ProductDetailsModel viewModel = new ProductDetailsModel()
-            //    {
-            //        AddProducts = products,
-            //        productReviews = productReview,
-            //        productSizePrices = productSizes,
-            //        Product = product,
-            //        reviewMsg= "Your review is added successfully!"
-            //    };
-            //    return View("ProductDetails", viewModel);
-            //}
 
             return Json(new { success = added });
         }

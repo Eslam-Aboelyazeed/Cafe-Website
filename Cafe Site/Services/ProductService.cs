@@ -17,11 +17,6 @@ namespace Cafe_Site.Services
         private readonly IDefaultRepository<Product_Size_Price> psrepository;
         private readonly IDefaultService defaultService;
 		private readonly ICartRepository crepository;
-        //private readonly IDefaultRepository<Order> orepository;
-
-        //private readonly UserManager<ApplicationUser> urepo;
-
-        //private readonly IDefaultRepository<aspnet> urepo;
 
         public ProductService(IDefaultRepository<Product> repository, IDefaultRepository<Product_Size_Price> psrepository, IDefaultService defaultService, ICartRepository crepository)
         {
@@ -29,8 +24,6 @@ namespace Cafe_Site.Services
             this.psrepository = psrepository;
             this.defaultService = defaultService;
 			this.crepository = crepository;
-            //this.orepository = orepository;
-            //this.urepo = urepo;
         }
 
         public DashboardViewModel GetProductsForAdminIndex(int page, int pageSize, string filter, string type)
@@ -107,7 +100,6 @@ namespace Cafe_Site.Services
                 MPrice = (p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'M') != null) ? p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'M').Price.ToString("0.00") : "-",
                 LPrice = (p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'L') != null) ? p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'L').Price.ToString("0.00") : "-",
                 Product_Image = Convert.ToBase64String(p.Product_Image?? defaultByteArray),
-                //Product_Image = p.Product_Image,
                 userId = p.userId
             }).ToList();
 
@@ -129,7 +121,6 @@ namespace Cafe_Site.Services
 				MPrice = (p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'M') != null) ? p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'M').Price.ToString("0.00") : "-",
 				LPrice = (p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'L') != null) ? p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'L').Price.ToString("0.00") : "-",
 				Product_Image = Convert.ToBase64String(p.Product_Image ?? defaultByteArray),
-				//Product_Image = p.Product_Image,
 				userId = p.userId
 			}).ToList();
 
@@ -151,7 +142,6 @@ namespace Cafe_Site.Services
 				MPrice = (p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'M') != null) ? p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'M').Price.ToString("0.00") : "-",
 				LPrice = (p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'L') != null) ? p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'L').Price.ToString("0.00") : "-",
 				Product_Image = Convert.ToBase64String(p.Product_Image ?? defaultByteArray),
-				//Product_Image = p.Product_Image,
 				userId = p.userId
 			}).ToList();
 
@@ -173,7 +163,6 @@ namespace Cafe_Site.Services
                 MPrice = (p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'M') != null) ? p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'M').Price.ToString("0.00") : "-",
                 LPrice = (p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'L') != null) ? p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'L').Price.ToString("0.00") : "-",
                 Product_Image = Convert.ToBase64String(p.Product_Image ?? defaultByteArray),
-                //Product_Image = p.Product_Image,
                 userId = p.userId
             }).ToList();
 
@@ -195,7 +184,6 @@ namespace Cafe_Site.Services
                 MPrice = (p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'M') != null) ? p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'M').Price.ToString("0.00") : "-",
                 LPrice = (p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'L') != null) ? p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'L').Price.ToString("0.00") : "-",
                 Product_Image = Convert.ToBase64String(p.Product_Image ?? defaultByteArray),
-                //Product_Image = p.Product_Image,
                 userId = p.userId
             }).ToList();
 
@@ -217,7 +205,6 @@ namespace Cafe_Site.Services
                 MPrice = (p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'M') != null) ? p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'M').Price.ToString("0.00") : "-",
                 LPrice = (p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'L') != null) ? p.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == p.Product_Id && ps.Size == 'L').Price.ToString("0.00") : "-",
                 Product_Image = Convert.ToBase64String(p.Product_Image ?? defaultByteArray),
-                //Product_Image = p.Product_Image,
                 userId = p.userId
             }).ToList();
 
@@ -298,10 +285,9 @@ namespace Cafe_Site.Services
                 Product_Type = product.Product_Type,
                 Product_Quantity = product.Product_Quantity,
                 Product_Description = product.Product_Description,
-                SPrice = (product.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == product.Product_Id && ps.Size == 'S') != null) ? product.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == product.Product_Id && ps.Size == 'S').Price.ToString("0.00") : "0",  //"-",
-                MPrice = (product.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == product.Product_Id && ps.Size == 'M') != null) ? product.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == product.Product_Id && ps.Size == 'M').Price.ToString("0.00") : "0",  //"-",
-                LPrice = (product.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == product.Product_Id && ps.Size == 'L') != null) ? product.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == product.Product_Id && ps.Size == 'L').Price.ToString("0.00") : "0",  //"-",
-                //Product_Image = Convert.ToBase64String(product.Product_Image),
+                SPrice = (product.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == product.Product_Id && ps.Size == 'S') != null) ? product.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == product.Product_Id && ps.Size == 'S').Price.ToString("0.00") : "0", 
+                MPrice = (product.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == product.Product_Id && ps.Size == 'M') != null) ? product.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == product.Product_Id && ps.Size == 'M').Price.ToString("0.00") : "0", 
+                LPrice = (product.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == product.Product_Id && ps.Size == 'L') != null) ? product.Product_Size_Prices.FirstOrDefault(ps => ps.Product_Id == product.Product_Id && ps.Size == 'L').Price.ToString("0.00") : "0", 
                 userId = product.userId
             };
 

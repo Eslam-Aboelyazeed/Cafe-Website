@@ -9,23 +9,21 @@
 {
     <li>
         <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })" method="post" id="logoutForm" class="navbar-right" style="margin-top:-5px; display:inline">
-                    @* <ul class="nav navbar-nav navbar-right"> *@
+
             <li>
                 <a asp-area="Identity" asp-page="/Account/Manage/Index" style="padding-top:0; padding-bottom:0" title="Manage"><img src="/images/user.png" style="height:25px; padding-right:5px" />Hello @User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value</a>
-                        @* @UserManager.GetUserName(User)!</a> *@
+
             </li>
             <li>
-        <button type="submit" style="padding-top:0; color:rgba(255, 255, 255, 0.7); font-size:large" class="btn btn-link navbar-btn navbar-link"><img src="/images/out_10609305.png" style="height:25px; padding-right:5px" />Logout</button>
+                <button type="submit" style="padding-top:0; color:rgba(255, 255, 255, 0.7); font-size:large" class="btn btn-link navbar-btn navbar-link"><img src="/images/out_10609305.png" style="height:25px; padding-right:5px" />Logout</button>
             </li>
-            @* </ul> *@
+
         </form>
-    </li>
+        </li>
 
 }
 else
 {
-    @* <ul class="nav navbar-nav navbar-right" style="margin: 0; padding:0"> *@
         <li><a style="margin-right: 25px; padding:5px" asp-area="Identity" asp-page="/Account/Register">Register</a></li>
         <li><a style="margin: 0; padding:5px" asp-area="Identity" asp-page="/Account/Login">Login</a></li>
-    @* </ul> *@
 }

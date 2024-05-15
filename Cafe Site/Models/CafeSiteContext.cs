@@ -18,11 +18,6 @@ namespace Cafe_Site.Models
 
 		public CafeSiteContext(DbContextOptions<CafeSiteContext> options):base(options){}
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlServer("Server=.;Database=CafeSiteDB;Trusted_Connection=True;TrustServerCertificate=True");
-        //}
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

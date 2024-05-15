@@ -46,8 +46,6 @@ namespace Cafe_Site.Controllers
 
 					ViewBag.Message = "Message sent successfully!";
 
-					//modelstate.clear();
-
 					return View("Contact",new ContactViewModels()
 					{
 						flag = true,

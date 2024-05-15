@@ -56,12 +56,6 @@
 	<!-- Modernizr JS -->
 	<script src="~/js/modernizr-2.6.2.min.js"></script>
 
-
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
-
 </head>
 <body>
 
@@ -70,7 +64,6 @@
 
 	<div id="page">
 		<nav class="fh5co-nav" role="navigation">
-			<!-- <div class="top-menu"> -->
 			<div class="container">
 				<div class="row">
 					<div class="col-xs-12 text-center logo-wrap">
@@ -95,9 +88,7 @@
 						</ul>
 					</div>
 				</div>
-
 			</div>
-			<!-- </div> -->
 		</nav>
 
 
@@ -111,7 +102,6 @@
 						<div class="display-t js-fullheight">
 							<div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
 								<h1>Get <em>in</em> Touch</h1>
-								@* <h2>Brought to you by <a href="http://freehtml5.co/" target="_blank">freehtml5.co</a></h2> *@
 							</div>
 						</div>
 					</div>
@@ -157,7 +147,6 @@
 							<div class="row form-group">
 								<div class="col-md-12">
 									<input type="submit" class="btn btn-primary btn-outline btn-lg" value="Submit Form">
-									@* <button type="button" class="btn btn-primary btn-outline btn-lg" onclick="ShowModal()">Submit</button> *@
 								</div>
 							</div>
 
@@ -324,21 +313,11 @@
 						behavior: 'smooth',
 						block: 'center'
 					}) , 200);
-					// document.getElementById("form-wrap").scrollIntoView({
-					// 	behavior: 'smooth',
-					// 	block: 'center'
-					// });
-
 
 					setTimeout(() => $('#m2').modal('show'), 1200);
 					
 				}
 			}
-
-
-				// console.log(document.getElementById("Name").value);
-				// console.log(document.getElementById("Email").value);
-				// console.log(document.getElementById("Message").value);
 
 			$('#form-wrap').submit(function (e) {
 				e.preventDefault();

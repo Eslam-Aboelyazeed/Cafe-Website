@@ -18,7 +18,6 @@ namespace Cafe_Site
             (builder.Configuration.GetConnectionString("cs")));
 
             builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false).AddRoles<IdentityRole>().AddEntityFrameworkStores<CafeSiteContext>();
-            //builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<CafeSiteContext>();
 
 
             builder.Services.AddScoped< IDefaultRepository<Product>, DefaultRepository<Product> >();
@@ -62,11 +61,6 @@ namespace Cafe_Site
 
             app.UseAuthorization();
 
-            //app.MapControllerRoute(
-            //    name: "default",
-            //   // pattern: "{controller=AdminDashboard}/{action=Index}/{id?}");
-            //pattern: "{controller=Home}/{action=Index}/{id?}");
-            //app.MapRazorPages();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

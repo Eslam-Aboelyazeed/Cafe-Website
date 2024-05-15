@@ -2,8 +2,7 @@
 
 
 <div id="products-section" data-current-page="@Model.CurrentPage" data-total-pages="@Model.TotalPages">
-@*     @foreach (var product in Model.Products)
-    { *@
+
     <div class="container-fluid p-0" style="overflow:auto">
         <table class="table text-center text-light">
             <thead>
@@ -61,21 +60,17 @@
                             @Html.DisplayFor(modelItem => item.LPrice)
                         </td>
                         <td class="align-middle">
-                            @* @Html.DisplayFor(modelItem => item.Product_Image) *@
                             <img src="data:image/png;base64,@item.Product_Image" alt="@item.Product_Name Image" style="height:50px">
                         </td>
                         <td class="align-middle" style="display:grid;gap: 5px;font-family: 'Satisfy', cursive;">
-                            @* @Html.ActionLink("Update", "Update", new { id = item.Product_Id }) *@ <a class="action update" href="/admindashboard/update/@item.Product_Id" style="color:#ddd !important; background:#BE9C79 !important; font-weight:bold; border-radius: 2px; width: 150px; padding: 5px 0;" onmouseover="this.style.backgroundColor='darkorange'" onmouseout="this.style.backgroundColor='#BE9C79'">Update</a>
-                            @*  <button type="button" class="bg-transparent text-danger border-0" onclick="ShowModal(@item.Product_Id)">Delete</button> *@ <a class="action delete" style="cursor:pointer;color:#ddd !important; background:#BE9C79 !important; font-weight:bold; border-radius: 2px; padding: 5px 0; " onmouseover="this.style.backgroundColor='darkorange'" onmouseout="this.style.backgroundColor='#BE9C79'" onclick="ShowModal(@item.Product_Id)">Delete</a>
-                            @*  <button type="button" class="bg-transparent text-alert border-0" onclick="ShowModalSize(@item.Product_Id)">Delete Size</button> *@ <a class="action deleteSize" style="cursor:pointer;color:#ddd !important; background:#BE9C79 !important; font-weight:bold; border-radius: 2px; padding: 5px 0;" onmouseover="this.style.backgroundColor='darkorange'" onmouseout="this.style.backgroundColor='#BE9C79'" onclick="ShowModalSize(@item.Product_Id)">Delete Size</a>
-                            @* @Html.ActionLink("Order History", "GetOrdersHistory", new { id = item.Product_Id }) *@ <a class="action orderHistory" href="/admindashboard/GetOrdersHistory/@item.Product_Id" style="cursor:pointer;color:#ddd !important; background:#BE9C79 !important; font-weight:bold; border-radius: 2px; padding: 5px 0;" onmouseover="this.style.backgroundColor='darkorange'" onmouseout="this.style.backgroundColor='#BE9C79'">Order History</a>
-                            @* <a href="" onclick="ShowModal(@item.Product_Id)">Delete</a> *@
-                            @* @Html.ActionLink("Delete", "Delete", "AdminDashboard", new { id = item.Product_Id }, new { onclick = $"ShowModal({item.Product_Id})" }) *@
+                            <a class="action update" href="/admindashboard/update/@item.Product_Id" style="color:#ddd !important; background:#BE9C79 !important; font-weight:bold; border-radius: 2px; width: 150px; padding: 5px 0;" onmouseover="this.style.backgroundColor='darkorange'" onmouseout="this.style.backgroundColor='#BE9C79'">Update</a>
+                            <a class="action delete" style="cursor:pointer;color:#ddd !important; background:#BE9C79 !important; font-weight:bold; border-radius: 2px; padding: 5px 0; " onmouseover="this.style.backgroundColor='darkorange'" onmouseout="this.style.backgroundColor='#BE9C79'" onclick="ShowModal(@item.Product_Id)">Delete</a>
+                            <a class="action deleteSize" style="cursor:pointer;color:#ddd !important; background:#BE9C79 !important; font-weight:bold; border-radius: 2px; padding: 5px 0;" onmouseover="this.style.backgroundColor='darkorange'" onmouseout="this.style.backgroundColor='#BE9C79'" onclick="ShowModalSize(@item.Product_Id)">Delete Size</a>
+                            <a class="action orderHistory" href="/admindashboard/GetOrdersHistory/@item.Product_Id" style="cursor:pointer;color:#ddd !important; background:#BE9C79 !important; font-weight:bold; border-radius: 2px; padding: 5px 0;" onmouseover="this.style.backgroundColor='darkorange'" onmouseout="this.style.backgroundColor='#BE9C79'">Order History</a>
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
     </div>
-    @* } *@
 </div>

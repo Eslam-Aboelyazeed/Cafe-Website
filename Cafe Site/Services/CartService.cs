@@ -87,15 +87,6 @@ namespace Cafe_Site.Services
                         }
                     }
                 }
-                //if (item[0]. == Type.)
-                //{
-                //    // code to update the order total price
-
-                //}
-                //else if ((!item.StartsWith('s')) && (!item.StartsWith('p')) && item != "OID" && item != "Total")
-                //{
-
-                //}
             }
 
             var order = orderRepository.GetElement(o => o.Order_Id == int.Parse(data["OID"]), null);

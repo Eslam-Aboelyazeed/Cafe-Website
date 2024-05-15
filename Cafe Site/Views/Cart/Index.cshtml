@@ -21,7 +21,6 @@
 
 @if(Model != null && Model?.Count > 0)
 {
-    @* <div id="CartContent"> *@
         <!-- check out section -->
         <div class="checkout-section mt-150 mb-150">
             <div class="container">
@@ -86,8 +85,6 @@
 
                                                                 @foreach (var item in Model)
                                                                 {
-                                                                    @*                                                                 <tr>
-                                                            <div id="@(item.Product_Id)div"> *@
                                                                     <tr class="table-body-row" id="@(item.Product_Id)@(item.Product_Size)" style="background-color:#181818;">
                                                                         <td class="product-remove"><button type="button" id="@(item.Product_Id)@(item.Product_Size)Del" class="bg-transparent text-danger border-0" onclick="ShowModal(@item.Order_Id, @item.Product_Id, document.getElementById('s@(item.Product_Id)@(item.Product_Size)').innerText)"><i class="far fa-window-close"></i></button></td>
                                                                         <td class="product-image"><img src="data:image/png;base64,@item.Product_Image" alt="@item.Product_Name Image" style="height:50px"></td>
@@ -97,8 +94,6 @@
                                                                         <td class="product-quantity" style="text-align: center;"><input style="text-align: center; font-weight:bold; background: #181818; color: #ddd;" type="number" id="q@(item.Product_Id)@(item.Product_Size)" placeholder="1" value="@item.Quantity" min="1" max="@item.MaxQuantity" onchange="ModifyQuantity(@item.Product_Id, document.getElementById('s@(item.Product_Id)@(item.Product_Size)').innerText)"></td>
                                                                         <td class="product-total" id="t@(item.Product_Id)@(item.Product_Size)">$@(item.Product_Price * item.Quantity)</td>
                                                                     </tr>
-                                                                    @*                                                                     </div>
-                                                            </tr> *@
                                                                 }
                                                             </tbody>
                                                         </table>
@@ -157,7 +152,6 @@
             </div>
         </div>
         <!-- end check out section -->
-    @* </div> *@
 
     <!-- Start Modal Section -->
 
@@ -210,7 +204,6 @@ else
     </div>
 }
 @section Scripts {
-    @* <script src="/js/jquery-1.11.3.min.js"></script> *@
     
     <script src="/bootstrap/js/cartbootstrap.min.js"></script>
 
@@ -228,14 +221,12 @@ else
 
     <script src="/js/cartmain.js"></script>
 
-    @* <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> *@
     <script src="~/js/bootstrap.bundle.js"></script>
 
 
 <script>
     let list = @Html.Raw(Json.Serialize(Model));
-        // console.log(list);
-            // let list = Html.Raw(Json.Serialize(Model));
+
     if(list != null && list.length > 0){
         function CalculateTotal(){
             let total = document.getElementById("Total");
@@ -248,9 +239,7 @@ else
                 let x = proPrices[i].innerText.split('');
                 x.shift();
                 let y = x.join('');
-                // sum += Number(proPrices[i].innerText.split('').splice(0, 1).join(''));
                 sum += Number(y);
-                // console.log(y);
             }
 
             stotal.innerText = "$" + sum.toFixed(2);
@@ -278,8 +267,7 @@ else
         }
 
         function ShowModal(oid, pid, s) {
-            // console.log("oid = " + oid);
-            // console.log("pid = " + pid);
+
             let modal = new bootstrap.Modal(document.getElementById('m1'));
 
             let b1 = document.createElement("a");
@@ -297,7 +285,6 @@ else
             b2.style.color = "white";
             b2.setAttribute("data-bs-dismiss", "modal");
             b2.onclick = DeleteProductFromCart.bind(this, oid, pid, s);
-            // b2.setAttribute("href", `/Cart/RemoveFromCart?oid=${oid}&pid=${pid}`);
 
             let mf = document.getElementById('mf');
 
@@ -323,7 +310,6 @@ else
                 type: "DELETE",
                 dataType: "json",
                 success: function (data) {
-                    // console.log(data);
 
                     if(data.success){
                             let modal = new bootstrap.Modal(document.getElementById('m2'));
@@ -353,26 +339,11 @@ else
 
                             modal.show();
 
-                            // document.getElementById(`${pid}div`).style.height = document.getElementById(`${pid}div`).clientHeight + `px`;
-                            // document.getElementById(`${pid}Del`).children[0].style.height = document.getElementById(`${pid}Del`).children[0].clientHeight + `px`;
-                            // $(`#${pid}`).children().height($(`#${pid}Del`).height());
-
-                            // setTimeout(() => {
-                            // $(`#${pid}`).children().children().slideUp("slow", "swing", function (pid) {
-                            //     // document.getElementById(`${pid}`).remove();
-                            // }.bind(this, pid));
-                            // $(`#${pid}`).children().innerText = '';
-                            // $(`#${pid}`).children().slideUp("slow", "swing", function (pid) {
-                            //     // document.getElementById(`${pid}`).remove();
-                            // }.bind(this, pid));
-                            // }, 1000);
-
                             document.getElementById(`${pid}${s}`).remove();
                             document.getElementById(`pn${pid}${s}`).remove();
                             document.getElementById(`tt${pid}${s}`).remove();
                             CalculateTotal();
                             list = list.filter(obj => obj.product_Id !== pid && obj.product_Size !== s);
-                            // console.log(list);
                     } else {
                         let modal = new bootstrap.Modal(document.getElementById('m2'));
 
@@ -410,34 +381,12 @@ else
 
         function SendData(oid) {
             let dict = {};
-            // let list = Html.Raw(Json.Serialize(Model));
-
-            // console.log(list);
 
             for(let i = 0; i < list.length; i++){
                 let j = list[i].product_Size.split('');
                 let k = j[0];
 
                 dict[`${list[i].product_Id}${k}`] = document.getElementById(`q${list[i].product_Id}${list[i].product_Size}`).value;
-
-
-                // let j = document.getElementById(`s(${list[i].product_Id}${list[i].product_Size})`).innerText.split('');
-                // let k = j[0];
-
-                // dict[`s${list[i].product_Id}`] = k;
-
-
-
-                // let a = document.getElementById(`p(${id})`).innerText.split('');
-                // a.shift();
-                // let b = a.join('');
-
-                // dict[`p${list[i].product_Id}`] = b;
-
-
-                // console.log(document.getElementById(`q(${list[i].product_Id})`).value);
-                // console.log(document.getElementById(`s(${list[i].product_Id})`).innerText);
-                // console.log(dict);
             }
 
             dict[`OID`] = oid.toString();
@@ -447,8 +396,6 @@ else
             let y = x.join('');
 
             dict[`Total`] = y;
-
-            // console.log(dict);
 
             let modal = new bootstrap.Modal(document.getElementById('m1'));
 
@@ -466,54 +413,8 @@ else
             b2.setAttribute("data-bs-dismiss", "modal");
             b1.style.color = "white";
             b2.style.color = "white";
-            // b2.setAttribute("href", `/Cart/RemoveFromCart?oid=${oid}&pid=${pid}`);
+
             b2.onclick = Checkout.bind(this, dict);
-            // b2.addEventListener('click', function (dict) {
-            //     $.ajax({
-            //         type: "POST",
-            //         url: '/Cart/Checkout',
-            //         data: JSON.stringify(dict),
-            //         contentType: "application/json; charset=utf-8",
-            //         dataType: "json",
-            //         success: function (response) {
-            //             console.log("Success:", response);
-            //             if (response) {
-            //                 location.reload();
-            //             } else {
-            //                 let modal = new bootstrap.Modal(document.getElementById('m1'));
-
-            //                 let b1 = document.createElement("a");
-
-            //                 b1.classList = "btn btn-secondary";
-
-
-            //                 b1.innerText = "No";
-
-            //                 b1.setAttribute("data-bs-dismiss", "modal");
-            //                 b1.style.color = "white";
-
-            //                 let mf = document.getElementById('mf');
-
-            //                 let mt = document.getElementById('ModalText');
-
-            //                 let ml = document.getElementById('exampleModalLabel');
-
-            //                 ml.innerText = "Out of Stock";
-
-            //                 mt.innerText = "This Product is Out of Stock, Try Again Later!";
-
-            //                 mf.innerHTML = "";
-
-            //                 mf.append(b1);
-
-            //                 modal.show();
-            //             }
-            //         },
-            //         error: function (error) {
-            //             console.log("Error:", error);
-            //         }
-            //     });
-            // }.bind(null, dict));
 
             let mf = document.getElementById('mf');
 
@@ -530,9 +431,6 @@ else
             mf.append(b1, b2);
 
             modal.show();
-
-
-           
         }
 
         function Checkout(dict){
@@ -545,7 +443,7 @@ else
                 success: function (response) {
                     console.log("Success:", response);
                     if (response.success) {
-                        // location.reload();
+
                         let modal = new bootstrap.Modal(document.getElementById('m2'));
 
                         let b1 = document.createElement("a");
@@ -602,7 +500,6 @@ else
 
                         modal.show();
 
-                        // location.reload();
                     }
                 },
                 error: function (error) {

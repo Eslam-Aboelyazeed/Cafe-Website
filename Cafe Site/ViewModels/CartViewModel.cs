@@ -11,7 +11,6 @@ namespace Cafe_Site.ViewModels
         public int Quantity { get; set; }
         public decimal? Product_Price { get; set; }
         public string? Product_Size { get; set; }
-        //public List<Order_Products> Order_Products { get; set; }
         public int MaxQuantity { get; set; }
 
     }

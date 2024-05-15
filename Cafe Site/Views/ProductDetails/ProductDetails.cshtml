@@ -267,42 +267,7 @@
                         if (result.success) {
                             $(".modal-body").html("Product added to cart successfully!");
                             $("#exampleModal").modal("show");
-                            // Swal.fire({
-                            //     icon: 'success',
-                            //     title: 'Success',
-                            //     text: 'Product added to cart successfully!',
-                            //     confirmButtonColor: '#BE9C79',  // Set button color
-                            //     confirmButtonText: 'OK',
-                            //     theme: 'dark',
-                            //     customClass: {
-                            //         container: 'dark-mode-alert',
-                            //         title: 'dark-mode-title',
-                            //         content: 'dark-mode-content',
-                            //         confirmButton: 'dark-mode-confirm-button'
-                            //     }
-                            // }).then((result) => {
-                            //     if (result.isConfirmed) {
-                            //         location.reload(); // Reload the page or do any other action
-                            //     }
-                            // });
-
-
                         } else {
-
-                            // Swal.fire({
-                            //     icon: 'error',
-                            //     title: 'Oops...',
-                            //     text: 'This product is not available now',
-                            //     confirmButtonColor: '#BE9C79',  // Set button color
-                            //     confirmButtonText: 'OK',
-                            //     theme: 'dark',
-                            //     customClass: {
-                            //         container: 'dark-mode-alert',
-                            //         title: 'dark-mode-title',
-                            //         content: 'dark-mode-content',
-                            //         confirmButton: 'dark-mode-confirm-button'
-                            //     }
-                            // });
 
                             $(".modal-body").html("This product is not available now");
                             $("#exampleModal").modal("show");
@@ -310,21 +275,6 @@
                         }
                     },
                     error: function (error) {
-                        // Swal.fire({
-                        //     icon: 'error',
-                        //     title: 'Oops...',
-                        //     text: 'Error occurred while adding product to cart.',
-                        //     confirmButtonColor: '#BE9C79',  // Set button color
-                        //     confirmButtonText: 'OK',
-                        //     theme: 'dark',
-                        //     customClass: {
-                        //         container: 'dark-mode-alert',
-                        //         title: 'dark-mode-title',
-                        //         content: 'dark-mode-content',
-                        //         confirmButton: 'dark-mode-confirm-button'
-                        //     }
-                        // });
-                        // console.log(error);
 
                         if (error.statusText == "Unauthorized") {
                             window.location.href = '/Identity/Account/Login';
@@ -376,22 +326,6 @@
 
                     },
                     error: function (error) {
-                        // $("#exampleModal").modal("show");
-                        // Swal.fire({
-                        //     icon: 'error',
-                        //     title: 'Oops...',
-                        //     text: 'Error occurred while adding review.',
-                        //     confirmButtonColor: '#BE9C79',  // Set button color
-                        //     confirmButtonText: 'OK',
-                        //     theme: 'dark',
-                        //     customClass: {
-                        //         container: 'dark-mode-alert',
-                        //         title: 'dark-mode-title',
-                        //         content: 'dark-mode-content',
-                        //         confirmButton: 'dark-mode-confirm-button'
-                        //     }
-                        // });
-                        // $(".modal-body").html("Error occurred while adding review .");
 
                         if (error.statusText == "Unauthorized") {
                             window.location.href = '/Identity/Account/Login';

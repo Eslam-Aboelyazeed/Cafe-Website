@@ -28,10 +28,6 @@
 
     <!-- Modernizr JS -->
     <script src="js/modernizr-2.6.2.min.js"></script>
-    <!-- FOR IE9 below -->
-    <!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
 
     <style>
         .pagination-container {
@@ -289,49 +285,30 @@
     <script>
         $(document).ready(function () {
             var f = @Html.Raw(Json.Serialize(Model.Filter));
-            //var totalPages = Html.Raw(Json.Serialize(Model.TotalPages)));
             window.scrollTo(0, 0);
 
             document.getElementById(f).classList.add("active");
             document.getElementById(f).setAttribute("disabled", "true");
-            // $(`#${f}`).prop('disabled', true);
             
             console.log("Filter = ", f);
             if (f != "All") {
-                // console.log("testesttesttesttesttest");
                 document.getElementById("ProFilters").focus();
                 setTimeout(() => document.getElementById("ProFilters").scrollIntoView({
                     behavior: 'smooth',
                     block: 'center'
                 }), 200);
-                // document.getElementById("ProFilters").scrollIntoView({
-                //     behavior: 'smooth',
-                //     block: 'center'
-                // });
-
-                // console.log("tt2t2t2t22t2t22t2t2t2");
             }
 
-            // setTimeout(() => MakeAjaxCall(), 2000);
             MakeAjaxCall();
 
             $(".filter-button").on('click',function (e) {
                 var value = $(this).attr('data-filter');
-
-                // if (value == "All") {
-                //     $('.filter').show('1000');
-                // }
-                // else {
-                //     $(".filter").not('.' + value).hide('3000');
-                //     $('.filter').filter('.' + value).show('3000');
-                // }
 
                 $(".filter-button").removeClass("active");
                 $(".filter-button").prop('disabled', false);
                 $(this).addClass("active");
                 $(this).prop('disabled', true);
 
-                // $(this).addClass("disabled");
                 e.preventDefault(); 
                 MakeAjaxCall();
             });
@@ -352,15 +329,11 @@
             console.log("Data:", { page: page });
 
             $.ajax({
-                //url: url,
                 url: `/menu/getproducts?page=${page}&pageSize=4&filter=${filter}`,
                 type: "GET",
-                // data: {
-                //     page: page,
-                //     filter: filter
-                // },
+
                 beforeSend: function () {
-                    // Show loading spinner or message
+
                 },
                 success: function (result) {
                     console.log("AJAX Response:", result);
@@ -369,7 +342,6 @@
 
                     // Check if newContent is defined
                     if (newContent) {
-                        // Update image URLs to force reload
                         var timestamp = new Date().getTime();
 
                         $("#parView").html(newContent);

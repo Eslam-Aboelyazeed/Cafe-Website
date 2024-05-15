@@ -11,7 +11,6 @@ using System.Security.Claims;
 namespace Cafe_Site.Controllers
 {
     [Authorize(Roles = "Admin")]
-    //[Authorize]
     public class AdminDashboardController : Controller
 	{
         private readonly IProductService productService;
@@ -20,13 +19,6 @@ namespace Cafe_Site.Controllers
         {
             this.productService = productService;
         }
-
-        //      public IActionResult Index()
-        //{
-        //          var products = productService.GetAllProducts();
-
-        //          return View("Index", products);
-        //      }
 
         public IActionResult Index(int page = 1, int pageSize = 5, string filter = "All", string type = "All")
         {
@@ -86,20 +78,12 @@ namespace Cafe_Site.Controllers
         {
             var result = productService.DeleteProduct(id);
 
-            //var result = true;
-
-            //return RedirectToAction("Index");
-
             return Json(new { success = result });
         }
 
         public IActionResult DeleteSize(int id, char size)
         {
             var result = productService.DeleteSize(id, size);
-
-            //var result = false;
-
-            //return RedirectToAction("Index");
 
             return Json(new { success = result });
         }

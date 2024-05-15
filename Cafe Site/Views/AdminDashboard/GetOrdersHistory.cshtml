@@ -5,23 +5,6 @@
     Layout = "~/Views/Shared/_CustomOrderHistoryLayout.cshtml";
 }
 
-@* <header id="fh5co-header" class="fh5co-cover js-fullheight" role="banner" style="background-image: url(/images/hero_1.jpeg);" data-stellar-background-ratio="0.5">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <div class="display-t js-fullheight">
-                    <div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
-                        <h1>Admin Dashboard</h1>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</header> *@
-
-
-
 @if(Model.ToList().Count != 0 && Model != null)
 {
 
@@ -31,20 +14,6 @@
         <a asp-action="Index" style="color:#BE9C79" onmouseover="this.style.color='red'; this.style.textDecoration='underline';" onmouseout="this.style.color='#BE9C79'; this.style.textDecoration='none';"><img src="~/images/back.png" alt="Plus" style="height:25px;padding-bottom:5px;padding-right:5px" />Back To The Products List</a>
     </div>
 
-    @* <h1 class="heading" style="text-align:center; margin-top:50px">Product Sales</h1>
-<div class="wrapper">
-    <div class="pie-wrap">
-        <div class="light-yellow entry" style="--p: @Model.ToList()[0].Product_Percentage; background: conic-gradient(from 0drg, transparent var(--p)%, #f9e79f var(--p) @Model.ToList()[0].Product_Percentage); border: 2px solid #f9e79f;transition: var(--p) 1s ease;">
-            <p>@Model.ToList()[0].Product_Percentage%</p>
-            <p class="entry-value">@Model.ToList()[0].Product_Name</p>
-        </div>
-        <div class="light-yellow entry" style="--p: @(100 - Model.ToList()[0].Product_Percentage); background: conic-gradient(from 0drg, transparent var(--p)%, #f9e79f var(--p) @(100 - Model.ToList()[0].Product_Percentage));  border: 2px solid #f9e79f;transition: var(--p) 1s ease;">
-            <p>@(100 - Model.ToList()[0].Product_Percentage)%</p>
-            <p class="entry-value">Total</p>
-        </div>
-    </div>
-    <div class="key-wrap"></div>
-</div> *@
     <section id="s-team" class="section">
         <div class="b-skills">
             <div class="container">
@@ -150,7 +119,6 @@
                 <th style="text-align:center">
                     @Html.DisplayNameFor(model => model.TotalPrice)
                 </th>
-                @* <th></th> *@
             </tr>
         </thead>
         <tbody>
@@ -167,18 +135,11 @@
                         @Html.DisplayFor(modelItem => item.Quantity)
                     </td>
                     <td class="align-middle">
-                        @* @Html.DisplayFor(modelItem => item.UnitPrice) *@
                         $@item.UnitPrice
                     </td>
                     <td class="align-middle">
-                        @* @Html.DisplayFor(modelItem => item.TotalPrice) *@
                         $@item.TotalPrice
                     </td>
-                    @*             <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td> *@
                 </tr>
             }
         </tbody>
@@ -186,22 +147,6 @@
 }
 else
 {
-@*     <div class="container text-center vh-100">
-        <div class="row justify-content-center align-content-center">
-            <div class="col-10">
-                <img src="~/images/remove-from-cart_4665232.png" />
-                <h2 class="text-light">This Product Hasn't Been Purchased Yet!"</h2>
-            </div>
-        </div>
-    </div> *@
-
-@*     <div class="d-flex justify-content-center align-items-center vh-100">
-        <div class="text-center">
-            <img src="~/images/remove-from-cart_4665232.png" />
-            <h2 class="text-light">This Product Hasn't Been Purchased Yet!"</h2>
-        </div>
-    </div> *@
-
     <div class="container-fluid d-flex flex-column vh-100">
         <header>
             <h1 class="text-center text-light mt-5">Order History</h1>
@@ -239,8 +184,6 @@ else
         }
     };
 
-    /* chart
-    ================================================== */
     function _chart() {
         $('.b-skills').appear(function () {
             setTimeout(function () {

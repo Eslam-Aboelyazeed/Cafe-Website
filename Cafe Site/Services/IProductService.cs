@@ -20,9 +20,7 @@ namespace Cafe_Site.Services
         public void UpdateProduct(ProductInfoViewModel productInfo);
         public bool DeleteProduct(int id);
         public bool DeleteSize(int id, char size);
-        //public ApplicationUser GetUser(string userId);
         public List<OrderHistoryViewModel> GetOrderHistory(int pid);
-
 
 	}
 }

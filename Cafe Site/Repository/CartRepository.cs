@@ -5,8 +5,6 @@ namespace Cafe_Site.Repository
 {
     public class CartRepository : DefaultRepository<Order_Products>, ICartRepository
     {
-        //private readonly CafeSiteContext db;
-
         public CartRepository(CafeSiteContext db): base(db) { }
         
 
